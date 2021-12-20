@@ -60,6 +60,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmGioco.resx">
+      <DependentUpon>frmGioco.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmHomePage.resx">
       <DependentUpon>frmHomePage.cs</DependentUpon>
     </EmbeddedResource>
@@ -94,6 +97,45 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Sfondo mattoni.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sfondo mattoni.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\A.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\B.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\C.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\D.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\E.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\F.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\G.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\H.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\I.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\J.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\K.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\L.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

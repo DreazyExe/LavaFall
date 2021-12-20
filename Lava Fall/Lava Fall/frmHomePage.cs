@@ -24,11 +24,13 @@ namespace Lava_Fall
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //Quando premi il pulsante play, apri frmGioco.
+            
 
-            Form frmGioco = new Form();
+            //Quando premi il pulsante play, apri frmGioco.
+            FormGioco frmGioco = new FormGioco();
             frmGioco.Show();
-            this.Hide();
+
+            this.Hide(); //nascondo la homepage
 
         }
     }
