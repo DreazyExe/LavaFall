@@ -126,6 +126,7 @@
             this.pbBase1.Size = new System.Drawing.Size(193, 68);
             this.pbBase1.TabIndex = 5;
             this.pbBase1.TabStop = false;
+            this.pbBase1.Click += new System.EventHandler(this.pbBase1_Click);
             // 
             // FormGioco
             // 
