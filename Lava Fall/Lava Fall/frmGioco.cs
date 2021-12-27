@@ -103,65 +103,100 @@ namespace Lava_Fall
 
         private void spostamento_basi_Tick(object sender, EventArgs e)
         {
-            char ultimaBase = 'B';
-
-            //Random r = new Random();
-            //int rInt = r.Next(0, 100); //for ints
-            //int range = 100;
-            //double rDouble = r.NextDouble() * range; //for doubles
+            //BUG: LA SECONDA BASE NON RITORNA SOPRA
+            //Dichiaro una variabile per l'ultima base che si è spostata. Inizialmente il suo valore è 2 perché non esiste una base precedente.
+            char ultimaBase = '2';
+            //Dichiaro una variabile per generare numeri casuali
+            Random rnd = new Random();
 
             //Lo schermo è compreso tra 0 e 600
-
-            //I tre range della generazione del numero sono
-
-            //1) Da 0 alla prima x più bassa diminuita di 60
-            //2) Dalla prima x più bassa aumentata di 60 alla prossima x diminuita di 60
-            //3) Dalla seconda x aumentata di 60 a 540 (fine schermo diminuito di 60)
 
             //Spostamento prima base
             if (pbBase1.Location.Y >= 710)
             {
-                Random rnd = new Random();
+                //Istruzioni se la base ha raggiunto la parte più bassa della form e deve essere spostata in alto.
                 switch (ultimaBase)
                 {
                     //Istruzioni se la base precedente era la seconda
-                    case 'B':
-                        pbBase1.Location = new Point(rnd.Next(rnd.Next(0, , 600), 0 - pbBase1.Size.Height);
+                    case '2':
+                        //Porto la base ad un punto x distante almeno di 20 px rispetto alla base precedente (sia a destra che a sinistra) ed ad un punto y sopra la form.
+                        pbBase1.Location = new Point(rnd.Next(rnd.Next(0, pbBase2.Location.X - 20), rnd.Next(pbBase2.Location.X + 80, 600)), 0 - pbBase1.Size.Height);
+                        break;
+
+                    //Istruzioni se la base precedente era la terza
+                    case '3':
+                        //Porto la base ad un punto x distante almeno di 20 px rispetto alla base precedente (sia a destra che a sinistra) ed ad un punto y sopra la form.
+                        pbBase1.Location = new Point(rnd.Next(rnd.Next(0, pbBase3.Location.X - 20), rnd.Next(pbBase3.Location.X + 80, 600)), 0 - pbBase1.Size.Height);
                         break;
                 }
-                
-                pbBase1.Location = new Point(rnd.Next(rnd.Next(0, , 600), 0 - pbBase1.Size.Height);
+                //Memorizzo il fatto che l'ultima base modificata è stata la prima
                 ultimaBase = '1';
             }
             else
             {
+                //Se la base non ha raggiunto la parte più bassa della form, spostarla verso il basso di 10 px.
                 pbBase1.Location = new Point(pbBase1.Location.X, pbBase1.Location.Y + 10);
             }
 
             //Spostamento seconda base
             if (pbBase2.Location.Y >= 710)
             {
-                Random rnd = new Random();
-                pbBase2.Location = new Point(rnd.Next(0, 600), 0 - pbBase2.Size.Height);
+                //Istruzioni se la base ha raggiunto la parte più bassa della form e deve essere spostata in alto.
+                switch (ultimaBase)
+                {
+                    //Istruzioni se la base precedente era la seconda
+                    case '1':
+                        //Porto la base ad un punto x distante almeno di 20 px rispetto alla base precedente (sia a destra che a sinistra) ed ad un punto y sopra la form.
+                        pbBase2.Location = new Point(rnd.Next(rnd.Next(0, pbBase1.Location.X - 20), rnd.Next(pbBase1.Location.X + 80, 600)), 0 - pbBase2.Size.Height);
+                        break;
+
+                    //Istruzioni se la base precedente era la terza
+                    case '3':
+                        //Porto la base ad un punto x distante almeno di 20 px rispetto alla base precedente (sia a destra che a sinistra) ed ad un punto y sopra la form.
+                        pbBase2.Location = new Point(rnd.Next(rnd.Next(0, pbBase3.Location.X - 20), rnd.Next(pbBase3.Location.X + 80, 600)), 0 - pbBase2.Size.Height);
+                        break;
+                }
+                //Memorizzo il fatto che l'ultima base modificata è stata la prima
                 ultimaBase = '2';
             }
             else
             {
+                //Se la base non ha raggiunto la parte più bassa della form, spostarla verso il basso di 10 px.
                 pbBase2.Location = new Point(pbBase2.Location.X, pbBase2.Location.Y + 10);
             }
 
-            //Spostamento terzo base
+            //Spostamento terza base
             if (pbBase3.Location.Y >= 710)
             {
-                Random rnd = new Random();
-                pbBase3.Location = new Point(rnd.Next(0, 600), 0 - pbBase3.Size.Height);
+                //Istruzioni se la base ha raggiunto la parte più bassa della form e deve essere spostata in alto.
+                switch (ultimaBase)
+                {
+                    //Istruzioni se la base precedente era la seconda
+                    case '1':
+                        //Porto la base ad un punto x distante almeno di 20 px rispetto alla base precedente (sia a destra che a sinistra) ed ad un punto y sopra la form.
+                        pbBase3.Location = new Point(rnd.Next(rnd.Next(0, pbBase1.Location.X - 20), rnd.Next(pbBase1.Location.X + 80, 600)), 0 - pbBase3.Size.Height);
+                        break;
+
+                    //Istruzioni se la base precedente era la terza
+                    case '2':
+                        //Porto la base ad un punto x distante almeno di 20 px rispetto alla base precedente (sia a destra che a sinistra) ed ad un punto y sopra la form.
+                        pbBase3.Location = new Point(rnd.Next(rnd.Next(0, pbBase2.Location.X - 20), rnd.Next(pbBase2.Location.X + 80, 600)), 0 - pbBase3.Size.Height);
+                        break;
+                }
+                //Memorizzo il fatto che l'ultima base modificata è stata la prima
                 ultimaBase = '3';
             }
             else
             {
+                //Se la base non ha raggiunto la parte più bassa della form, spostarla verso il basso di 10 px.
                 pbBase3.Location = new Point(pbBase3.Location.X, pbBase3.Location.Y + 10);
             }
 
+
+        }
+
+        private void pbBase1_Click(object sender, EventArgs e)
+        {
 
         }
     }
