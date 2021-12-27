@@ -27,6 +27,7 @@ namespace Lava_Fall
 
         private void timerLava_Tick(object sender, EventArgs e)
         {
+            //ANIMAZIONE LAVA
             switch (i)
             {
                 case 1:
@@ -88,9 +89,7 @@ namespace Lava_Fall
                     i = 1;
                     break;
             }
-            //string _nomeImmagineLava = Convert.ToString(pbLava.Image);
-            //MessageBox.Show(Convert.ToString(_nomeImmagineLava));
-            //timerLava.Enabled = false;
+            
         }
 
         private void punteggio_Tick(object sender, EventArgs e)
@@ -98,6 +97,70 @@ namespace Lava_Fall
             //aumento il punteggio di uno ogni secondo
             _punteggio++;
             lbPunteggio.Text = Convert.ToString(_punteggio);
+
+
+        }
+
+        private void spostamento_basi_Tick(object sender, EventArgs e)
+        {
+            char ultimaBase = 'B';
+
+            //Random r = new Random();
+            //int rInt = r.Next(0, 100); //for ints
+            //int range = 100;
+            //double rDouble = r.NextDouble() * range; //for doubles
+
+            //Lo schermo è compreso tra 0 e 600
+
+            //I tre range della generazione del numero sono
+
+            //1) Da 0 alla prima x più bassa diminuita di 60
+            //2) Dalla prima x più bassa aumentata di 60 alla prossima x diminuita di 60
+            //3) Dalla seconda x aumentata di 60 a 540 (fine schermo diminuito di 60)
+
+            //Spostamento prima base
+            if (pbBase1.Location.Y >= 710)
+            {
+                Random rnd = new Random();
+                switch (ultimaBase)
+                {
+                    //Istruzioni se la base precedente era la seconda
+                    case 'B':
+                        pbBase1.Location = new Point(rnd.Next(rnd.Next(0, , 600), 0 - pbBase1.Size.Height);
+                        break;
+                }
+                
+                pbBase1.Location = new Point(rnd.Next(rnd.Next(0, , 600), 0 - pbBase1.Size.Height);
+                ultimaBase = '1';
+            }
+            else
+            {
+                pbBase1.Location = new Point(pbBase1.Location.X, pbBase1.Location.Y + 10);
+            }
+
+            //Spostamento seconda base
+            if (pbBase2.Location.Y >= 710)
+            {
+                Random rnd = new Random();
+                pbBase2.Location = new Point(rnd.Next(0, 600), 0 - pbBase2.Size.Height);
+                ultimaBase = '2';
+            }
+            else
+            {
+                pbBase2.Location = new Point(pbBase2.Location.X, pbBase2.Location.Y + 10);
+            }
+
+            //Spostamento terzo base
+            if (pbBase3.Location.Y >= 710)
+            {
+                Random rnd = new Random();
+                pbBase3.Location = new Point(rnd.Next(0, 600), 0 - pbBase3.Size.Height);
+                ultimaBase = '3';
+            }
+            else
+            {
+                pbBase3.Location = new Point(pbBase3.Location.X, pbBase3.Location.Y + 10);
+            }
 
 
         }

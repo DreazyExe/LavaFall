@@ -193,6 +193,16 @@ namespace Lava_Fall.Properties {
         /// <summary>
         ///   Cerca una risorsa localizzata di tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap piattaforma_normale {
+            get {
+                object obj = ResourceManager.GetObject("piattaforma_normale", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una risorsa localizzata di tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Sfondo_mattoni {
             get {
                 object obj = ResourceManager.GetObject("Sfondo mattoni", resourceCulture);
