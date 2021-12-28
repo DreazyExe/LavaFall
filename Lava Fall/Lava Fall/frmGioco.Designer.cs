@@ -30,18 +30,22 @@
         {
             this.components = new System.ComponentModel.Container();
             this.timerLava = new System.Windows.Forms.Timer(this.components);
-            this.pbLava = new System.Windows.Forms.PictureBox();
             this.punteggio = new System.Windows.Forms.Timer(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.lbPunteggio = new System.Windows.Forms.Label();
-            this.pbBase3 = new System.Windows.Forms.PictureBox();
             this.spostamento_basi = new System.Windows.Forms.Timer(this.components);
-            this.pbBase2 = new System.Windows.Forms.PictureBox();
             this.pbBase1 = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pbLava)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbBase3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbBase2)).BeginInit();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pbBase2 = new System.Windows.Forms.PictureBox();
+            this.pbBase3 = new System.Windows.Forms.PictureBox();
+            this.pbLava = new System.Windows.Forms.PictureBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pbBase1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbBase2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbBase3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbLava)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.SuspendLayout();
             // 
             // timerLava
@@ -49,18 +53,6 @@
             this.timerLava.Enabled = true;
             this.timerLava.Interval = 208;
             this.timerLava.Tick += new System.EventHandler(this.timerLava_Tick);
-            // 
-            // pbLava
-            // 
-            this.pbLava.BackColor = System.Drawing.Color.Transparent;
-            this.pbLava.ErrorImage = null;
-            this.pbLava.Image = global::Lava_Fall.Properties.Resources.A;
-            this.pbLava.InitialImage = null;
-            this.pbLava.Location = new System.Drawing.Point(-1, 40);
-            this.pbLava.Name = "pbLava";
-            this.pbLava.Size = new System.Drawing.Size(933, 694);
-            this.pbLava.TabIndex = 0;
-            this.pbLava.TabStop = false;
             // 
             // punteggio
             // 
@@ -91,6 +83,44 @@
             this.lbPunteggio.TabIndex = 2;
             this.lbPunteggio.Text = "0";
             // 
+            // spostamento_basi
+            // 
+            this.spostamento_basi.Enabled = true;
+            this.spostamento_basi.Interval = 600;
+            this.spostamento_basi.Tick += new System.EventHandler(this.spostamento_basi_Tick);
+            // 
+            // pbBase1
+            // 
+            this.pbBase1.BackColor = System.Drawing.Color.Transparent;
+            this.pbBase1.Image = global::Lava_Fall.Properties.Resources.piattaforma_normale;
+            this.pbBase1.Location = new System.Drawing.Point(541, 224);
+            this.pbBase1.Name = "pbBase1";
+            this.pbBase1.Size = new System.Drawing.Size(193, 68);
+            this.pbBase1.TabIndex = 5;
+            this.pbBase1.TabStop = false;
+            this.pbBase1.Click += new System.EventHandler(this.pbBase1_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1.Image = global::Lava_Fall.Properties.Resources.Asset_17_4x1;
+            this.pictureBox1.Location = new System.Drawing.Point(314, 167);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(145, 142);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 6;
+            this.pictureBox1.TabStop = false;
+            // 
+            // pbBase2
+            // 
+            this.pbBase2.BackColor = System.Drawing.Color.Transparent;
+            this.pbBase2.Image = global::Lava_Fall.Properties.Resources.piattaforma_normale;
+            this.pbBase2.Location = new System.Drawing.Point(64, 277);
+            this.pbBase2.Name = "pbBase2";
+            this.pbBase2.Size = new System.Drawing.Size(193, 68);
+            this.pbBase2.TabIndex = 4;
+            this.pbBase2.TabStop = false;
+            // 
             // pbBase3
             // 
             this.pbBase3.BackColor = System.Drawing.Color.Transparent;
@@ -101,39 +131,39 @@
             this.pbBase3.TabIndex = 3;
             this.pbBase3.TabStop = false;
             // 
-            // spostamento_basi
+            // pbLava
             // 
-            this.spostamento_basi.Enabled = true;
-            this.spostamento_basi.Interval = 600;
-            this.spostamento_basi.Tick += new System.EventHandler(this.spostamento_basi_Tick);
+            this.pbLava.BackColor = System.Drawing.Color.Transparent;
+            this.pbLava.ErrorImage = null;
+            this.pbLava.Image = global::Lava_Fall.Properties.Resources.A;
+            this.pbLava.InitialImage = null;
+            this.pbLava.Location = new System.Drawing.Point(-5, 22);
+            this.pbLava.Name = "pbLava";
+            this.pbLava.Size = new System.Drawing.Size(800, 800);
+            this.pbLava.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbLava.TabIndex = 0;
+            this.pbLava.TabStop = false;
             // 
-            // pbBase2
+            // pictureBox3
             // 
-            this.pbBase2.BackColor = System.Drawing.Color.Transparent;
-            this.pbBase2.Image = global::Lava_Fall.Properties.Resources.piattaforma_normale;
-            this.pbBase2.Location = new System.Drawing.Point(496, 290);
-            this.pbBase2.Name = "pbBase2";
-            this.pbBase2.Size = new System.Drawing.Size(193, 68);
-            this.pbBase2.TabIndex = 4;
-            this.pbBase2.TabStop = false;
-            // 
-            // pbBase1
-            // 
-            this.pbBase1.BackColor = System.Drawing.Color.Transparent;
-            this.pbBase1.Image = global::Lava_Fall.Properties.Resources.piattaforma_normale;
-            this.pbBase1.Location = new System.Drawing.Point(278, 532);
-            this.pbBase1.Name = "pbBase1";
-            this.pbBase1.Size = new System.Drawing.Size(193, 68);
-            this.pbBase1.TabIndex = 5;
-            this.pbBase1.TabStop = false;
-            this.pbBase1.Click += new System.EventHandler(this.pbBase1_Click);
+            this.pictureBox3.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox3.Image = global::Lava_Fall.Properties.Resources.Base;
+            this.pictureBox3.Location = new System.Drawing.Point(-22, 332);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(851, 246);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox3.TabIndex = 7;
+            this.pictureBox3.TabStop = false;
             // 
             // FormGioco
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Beige;
             this.BackgroundImage = global::Lava_Fall.Properties.Resources.Sfondo_mattoni;
             this.ClientSize = new System.Drawing.Size(794, 711);
+            this.Controls.Add(this.pictureBox3);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.pbBase1);
             this.Controls.Add(this.pbBase2);
             this.Controls.Add(this.pbBase3);
@@ -144,10 +174,13 @@
             this.Name = "FormGioco";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormGioco";
-            ((System.ComponentModel.ISupportInitialize)(this.pbLava)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbBase3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbBase2)).EndInit();
+            this.Load += new System.EventHandler(this.FormGioco_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbBase1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbBase2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbBase3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbLava)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -164,5 +197,7 @@
         private System.Windows.Forms.Timer spostamento_basi;
         private System.Windows.Forms.PictureBox pbBase2;
         private System.Windows.Forms.PictureBox pbBase1;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pictureBox3;
     }
 }

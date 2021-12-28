@@ -199,5 +199,10 @@ namespace Lava_Fall
         {
 
         }
+
+        private void FormGioco_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

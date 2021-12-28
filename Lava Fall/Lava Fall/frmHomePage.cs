@@ -22,15 +22,27 @@ namespace Lava_Fall
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+   
+
+        private void pictureBox2_Click(object sender, EventArgs e)
         {
-            
 
             //Quando premi il pulsante play, apri frmGioco.
             FormGioco frmGioco = new FormGioco();
             frmGioco.Show();
 
             this.Hide(); //nascondo la homepage
+
+
+        }
+
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+            //Quando premi il pulsante play, apri frmHelp.
+            frmHelp frmHelp = new frmHelp();
+            frmHelp.Show();
+
+            
 
         }
     }
