@@ -15,6 +15,7 @@ namespace Lava_Fall
         //variabili globali
         int i = 1;
         int _punteggio = 0;
+        int _counter = 3;
         public FormGioco()
         {
             InitializeComponent();
@@ -203,6 +204,39 @@ namespace Lava_Fall
         private void FormGioco_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void countDown_Tick(object sender, EventArgs e)
+        {
+            //Se i secondi di attesa iniziale sono finiti
+            if (_counter == 0)
+            {
+                //Attivo i timer di movimento
+                punteggio.Enabled = true;
+                spostamento_basi.Enabled = true;
+
+                //Disattiva il timer
+                this.Enabled = false;
+
+                //Rimuovi il counter
+                lblCountDown.Visible = false;
+            }
+            else
+            {
+                //Aggiorno il counter
+                _counter--;
+
+                if (_counter == 0)
+                    //Aggiorno la label dei secondi rimasti
+                    lblCountDown.Text = "Via!";
+                else
+                    lblCountDown.Text = _counter.ToString();
+            }
         }
     }
 }
