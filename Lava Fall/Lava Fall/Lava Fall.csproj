@@ -111,42 +111,6 @@
     <None Include="Resources\Sfondo mattoni.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\A.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\B.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\C.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\D.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\E.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\F.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\G.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\H.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\I.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\J.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\K.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\L.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\piattaforma_normale.png" />
   </ItemGroup>
   <ItemGroup>
@@ -166,6 +130,20 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\A1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\A.png" />
+    <Content Include="Resources\B.png" />
+    <Content Include="Resources\C.png" />
+    <Content Include="Resources\D.png" />
+    <Content Include="Resources\E.png" />
+    <Content Include="Resources\F.png" />
+    <Content Include="Resources\G.png" />
+    <Content Include="Resources\H.png" />
+    <Content Include="Resources\I.png" />
+    <Content Include="Resources\J.png" />
+    <Content Include="Resources\K.png" />
+    <Content Include="Resources\L.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
