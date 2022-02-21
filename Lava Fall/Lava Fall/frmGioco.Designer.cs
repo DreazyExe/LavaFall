@@ -35,19 +35,19 @@
             this.lbPunteggio = new System.Windows.Forms.Label();
             this.spostamento_basi = new System.Windows.Forms.Timer(this.components);
             this.pbBase1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pbBase2 = new System.Windows.Forms.PictureBox();
             this.pbBase3 = new System.Windows.Forms.PictureBox();
+            this.pbPersonaggio = new System.Windows.Forms.PictureBox();
             this.pbLava = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.pbBasePrincipale = new System.Windows.Forms.PictureBox();
             this.lblCountDown = new System.Windows.Forms.Label();
             this.countDown = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pbBase1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbBase2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbBase3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbPersonaggio)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbLava)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbBasePrincipale)).BeginInit();
             this.SuspendLayout();
             // 
             // timerLava
@@ -98,19 +98,8 @@
             this.pbBase1.Size = new System.Drawing.Size(193, 68);
             this.pbBase1.TabIndex = 5;
             this.pbBase1.TabStop = false;
+            this.pbBase1.Tag = "Spostamento";
             this.pbBase1.Click += new System.EventHandler(this.pbBase1_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.Image = global::Lava_Fall.Properties.Resources.Asset_17_4x1;
-            this.pictureBox1.Location = new System.Drawing.Point(314, 167);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(145, 142);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 6;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // pbBase2
             // 
@@ -121,6 +110,7 @@
             this.pbBase2.Size = new System.Drawing.Size(193, 68);
             this.pbBase2.TabIndex = 4;
             this.pbBase2.TabStop = false;
+            this.pbBase2.Tag = "Spostamento";
             // 
             // pbBase3
             // 
@@ -131,6 +121,19 @@
             this.pbBase3.Size = new System.Drawing.Size(193, 68);
             this.pbBase3.TabIndex = 3;
             this.pbBase3.TabStop = false;
+            this.pbBase3.Tag = "Spostamento";
+            // 
+            // pbPersonaggio
+            // 
+            this.pbPersonaggio.BackColor = System.Drawing.Color.Transparent;
+            this.pbPersonaggio.Image = global::Lava_Fall.Properties.Resources.Asset_17_4x1;
+            this.pbPersonaggio.Location = new System.Drawing.Point(73, 167);
+            this.pbPersonaggio.Name = "pbPersonaggio";
+            this.pbPersonaggio.Size = new System.Drawing.Size(145, 142);
+            this.pbPersonaggio.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbPersonaggio.TabIndex = 6;
+            this.pbPersonaggio.TabStop = false;
+            this.pbPersonaggio.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // pbLava
             // 
@@ -138,23 +141,23 @@
             this.pbLava.ErrorImage = null;
             this.pbLava.Image = global::Lava_Fall.Properties.Resources.A;
             this.pbLava.InitialImage = null;
-            this.pbLava.Location = new System.Drawing.Point(-5, 32);
+            this.pbLava.Location = new System.Drawing.Point(-25, 602);
             this.pbLava.Name = "pbLava";
-            this.pbLava.Size = new System.Drawing.Size(800, 800);
+            this.pbLava.Size = new System.Drawing.Size(851, 233);
             this.pbLava.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbLava.TabIndex = 0;
             this.pbLava.TabStop = false;
             // 
-            // pictureBox3
+            // pbBasePrincipale
             // 
-            this.pictureBox3.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox3.Image = global::Lava_Fall.Properties.Resources.Base;
-            this.pictureBox3.Location = new System.Drawing.Point(-25, 315);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(851, 246);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox3.TabIndex = 7;
-            this.pictureBox3.TabStop = false;
+            this.pbBasePrincipale.BackColor = System.Drawing.Color.Transparent;
+            this.pbBasePrincipale.Image = global::Lava_Fall.Properties.Resources.Base;
+            this.pbBasePrincipale.Location = new System.Drawing.Point(-25, 315);
+            this.pbBasePrincipale.Name = "pbBasePrincipale";
+            this.pbBasePrincipale.Size = new System.Drawing.Size(851, 246);
+            this.pbBasePrincipale.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbBasePrincipale.TabIndex = 7;
+            this.pbBasePrincipale.TabStop = false;
             // 
             // lblCountDown
             // 
@@ -183,25 +186,25 @@
             this.BackgroundImage = global::Lava_Fall.Properties.Resources.Sfondo_mattoni;
             this.ClientSize = new System.Drawing.Size(794, 711);
             this.Controls.Add(this.pbLava);
-            this.Controls.Add(this.pictureBox3);
-            this.Controls.Add(this.lblCountDown);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.lbPunteggio);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.pbBase1);
             this.Controls.Add(this.pbBase2);
             this.Controls.Add(this.pbBase3);
-            this.Controls.Add(this.lbPunteggio);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.pbBasePrincipale);
+            this.Controls.Add(this.pbPersonaggio);
+            this.Controls.Add(this.lblCountDown);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "FormGioco";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormGioco";
             this.Load += new System.EventHandler(this.FormGioco_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbBase1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbBase2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbBase3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbPersonaggio)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbLava)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbBasePrincipale)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -218,8 +221,8 @@
         private System.Windows.Forms.Timer spostamento_basi;
         private System.Windows.Forms.PictureBox pbBase2;
         private System.Windows.Forms.PictureBox pbBase1;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.PictureBox pbPersonaggio;
+        private System.Windows.Forms.PictureBox pbBasePrincipale;
         private System.Windows.Forms.Label lblCountDown;
         private System.Windows.Forms.Timer countDown;
     }
