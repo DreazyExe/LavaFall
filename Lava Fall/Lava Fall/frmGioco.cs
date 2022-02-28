@@ -126,14 +126,21 @@ namespace Lava_Fall
                     //Entra se il tag dell'oggetto preso è base
                     if ((string)baseAttuale.Tag=="Base")
                     {
-                        // Facciamo spostare la base di 1 px in basso
+                        // Facciamo spostare la base di 5 px in basso
                         // Controllo se ho raggiunto la lava
                         if (baseAttuale.Location.Y >= 786)
                             // In caso affermativo torna sopra
                             baseAttuale.Location = new Point(rnd.Next(rnd.Next(0, baseAttuale.Location.X - 20), rnd.Next(baseAttuale.Location.X + 80, 600)), 0 - baseAttuale.Size.Height);
                         else
                             // In caso negativo fai scendere di 1 pixel
-                            baseAttuale.Location = new Point(baseAttuale.Location.X, baseAttuale.Location.Y + 1);
+                            baseAttuale.Location = new Point(baseAttuale.Location.X, baseAttuale.Location.Y + 5);
+                    }
+
+                    if((string)baseAttuale.Tag == "BasePrincipale")
+                    {
+                        if (baseAttuale.Location.Y <= 786)
+                            // Facciamo spostare la base di 5 px in basso
+                            baseAttuale.Location = new Point(baseAttuale.Location.X, baseAttuale.Location.Y + 5);
                     }
                 }
             }
