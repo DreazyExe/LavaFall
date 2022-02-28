@@ -42,12 +42,14 @@
             this.pbBasePrincipale = new System.Windows.Forms.PictureBox();
             this.lblCountDown = new System.Windows.Forms.Label();
             this.countDown = new System.Windows.Forms.Timer(this.components);
+            this.pbBase4 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pbBase1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbBase2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbBase3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPersonaggio)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbLava)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbBasePrincipale)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbBase4)).BeginInit();
             this.SuspendLayout();
             // 
             // timerLava
@@ -93,12 +95,12 @@
             // 
             this.pbBase1.BackColor = System.Drawing.Color.Transparent;
             this.pbBase1.Image = global::Lava_Fall.Properties.Resources.piattaforma_normale;
-            this.pbBase1.Location = new System.Drawing.Point(541, 224);
+            this.pbBase1.Location = new System.Drawing.Point(518, 71);
             this.pbBase1.Name = "pbBase1";
             this.pbBase1.Size = new System.Drawing.Size(193, 68);
             this.pbBase1.TabIndex = 5;
             this.pbBase1.TabStop = false;
-            this.pbBase1.Tag = "Spostamento";
+            this.pbBase1.Tag = "Base";
             this.pbBase1.Click += new System.EventHandler(this.pbBase1_Click);
             // 
             // pbBase2
@@ -110,7 +112,7 @@
             this.pbBase2.Size = new System.Drawing.Size(193, 68);
             this.pbBase2.TabIndex = 4;
             this.pbBase2.TabStop = false;
-            this.pbBase2.Tag = "Spostamento";
+            this.pbBase2.Tag = "Base";
             // 
             // pbBase3
             // 
@@ -121,7 +123,8 @@
             this.pbBase3.Size = new System.Drawing.Size(193, 68);
             this.pbBase3.TabIndex = 3;
             this.pbBase3.TabStop = false;
-            this.pbBase3.Tag = "Spostamento";
+            this.pbBase3.Tag = "Base";
+            this.pbBase3.Click += new System.EventHandler(this.pbBase3_Click);
             // 
             // pbPersonaggio
             // 
@@ -152,7 +155,7 @@
             // 
             this.pbBasePrincipale.BackColor = System.Drawing.Color.Transparent;
             this.pbBasePrincipale.Image = global::Lava_Fall.Properties.Resources.Base;
-            this.pbBasePrincipale.Location = new System.Drawing.Point(-25, 315);
+            this.pbBasePrincipale.Location = new System.Drawing.Point(-25, 385);
             this.pbBasePrincipale.Name = "pbBasePrincipale";
             this.pbBasePrincipale.Size = new System.Drawing.Size(851, 246);
             this.pbBasePrincipale.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -178,6 +181,17 @@
             this.countDown.Interval = 1000;
             this.countDown.Tick += new System.EventHandler(this.countDown_Tick);
             // 
+            // pbBase4
+            // 
+            this.pbBase4.BackColor = System.Drawing.Color.Transparent;
+            this.pbBase4.Image = global::Lava_Fall.Properties.Resources.piattaforma_normale;
+            this.pbBase4.Location = new System.Drawing.Point(483, 528);
+            this.pbBase4.Name = "pbBase4";
+            this.pbBase4.Size = new System.Drawing.Size(193, 68);
+            this.pbBase4.TabIndex = 9;
+            this.pbBase4.TabStop = false;
+            this.pbBase4.Tag = "Base";
+            // 
             // FormGioco
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -185,6 +199,7 @@
             this.BackColor = System.Drawing.Color.Beige;
             this.BackgroundImage = global::Lava_Fall.Properties.Resources.Sfondo_mattoni;
             this.ClientSize = new System.Drawing.Size(794, 711);
+            this.Controls.Add(this.pbBase4);
             this.Controls.Add(this.pbLava);
             this.Controls.Add(this.lbPunteggio);
             this.Controls.Add(this.label1);
@@ -205,6 +220,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbPersonaggio)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbLava)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbBasePrincipale)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbBase4)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -225,5 +241,6 @@
         private System.Windows.Forms.PictureBox pbBasePrincipale;
         private System.Windows.Forms.Label lblCountDown;
         private System.Windows.Forms.Timer countDown;
+        private System.Windows.Forms.PictureBox pbBase4;
     }
 }
