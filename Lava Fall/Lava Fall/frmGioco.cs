@@ -114,7 +114,25 @@ namespace Lava_Fall
 
 
 
-            //spostamento
+            // Spostamento
+            foreach(Control oggetto in this.Controls)
+            {
+                // Verifica se l'oggetto è una picturebox e il nome del tag è una stringa
+                if (oggetto is PictureBox && oggetto.Tag is String)
+                {
+                    // Alla picturebox assegna l'oggetto preso
+                    PictureBox baseAttuale = (PictureBox)oggetto;
+
+                    //Entra se il tag dell'oggetto preso è base
+                    if ((string)baseAttuale.Tag=="Base")
+                    {
+                        // Facciamo spostare la base di 1 px in basso
+                        baseAttuale.Location = new Point(baseAttuale.Location.X, baseAttuale.Location.Y + 1);
+                    }
+                }
+            }
+
+
 
 
 
@@ -245,6 +263,11 @@ namespace Lava_Fall
                 else
                     lblCountDown.Text = _counter.ToString();
             }
+        }
+
+        private void pbBase3_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
