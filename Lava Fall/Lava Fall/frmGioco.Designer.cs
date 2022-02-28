@@ -88,14 +88,14 @@
             // 
             // spostamento_basi
             // 
-            this.spostamento_basi.Interval = 600;
+            this.spostamento_basi.Interval = 300;
             this.spostamento_basi.Tick += new System.EventHandler(this.spostamento_basi_Tick);
             // 
             // pbBase1
             // 
             this.pbBase1.BackColor = System.Drawing.Color.Transparent;
             this.pbBase1.Image = global::Lava_Fall.Properties.Resources.piattaforma_normale;
-            this.pbBase1.Location = new System.Drawing.Point(518, 71);
+            this.pbBase1.Location = new System.Drawing.Point(95, 287);
             this.pbBase1.Name = "pbBase1";
             this.pbBase1.Size = new System.Drawing.Size(193, 68);
             this.pbBase1.TabIndex = 5;
@@ -107,7 +107,7 @@
             // 
             this.pbBase2.BackColor = System.Drawing.Color.Transparent;
             this.pbBase2.Image = global::Lava_Fall.Properties.Resources.piattaforma_normale;
-            this.pbBase2.Location = new System.Drawing.Point(64, 277);
+            this.pbBase2.Location = new System.Drawing.Point(605, 287);
             this.pbBase2.Name = "pbBase2";
             this.pbBase2.Size = new System.Drawing.Size(193, 68);
             this.pbBase2.TabIndex = 4;
@@ -118,7 +118,7 @@
             // 
             this.pbBase3.BackColor = System.Drawing.Color.Transparent;
             this.pbBase3.Image = global::Lava_Fall.Properties.Resources.piattaforma_normale;
-            this.pbBase3.Location = new System.Drawing.Point(52, 89);
+            this.pbBase3.Location = new System.Drawing.Point(258, 56);
             this.pbBase3.Name = "pbBase3";
             this.pbBase3.Size = new System.Drawing.Size(193, 68);
             this.pbBase3.TabIndex = 3;
@@ -130,7 +130,7 @@
             // 
             this.pbPersonaggio.BackColor = System.Drawing.Color.Transparent;
             this.pbPersonaggio.Image = global::Lava_Fall.Properties.Resources.Asset_17_4x1;
-            this.pbPersonaggio.Location = new System.Drawing.Point(73, 167);
+            this.pbPersonaggio.Location = new System.Drawing.Point(336, 391);
             this.pbPersonaggio.Name = "pbPersonaggio";
             this.pbPersonaggio.Size = new System.Drawing.Size(145, 142);
             this.pbPersonaggio.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -144,7 +144,7 @@
             this.pbLava.ErrorImage = null;
             this.pbLava.Image = global::Lava_Fall.Properties.Resources.A;
             this.pbLava.InitialImage = null;
-            this.pbLava.Location = new System.Drawing.Point(-25, 602);
+            this.pbLava.Location = new System.Drawing.Point(-25, 618);
             this.pbLava.Name = "pbLava";
             this.pbLava.Size = new System.Drawing.Size(851, 233);
             this.pbLava.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -155,12 +155,13 @@
             // 
             this.pbBasePrincipale.BackColor = System.Drawing.Color.Transparent;
             this.pbBasePrincipale.Image = global::Lava_Fall.Properties.Resources.Base;
-            this.pbBasePrincipale.Location = new System.Drawing.Point(-25, 385);
+            this.pbBasePrincipale.Location = new System.Drawing.Point(-25, 422);
             this.pbBasePrincipale.Name = "pbBasePrincipale";
             this.pbBasePrincipale.Size = new System.Drawing.Size(851, 246);
             this.pbBasePrincipale.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbBasePrincipale.TabIndex = 7;
             this.pbBasePrincipale.TabStop = false;
+            this.pbBasePrincipale.Tag = "BasePrincipale";
             // 
             // lblCountDown
             // 
@@ -185,7 +186,7 @@
             // 
             this.pbBase4.BackColor = System.Drawing.Color.Transparent;
             this.pbBase4.Image = global::Lava_Fall.Properties.Resources.piattaforma_normale;
-            this.pbBase4.Location = new System.Drawing.Point(483, 528);
+            this.pbBase4.Location = new System.Drawing.Point(336, 525);
             this.pbBase4.Name = "pbBase4";
             this.pbBase4.Size = new System.Drawing.Size(193, 68);
             this.pbBase4.TabIndex = 9;
@@ -199,15 +200,15 @@
             this.BackColor = System.Drawing.Color.Beige;
             this.BackgroundImage = global::Lava_Fall.Properties.Resources.Sfondo_mattoni;
             this.ClientSize = new System.Drawing.Size(794, 711);
-            this.Controls.Add(this.pbBase4);
+            this.Controls.Add(this.pbPersonaggio);
             this.Controls.Add(this.pbLava);
+            this.Controls.Add(this.pbBase4);
             this.Controls.Add(this.lbPunteggio);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pbBase1);
             this.Controls.Add(this.pbBase2);
             this.Controls.Add(this.pbBase3);
             this.Controls.Add(this.pbBasePrincipale);
-            this.Controls.Add(this.pbPersonaggio);
             this.Controls.Add(this.lblCountDown);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "FormGioco";
