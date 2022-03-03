@@ -22,7 +22,7 @@ namespace Lava_Fall
         bool left;
 
         bool jump;
-        int g = 25; //quanto salta in alto il personaggio
+        int g = 100; //quanto salta in alto il personaggio
         int force = 0;
 
         public FormGioco()
@@ -296,19 +296,24 @@ namespace Lava_Fall
         {
             if (right)
             {
-                pbPersonaggio.Left += 2;
+                pbPersonaggio.Left += 20;
             }
             if (left)
             {
-                pbPersonaggio.Left -= 2;
+                pbPersonaggio.Left -= 20;
             }
             if (jump)
             {
                 pbPersonaggio.Top -= force;
-                force -= 2;
+                force -= 20;
             }
-
+            if(pbPersonaggio.Top + pbPersonaggio.Height >= 810)
+            {
+                pbPersonaggio.Top = 810 - pbPersonaggio.Height;
+                jump = false;
+            }
         }
+        
 
         private void Form1_KeyDown(object sender,KeyEventArgs e)
         {
@@ -321,6 +326,16 @@ namespace Lava_Fall
                     right = true;
                     break;
             }
+
+            //if (jump == false)
+            //{
+                if (e.KeyCode == Keys.Space)
+                {
+                    jump = true;
+                    force = g;
+
+                }
+            //}
         }
 
         private void Form1_KeyUp(object sender, KeyEventArgs e)
