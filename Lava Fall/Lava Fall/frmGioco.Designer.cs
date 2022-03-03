@@ -131,7 +131,7 @@
             // 
             this.pbPersonaggio.BackColor = System.Drawing.Color.Transparent;
             this.pbPersonaggio.Image = global::Lava_Fall.Properties.Resources.Asset_17_4x1;
-            this.pbPersonaggio.Location = new System.Drawing.Point(336, 391);
+            this.pbPersonaggio.Location = new System.Drawing.Point(358, 388);
             this.pbPersonaggio.Name = "pbPersonaggio";
             this.pbPersonaggio.Size = new System.Drawing.Size(145, 142);
             this.pbPersonaggio.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -170,7 +170,7 @@
             this.lblCountDown.BackColor = System.Drawing.Color.Transparent;
             this.lblCountDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 129.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCountDown.ForeColor = System.Drawing.Color.Transparent;
-            this.lblCountDown.Location = new System.Drawing.Point(184, 268);
+            this.lblCountDown.Location = new System.Drawing.Point(194, 204);
             this.lblCountDown.Name = "lblCountDown";
             this.lblCountDown.Size = new System.Drawing.Size(461, 195);
             this.lblCountDown.TabIndex = 8;
@@ -207,7 +207,6 @@
             this.BackColor = System.Drawing.Color.Beige;
             this.BackgroundImage = global::Lava_Fall.Properties.Resources.sfondo;
             this.ClientSize = new System.Drawing.Size(794, 711);
-            this.Controls.Add(this.pbPersonaggio);
             this.Controls.Add(this.pbLava);
             this.Controls.Add(this.pbBase4);
             this.Controls.Add(this.lbPunteggio);
@@ -215,8 +214,9 @@
             this.Controls.Add(this.pbBase1);
             this.Controls.Add(this.pbBase2);
             this.Controls.Add(this.pbBase3);
-            this.Controls.Add(this.pbBasePrincipale);
             this.Controls.Add(this.lblCountDown);
+            this.Controls.Add(this.pbPersonaggio);
+            this.Controls.Add(this.pbBasePrincipale);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "FormGioco";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
