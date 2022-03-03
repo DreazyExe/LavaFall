@@ -205,7 +205,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Beige;
-            this.BackgroundImage = global::Lava_Fall.Properties.Resources.Sfondo_mattoni;
+            this.BackgroundImage = global::Lava_Fall.Properties.Resources.sfondo;
             this.ClientSize = new System.Drawing.Size(794, 711);
             this.Controls.Add(this.pbPersonaggio);
             this.Controls.Add(this.pbLava);
