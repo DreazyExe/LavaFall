@@ -16,6 +16,15 @@ namespace Lava_Fall
         int i = 1;
         int _punteggio = 0;
         int _counter = 3;
+
+        //variabili movimento
+        bool right;
+        bool left;
+
+        bool jump;
+        int g = 25; //quanto salta in alto il personaggio
+        int force = 0;
+
         public FormGioco()
         {
             InitializeComponent();
@@ -92,7 +101,7 @@ namespace Lava_Fall
             }
             
         }
-
+        
         private void punteggio_Tick(object sender, EventArgs e)
         {
             //aumento il punteggio di uno ogni secondo
@@ -281,6 +290,43 @@ namespace Lava_Fall
         private void pbBase3_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void personaggio_pg(object sender, EventArgs e)
+        {
+            if (right)
+            {
+                pbPersonaggio.Left += 2;
+            }
+            if (left)
+            {
+                pbPersonaggio.Left -= 2;
+            }
+            if (jump)
+            {
+                pbPersonaggio.Top -= force;
+                force -= 2;
+            }
+
+        }
+
+        private void Form1_KeyDown(object sender,KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Left:
+                    left = true;
+                    break;
+                case Keys.Right:
+                    right = true;
+                    break;
+            }
+        }
+
+        private void Form1_KeyUp(object sender, KeyEventArgs e)
+        {
+            right = false;
+            left = false;
         }
     }
 }
