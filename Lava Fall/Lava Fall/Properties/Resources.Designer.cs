@@ -263,9 +263,9 @@ namespace Lava_Fall.Properties {
         /// <summary>
         ///   Cerca una risorsa localizzata di tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Sfondo_mattoni {
+        internal static System.Drawing.Bitmap sfondo {
             get {
-                object obj = ResourceManager.GetObject("Sfondo mattoni", resourceCulture);
+                object obj = ResourceManager.GetObject("sfondo", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
