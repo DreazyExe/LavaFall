@@ -30,9 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             this.timerLava = new System.Windows.Forms.Timer(this.components);
-            this.punteggio = new System.Windows.Forms.Timer(this.components);
             this.label1 = new System.Windows.Forms.Label();
-            this.lbPunteggio = new System.Windows.Forms.Label();
+            this.lblPunteggio = new System.Windows.Forms.Label();
             this.spostamento_basi = new System.Windows.Forms.Timer(this.components);
             this.pbBase1 = new System.Windows.Forms.PictureBox();
             this.pbBase2 = new System.Windows.Forms.PictureBox();
@@ -59,10 +58,6 @@
             this.timerLava.Interval = 208;
             this.timerLava.Tick += new System.EventHandler(this.timerLava_Tick);
             // 
-            // punteggio
-            // 
-            this.punteggio.Tick += new System.EventHandler(this.punteggio_Tick);
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -75,17 +70,17 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "SCORE";
             // 
-            // lbPunteggio
+            // lblPunteggio
             // 
-            this.lbPunteggio.AutoSize = true;
-            this.lbPunteggio.BackColor = System.Drawing.Color.Transparent;
-            this.lbPunteggio.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbPunteggio.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.lbPunteggio.Location = new System.Drawing.Point(90, 13);
-            this.lbPunteggio.Name = "lbPunteggio";
-            this.lbPunteggio.Size = new System.Drawing.Size(25, 25);
-            this.lbPunteggio.TabIndex = 2;
-            this.lbPunteggio.Text = "0";
+            this.lblPunteggio.AutoSize = true;
+            this.lblPunteggio.BackColor = System.Drawing.Color.Transparent;
+            this.lblPunteggio.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPunteggio.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblPunteggio.Location = new System.Drawing.Point(90, 13);
+            this.lblPunteggio.Name = "lblPunteggio";
+            this.lblPunteggio.Size = new System.Drawing.Size(25, 25);
+            this.lblPunteggio.TabIndex = 2;
+            this.lblPunteggio.Text = "0";
             // 
             // spostamento_basi
             // 
@@ -102,7 +97,6 @@
             this.pbBase1.TabIndex = 5;
             this.pbBase1.TabStop = false;
             this.pbBase1.Tag = "Base";
-            this.pbBase1.Click += new System.EventHandler(this.pbBase1_Click);
             // 
             // pbBase2
             // 
@@ -125,7 +119,6 @@
             this.pbBase3.TabIndex = 3;
             this.pbBase3.TabStop = false;
             this.pbBase3.Tag = "Base";
-            this.pbBase3.Click += new System.EventHandler(this.pbBase3_Click);
             // 
             // pbPersonaggio
             // 
@@ -137,7 +130,6 @@
             this.pbPersonaggio.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbPersonaggio.TabIndex = 6;
             this.pbPersonaggio.TabStop = false;
-            this.pbPersonaggio.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // pbLava
             // 
@@ -168,13 +160,14 @@
             // 
             this.lblCountDown.AutoSize = true;
             this.lblCountDown.BackColor = System.Drawing.Color.Transparent;
-            this.lblCountDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 129.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCountDown.Font = new System.Drawing.Font("Trebuchet MS", 180F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCountDown.ForeColor = System.Drawing.Color.Transparent;
-            this.lblCountDown.Location = new System.Drawing.Point(194, 204);
+            this.lblCountDown.Location = new System.Drawing.Point(211, 185);
+            this.lblCountDown.MinimumSize = new System.Drawing.Size(388, 230);
             this.lblCountDown.Name = "lblCountDown";
-            this.lblCountDown.Size = new System.Drawing.Size(461, 195);
+            this.lblCountDown.Size = new System.Drawing.Size(388, 300);
             this.lblCountDown.TabIndex = 8;
-            this.lblCountDown.Text = "   3   ";
+            this.lblCountDown.Text = "3";
             this.lblCountDown.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // countDown
@@ -209,7 +202,7 @@
             this.ClientSize = new System.Drawing.Size(794, 711);
             this.Controls.Add(this.pbLava);
             this.Controls.Add(this.pbBase4);
-            this.Controls.Add(this.lbPunteggio);
+            this.Controls.Add(this.lblPunteggio);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pbBase1);
             this.Controls.Add(this.pbBase2);
@@ -221,7 +214,6 @@
             this.Name = "FormGioco";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormGioco";
-            this.Load += new System.EventHandler(this.FormGioco_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.pbBase1)).EndInit();
@@ -240,9 +232,8 @@
 
         private System.Windows.Forms.Timer timerLava;
         private System.Windows.Forms.PictureBox pbLava;
-        private System.Windows.Forms.Timer punteggio;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label lbPunteggio;
+        private System.Windows.Forms.Label lblPunteggio;
         private System.Windows.Forms.PictureBox pbBase3;
         private System.Windows.Forms.Timer spostamento_basi;
         private System.Windows.Forms.PictureBox pbBase2;
