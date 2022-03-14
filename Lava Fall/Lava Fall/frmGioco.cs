@@ -30,11 +30,22 @@ namespace Lava_Fall
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        #region Aumento punteggio
+        /// <summary>
+        /// Aumenta il punteggio di una quantità stabilita.
+        /// </summary>
+        /// <param name="aumento">Quantità da aggiungere al punteggio</param>
+        private void aumentoPunteggio(byte aumento)
         {
+            //Aumento il punteggio di quanto stabilito
+            _punteggio += aumento;
 
+            //Aggiornare il punteggio sulla label apposita
+            lblPunteggio.Text = _punteggio.ToString();
         }
+        #endregion
 
+        
         private void timerLava_Tick(object sender, EventArgs e)
         {
             //ANIMAZIONE LAVA
@@ -99,15 +110,6 @@ namespace Lava_Fall
                     i = 1;
                     break;
             }
-            
-        }
-        
-        private void punteggio_Tick(object sender, EventArgs e)
-        {
-            //aumento il punteggio di uno ogni secondo
-            _punteggio++;
-            lbPunteggio.Text = Convert.ToString(_punteggio);
-
 
         }
 
@@ -120,9 +122,6 @@ namespace Lava_Fall
             Random rnd = new Random();
 
             //Lo schermo è compreso tra 0 e 600
-
-
-
             // Spostamento
             foreach(Control oggetto in this.Controls)
             {
@@ -153,119 +152,18 @@ namespace Lava_Fall
                     }
                 }
             }
-
-
-
-
-
-
-
-            ////Spostamento prima base
-            //if (pbBase1.Location.Y >= 710)
-            //{
-            //    //Istruzioni se la base ha raggiunto la parte più bassa della form e deve essere spostata in alto.
-            //    switch (ultimaBase)
-            //    {
-            //        //Istruzioni se la base precedente era la seconda
-            //        case '2':
-            //            //Porto la base ad un punto x distante almeno di 20 px rispetto alla base precedente (sia a destra che a sinistra) ed ad un punto y sopra la form.
-            //            pbBase1.Location = new Point(rnd.Next(rnd.Next(0, pbBase2.Location.X - 20), rnd.Next(pbBase2.Location.X + 80, 600)), 0 - pbBase1.Size.Height);
-            //            break;
-
-            //        //Istruzioni se la base precedente era la terza
-            //        case '3':
-            //            //Porto la base ad un punto x distante almeno di 20 px rispetto alla base precedente (sia a destra che a sinistra) ed ad un punto y sopra la form.
-            //            pbBase1.Location = new Point(rnd.Next(rnd.Next(0, pbBase3.Location.X - 20), rnd.Next(pbBase3.Location.X + 80, 600)), 0 - pbBase1.Size.Height);
-            //            break;
-            //    }
-            //    //Memorizzo il fatto che l'ultima base modificata è stata la prima
-            //    ultimaBase = '1';
-            //}
-            //else
-            //{
-            //    //Se la base non ha raggiunto la parte più bassa della form, spostarla verso il basso di 10 px.
-            //    pbBase1.Location = new Point(pbBase1.Location.X, pbBase1.Location.Y + 10);
-            //}
-
-            ////Spostamento seconda base
-            //if (pbBase2.Location.Y >= 710)
-            //{
-            //    //Istruzioni se la base ha raggiunto la parte più bassa della form e deve essere spostata in alto.
-            //    switch (ultimaBase)
-            //    {
-            //        //Istruzioni se la base precedente era la seconda
-            //        case '1':
-            //            //Porto la base ad un punto x distante almeno di 20 px rispetto alla base precedente (sia a destra che a sinistra) ed ad un punto y sopra la form.
-            //            pbBase2.Location = new Point(rnd.Next(rnd.Next(0, pbBase1.Location.X - 20), rnd.Next(pbBase1.Location.X + 80, 600)), 0 - pbBase2.Size.Height);
-            //            break;
-
-            //        //Istruzioni se la base precedente era la terza
-            //        case '3':
-            //            //Porto la base ad un punto x distante almeno di 20 px rispetto alla base precedente (sia a destra che a sinistra) ed ad un punto y sopra la form.
-            //            pbBase2.Location = new Point(rnd.Next(rnd.Next(0, pbBase3.Location.X - 20), rnd.Next(pbBase3.Location.X + 80, 600)), 0 - pbBase2.Size.Height);
-            //            break;
-            //    }
-            //    //Memorizzo il fatto che l'ultima base modificata è stata la prima
-            //    ultimaBase = '2';
-            //}
-            //else
-            //{
-            //    //Se la base non ha raggiunto la parte più bassa della form, spostarla verso il basso di 10 px.
-            //    pbBase2.Location = new Point(pbBase2.Location.X, pbBase2.Location.Y + 10);
-            //}
-
-            ////Spostamento terza base
-            //if (pbBase3.Location.Y >= 710)
-            //{
-            //    //Istruzioni se la base ha raggiunto la parte più bassa della form e deve essere spostata in alto.
-            //    switch (ultimaBase)
-            //    {
-            //        //Istruzioni se la base precedente era la seconda
-            //        case '1':
-            //            //Porto la base ad un punto x distante almeno di 20 px rispetto alla base precedente (sia a destra che a sinistra) ed ad un punto y sopra la form.
-            //            pbBase3.Location = new Point(rnd.Next(rnd.Next(0, pbBase1.Location.X - 20), rnd.Next(pbBase1.Location.X + 80, 600)), 0 - pbBase3.Size.Height);
-            //            break;
-
-            //        //Istruzioni se la base precedente era la terza
-            //        case '2':
-            //            //Porto la base ad un punto x distante almeno di 20 px rispetto alla base precedente (sia a destra che a sinistra) ed ad un punto y sopra la form.
-            //            pbBase3.Location = new Point(rnd.Next(rnd.Next(0, pbBase2.Location.X - 20), rnd.Next(pbBase2.Location.X + 80, 600)), 0 - pbBase3.Size.Height);
-            //            break;
-            //    }
-            //    //Memorizzo il fatto che l'ultima base modificata è stata la prima
-            //    ultimaBase = '3';
-            //}
-            //else
-            //{
-            //    //Se la base non ha raggiunto la parte più bassa della form, spostarla verso il basso di 10 px.
-            //    pbBase3.Location = new Point(pbBase3.Location.X, pbBase3.Location.Y + 10);
-            //}
-
-
+  
+            //Aumento il punteggio di 1 ogni volta
+            aumentoPunteggio(1);
         }
 
-        private void pbBase1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void FormGioco_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
+        #region Countdown iniziale
         private void countDown_Tick(object sender, EventArgs e)
         {
             //Se i secondi di attesa iniziale sono finiti
             if (_counter == 0)
             {
                 //Attivo i timer di movimento
-                punteggio.Enabled = true;
                 spostamento_basi.Enabled = true;
 
                 //Disattiva il timer
@@ -281,17 +179,14 @@ namespace Lava_Fall
 
                 if (_counter == 0)
                     //Aggiorno la label dei secondi rimasti
-                    lblCountDown.Text = "Via!";
+                    lblCountDown.Text = "Go!";
                 else
                     lblCountDown.Text = _counter.ToString();
             }
         }
+        #endregion
 
-        private void pbBase3_Click(object sender, EventArgs e)
-        {
-
-        }
-
+        #region Spostamento personaggio
         private void personaggio_pg(object sender, EventArgs e)
         {
             if (right)
@@ -306,6 +201,11 @@ namespace Lava_Fall
             {
                 pbPersonaggio.Top -= force;
                 force -= 20;
+                if (pbPersonaggio.Bounds.IntersectsWith(pbBase1.Bounds))
+                {
+                    jump = true;
+                    force = g;
+                }
             }
             if(pbPersonaggio.Top + pbPersonaggio.Height >= 810)
             {
@@ -313,30 +213,36 @@ namespace Lava_Fall
                 jump = false;
             }
         }
-        
+        #endregion
 
+
+        #region Eventi quando un utente preme un carattere
         private void Form1_KeyDown(object sender,KeyEventArgs e)
         {
+            //Eseguo un azione in base al tasto digitato
             switch (e.KeyCode)
             {
+                //Istruzioni se il tasto è la freccia sinistra
                 case Keys.Left:
                     left = true;
                     break;
+                //Istruzioni se il tasto è la freccia destra
                 case Keys.Right:
                     right = true;
                     break;
+                //Istruzioni se il tasto è la barra spaziatrice
+                case Keys.Space:
+                    if (jump == false)
+                    {
+                        jump = true;
+                        force = g;
+                    }
+                    break;
+
+
             }
-
-            //if (jump == false)
-            //{
-                if (e.KeyCode == Keys.Space)
-                {
-                    jump = true;
-                    force = g;
-
-                }
-            //}
         }
+        #endregion
 
         private void Form1_KeyUp(object sender, KeyEventArgs e)
         {
