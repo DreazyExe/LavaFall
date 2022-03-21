@@ -215,7 +215,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormGioco";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
-            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.pbBase1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbBase2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbBase3)).EndInit();
