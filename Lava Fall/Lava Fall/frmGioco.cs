@@ -12,8 +12,9 @@ namespace Lava_Fall
 {
     public partial class FormGioco : Form
     {
+        #region Global variables
         //variabili globali
-        int i = 1;
+        int i = 0;
         int _punteggio = 0;
         int _counter = 3;
 
@@ -21,9 +22,14 @@ namespace Lava_Fall
         bool right;
         bool left;
 
+        //variables lava movement
+        System.Drawing.Image [] arrayLava = { Properties.Resources.B, Properties.Resources.C, Properties.Resources.D, Properties.Resources.E, Properties.Resources.F, Properties.Resources.G, Properties.Resources.H, Properties.Resources.I, Properties.Resources.J, Properties.Resources.K, Properties.Resources.L, Properties.Resources.A };
+
+        //Todo commenti
         bool jump;
         int g = 100; //quanto salta in alto il personaggio
         int force = 0;
+        #endregion
 
         public FormGioco()
         {
@@ -45,73 +51,16 @@ namespace Lava_Fall
         }
         #endregion
 
-        
+        #region Lava movement
         private void timerLava_Tick(object sender, EventArgs e)
         {
-            //ANIMAZIONE LAVA
-            switch (i)
-            {
-                case 1:
-                    pbLava.Image = Properties.Resources.B;
-                    i++;
-                    break;
-
-                case 2:
-                    pbLava.Image = Properties.Resources.C;
-                    i++;
-                    break;
-
-                case 3:
-                    pbLava.Image = Properties.Resources.D;
-                    i++;
-                    break;
-
-                case 4:
-                    pbLava.Image = Properties.Resources.E;
-                    i++;
-                    break;
-
-                case 5:
-                    pbLava.Image = Properties.Resources.F;
-                    i++;
-                    break;
-
-                case 6:
-                    pbLava.Image = Properties.Resources.G;
-                    i++;
-                    break;
-
-                case 7:
-                    pbLava.Image = Properties.Resources.H;
-                    i++;
-                    break;
-
-                case 8:
-                    pbLava.Image = Properties.Resources.I;
-                    i++;
-                    break;
-
-                case 9:
-                    pbLava.Image = Properties.Resources.J;
-                    i++;
-                    break;
-
-                case 10:
-                    pbLava.Image = Properties.Resources.K;
-                    i++;
-                    break;
-
-                case 11:
-                    pbLava.Image = Properties.Resources.L;
-                    i++;
-                    break;
-                case 12:
-                    pbLava.Image = Properties.Resources.A;
-                    i = 1;
-                    break;
-            }
-
+            pbLava.Image = arrayLava[i];
+            if (i < 11)
+                i++;
+            else
+                i = 0;
         }
+        #endregion
 
         private void spostamento_basi_Tick(object sender, EventArgs e)
         {
@@ -132,7 +81,7 @@ namespace Lava_Fall
                     PictureBox baseAttuale = (PictureBox)oggetto;
 
                     //Entra se il tag dell'oggetto preso è base
-                    if ((string)baseAttuale.Tag=="Base")
+                    if (baseAttuale.Tag=="Base")
                     {
                         // Facciamo spostare la base di 5 px in basso
                         // Controllo se ho raggiunto la lava
@@ -144,7 +93,7 @@ namespace Lava_Fall
                             baseAttuale.Location = new Point(baseAttuale.Location.X, baseAttuale.Location.Y + 5);
                     }
 
-                    if((string)baseAttuale.Tag == "BasePrincipale")
+                    if(baseAttuale.Tag == "BasePrincipale")
                     {
                         if (baseAttuale.Location.Y <= 786)
                             // Facciamo spostare la base di 5 px in basso
