@@ -45,6 +45,36 @@ namespace Lava_Fall
             InitializeComponent();
         }
 
+        #region Countdown iniziale
+        private void countDown_Tick(object sender, EventArgs e)
+        {
+            // Se i secondi di attesa iniziale sono finiti
+            if (_counter == 0)
+            {
+                // Attivo i timer di movimento
+                spostamento_basi.Enabled = true;
+
+                // Disattiva il timer del countdown
+                this.Enabled = false;
+
+                // Scrivo "Go!" sulla label del countdown per indicare l'inizio del gioco
+                lblCountDown.Text = "Go!";
+
+                // Nascondi la label del counter
+                lblCountDown.Visible = false;
+            }
+            // Se i secondi di attesa iniziale non sono ancora finiti
+            else
+            {
+                // Tolgo un secondo al timer
+                _counter--;
+
+                // Aggiorno la label del counter
+                lblCountDown.Text = _counter.ToString();
+            }
+        }
+        #endregion
+
         #region Aumento punteggio
         /// <summary>
         /// Aumenta il punteggio di una quantità stabilita.
@@ -67,10 +97,11 @@ namespace Lava_Fall
             if (i < 11)
                 i++;
             else
-                i = 0;]
+                i = 0;
         }
         #endregion
 
+        #region Spostamento basi
         private void spostamento_basi_Tick(object sender, EventArgs e)
         {
             //BUG: LA SECONDA BASE NON RITORNA SOPRA
@@ -114,35 +145,9 @@ namespace Lava_Fall
             //Aumento il punteggio di 1 ogni volta
             aumentoPunteggio(1);
         }
-
-        #region Countdown iniziale
-        private void countDown_Tick(object sender, EventArgs e)
-        {
-            //Se i secondi di attesa iniziale sono finiti
-            if (_counter == 0)
-            {
-                //Attivo i timer di movimento
-                spostamento_basi.Enabled = true;
-
-                //Disattiva il timer
-                this.Enabled = false;
-
-                //Rimuovi il counter
-                lblCountDown.Visible = false;
-            }
-            else
-            {
-                //Aggiorno il counter
-                _counter--;
-
-                if (_counter == 0)
-                    //Aggiorno la label dei secondi rimasti
-                    lblCountDown.Text = "Go!";
-                else
-                    lblCountDown.Text = _counter.ToString();
-            }
-        }
         #endregion
+
+
 
         #region Spostamento personaggio
         private void personaggio_pg(object sender, EventArgs e)
