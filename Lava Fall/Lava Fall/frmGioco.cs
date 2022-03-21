@@ -13,22 +13,31 @@ namespace Lava_Fall
     public partial class FormGioco : Form
     {
         #region Global variables
-        //variabili globali
-        int i = 0;
-        int _punteggio = 0;
+        // Starting count
         int _counter = 3;
 
-        //variabili movimento
-        bool right;
-        bool left;
+        // Lava movement
+        int i = 0;  //Counter of the image
+        System.Drawing.Image[] arrayLava = 
+        {
+            Properties.Resources.B, Properties.Resources.C, Properties.Resources.D,
+            Properties.Resources.E, Properties.Resources.F, Properties.Resources.G,
+            Properties.Resources.H, Properties.Resources.I, Properties.Resources.J,
+            Properties.Resources.K, Properties.Resources.L, Properties.Resources.A
+        };  //Array of lava images
 
-        //variables lava movement
-        System.Drawing.Image [] arrayLava = { Properties.Resources.B, Properties.Resources.C, Properties.Resources.D, Properties.Resources.E, Properties.Resources.F, Properties.Resources.G, Properties.Resources.H, Properties.Resources.I, Properties.Resources.J, Properties.Resources.K, Properties.Resources.L, Properties.Resources.A };
+        // Points
+        int _punteggio = 0; // Point variable
+        
+        // Movement variables
+        bool right;     // Direction of the move (right)
+        bool left;      // Direction of the move (left)
+        bool jump;      // Direction of the move (up)
+        int g = 100;    // Width of the jump
+        int force = 0;  // ?
 
         //Todo commenti
-        bool jump;
-        int g = 100; //quanto salta in alto il personaggio
-        int force = 0;
+
         #endregion
 
         public FormGioco()
@@ -58,7 +67,7 @@ namespace Lava_Fall
             if (i < 11)
                 i++;
             else
-                i = 0;
+                i = 0;]
         }
         #endregion
 
