@@ -27,7 +27,7 @@ namespace Lava_Fall
         };  //Array of lava images
 
         // Points
-        int _punteggio = 0; // Point variable
+        int _points = 0; // Point variable
         
         // Movement variables
         bool right;     // Direction of the move (right)
@@ -35,9 +35,6 @@ namespace Lava_Fall
         bool jump;      // Direction of the move (up)
         int g = 100;    // Width of the jump
         int force = 0;  // ?
-
-        //Todo commenti
-
         #endregion
 
         public FormGioco()
@@ -45,65 +42,73 @@ namespace Lava_Fall
             InitializeComponent();
         }
 
-        #region Countdown iniziale
+        #region Starting countdown
         private void countDown_Tick(object sender, EventArgs e)
         {
-            // Se i secondi di attesa iniziale sono finiti
-            if (_counter == 0)
+            // Subtract 1 second to the counter 
+            _counter--;
+
+            // Check if the countdown finishes
+            // If the countdown finished
+            if (_counter <= 0)
             {
-                // Attivo i timer di movimento
-                spostamento_basi.Enabled = true;
-
-                // Disattiva il timer del countdown
-                this.Enabled = false;
-
-                // Scrivo "Go!" sulla label del countdown per indicare l'inizio del gioco
+                // Write "Go!" on the label of the countdown to indicate the beginning of the game
                 lblCountDown.Text = "Go!";
 
-                // Nascondi la label del counter
+                // Enable movement timer
+                spostamento_basi.Enabled = true;
+
+                // Disable countdown timer
+                this.Enabled = false;
+
+                // Hide counter label
                 lblCountDown.Visible = false;
             }
-            // Se i secondi di attesa iniziale non sono ancora finiti
+            // If the countdown hasn't finished yet
             else
-            {
-                // Tolgo un secondo al timer
-                _counter--;
-
-                // Aggiorno la label del counter
+                // Refresh counter label
                 lblCountDown.Text = _counter.ToString();
-            }
         }
         #endregion
 
-        #region Aumento punteggio
+        #region Increase points
         /// <summary>
-        /// Aumenta il punteggio di una quantità stabilita.
+        /// Increases score of a set quantity
         /// </summary>
-        /// <param name="aumento">Quantità da aggiungere al punteggio</param>
-        private void aumentoPunteggio(byte aumento)
+        /// <param name="quantityToAdd"> Quantity to add to the points</param>
+        private void increasePoints(byte quantityToAdd)
         {
-            //Aumento il punteggio di quanto stabilito
-            _punteggio += aumento;
+            // Add the quantity to the total points
+            _points += quantityToAdd;
 
-            //Aggiornare il punteggio sulla label apposita
-            lblPunteggio.Text = _punteggio.ToString();
+            // Refresh of the points label
+            lblPunteggio.Text = _points.ToString();
         }
         #endregion
 
         #region Lava movement
         private void timerLava_Tick(object sender, EventArgs e)
         {
+            // Set the new frame of the lava
             pbLava.Image = arrayLava[i];
+
+            // Increase the indicator of frame
             if (i < 11)
                 i++;
+
+            // If frames are finished restart the animation
             else
                 i = 0;
         }
         #endregion
 
+        // TODO Sistemare spostamento basi ottimizzando il codice che rallenta il programma
         #region Spostamento basi
         private void spostamento_basi_Tick(object sender, EventArgs e)
         {
+            // TODO Spostare una base alla volta e non effettuare il controllo di tutti i controlli nella form
+            // TODO Progettare un algoritmo per riportare le basi in alto cambiando la posizione ed evitando che siano appiccicate
+
             //BUG: LA SECONDA BASE NON RITORNA SOPRA
             //Dichiaro una variabile per l'ultima base che si è spostata. Inizialmente il suo valore è 2 perché non esiste una base precedente.
             //char ultimaBase = '2';
@@ -141,25 +146,44 @@ namespace Lava_Fall
                     }
                 }
             }
-  
-            //Aumento il punteggio di 1 ogni volta
-            aumentoPunteggio(1);
+
+            // Add 1 point to the points    
+            increasePoints(1);
+        }
+        #endregion  //
+
+        // TODO Rendere più leggibile ed ottimizzare il codice del salto
+
+        #region Events if the user presses a key
+        private void Form1_KeyDown(object sender, KeyEventArgs key)
+        {
+            // Perform an action based on the pressed key
+            switch (key.KeyCode)
+            {
+                // If the key is "left arrow" go back 20 px
+                case Keys.Left:
+                    pbPersonaggio.Left -= 20;
+                    break;
+                // If the key is "right arrow" move forward 20 px
+                case Keys.Right:
+                    pbPersonaggio.Left += 20;
+                    break;
+                // Istructions if the key is "space"
+                case Keys.Space:
+                    // Jump only if the character is not jumping
+                    if (jump == false)
+                    {
+                        jump = true;
+                        force = g;
+                    }
+                    break;
+            }
         }
         #endregion
 
-
-
-        #region Spostamento personaggio
+        #region Character movement
         private void personaggio_pg(object sender, EventArgs e)
         {
-            if (right)
-            {
-                pbPersonaggio.Left += 20;
-            }
-            if (left)
-            {
-                pbPersonaggio.Left -= 20;
-            }
             if (jump)
             {
                 pbPersonaggio.Top -= force;
@@ -177,39 +201,5 @@ namespace Lava_Fall
             }
         }
         #endregion
-
-        #region Eventi quando un utente preme un carattere
-        private void Form1_KeyDown(object sender,KeyEventArgs e)
-        {
-            //Eseguo un azione in base al tasto digitato
-            switch (e.KeyCode)
-            {
-                //Istruzioni se il tasto è la freccia sinistra
-                case Keys.Left:
-                    left = true;
-                    break;
-                //Istruzioni se il tasto è la freccia destra
-                case Keys.Right:
-                    right = true;
-                    break;
-                //Istruzioni se il tasto è la barra spaziatrice
-                case Keys.Space:
-                    if (jump == false)
-                    {
-                        jump = true;
-                        force = g;
-                    }
-                    break;
-
-
-            }
-        }
-        #endregion
-
-        private void Form1_KeyUp(object sender, KeyEventArgs e)
-        {
-            right = false;
-            left = false;
-        }
     }
 }
