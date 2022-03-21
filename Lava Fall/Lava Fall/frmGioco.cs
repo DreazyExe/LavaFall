@@ -75,7 +75,7 @@ namespace Lava_Fall
         {
             //BUG: LA SECONDA BASE NON RITORNA SOPRA
             //Dichiaro una variabile per l'ultima base che si è spostata. Inizialmente il suo valore è 2 perché non esiste una base precedente.
-            char ultimaBase = '2';
+            //char ultimaBase = '2';
             //Dichiaro una variabile per generare numeri casuali
             Random rnd = new Random();
 
@@ -172,7 +172,6 @@ namespace Lava_Fall
             }
         }
         #endregion
-
 
         #region Eventi quando un utente preme un carattere
         private void Form1_KeyDown(object sender,KeyEventArgs e)
