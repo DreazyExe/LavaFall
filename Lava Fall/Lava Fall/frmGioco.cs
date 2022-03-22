@@ -33,7 +33,7 @@ namespace Lava_Fall
         bool right;     // Direction of the move (right)
         bool left;      // Direction of the move (left)
         bool jump;      // Direction of the move (up)
-        int g = 100;    // Width of the jump
+        int initialForce = 100;    // Initial force of the jump
         int force = 0;  // ?
         #endregion
 
@@ -150,10 +150,9 @@ namespace Lava_Fall
             // Add 1 point to the points    
             increasePoints(1);
         }
-        #endregion  //
+        #endregion
 
-        // TODO Rendere più leggibile ed ottimizzare il codice del salto
-
+        // Ok
         #region Events if the user presses a key
         private void Form1_KeyDown(object sender, KeyEventArgs key)
         {
@@ -174,29 +173,38 @@ namespace Lava_Fall
                     if (jump == false)
                     {
                         jump = true;
-                        force = g;
+                        force = initialForce;
                     }
                     break;
             }
         }
         #endregion
 
-        #region Character movement
-        private void personaggio_pg(object sender, EventArgs e)
+        #region Character jump
+        private void characterJump(object sender, EventArgs e)
         {
+            // Verifies if there's the necessity to jump
             if (jump)
             {
+                // Decrease the distance between the top of the window and the character
                 pbPersonaggio.Top -= force;
+                // Decrease the force of the jump (pixels movement)
                 force -= 20;
-                if (pbPersonaggio.Bounds.IntersectsWith(pbBase1.Bounds))
+                // If the character touches a base start the jump again
+                if (pbPersonaggio.Bounds.IntersectsWith(pbBase1.Bounds) || pbPersonaggio.Bounds.IntersectsWith(pbBase2.Bounds) || pbPersonaggio.Bounds.IntersectsWith(pbBase3.Bounds) || pbPersonaggio.Bounds.IntersectsWith(pbBase4.Bounds))
                 {
+                    // Enable jump
                     jump = true;
-                    force = g;
+                    // Reset the initial force
+                    force = initialForce;
                 }
             }
-            if(pbPersonaggio.Top + pbPersonaggio.Height >= 810)
+            // Verify if the character has passed the top of the form
+            if (pbPersonaggio.Top + pbPersonaggio.Height >= 810)
             {
+                // Move down the character
                 pbPersonaggio.Top = 810 - pbPersonaggio.Height;
+                // Disable the jump
                 jump = false;
             }
         }
