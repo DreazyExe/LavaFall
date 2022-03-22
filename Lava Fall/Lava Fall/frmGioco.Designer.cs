@@ -191,7 +191,7 @@
             // 
             this.spostamento_pg.Enabled = true;
             this.spostamento_pg.Interval = 50;
-            this.spostamento_pg.Tick += new System.EventHandler(this.personaggio_pg);
+            this.spostamento_pg.Tick += new System.EventHandler(this.characterJump);
             // 
             // FormGioco
             // 
