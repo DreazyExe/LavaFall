@@ -33,8 +33,21 @@ namespace Lava_Fall
         bool right;     // Direction of the move (right)
         bool left;      // Direction of the move (left)
         bool jump;      // Direction of the move (up)
-        int initialForce = 100;    // Initial force of the jump
+        int initialForce = 50;    // Initial force of the jump
         int force = 0;  // ?
+
+        // VETTORE DI PROVA PER IL MIO ALGORITMO
+        //(CONTIENE I PUNTI X DOVE PUO SPOWNARE LA BASE)
+        //LUNGHEZZA FORM ORIZZONTALE 791
+        //791 / 4 = 197
+        //ipotizzo una piattaforma lunga circa 200
+
+
+        int[] possiblePositions = { 10 , 220 ,430, 650  };
+
+        Point coordinates;
+        int _newY = 657;
+
         #endregion
 
         public FormGioco()
@@ -106,49 +119,41 @@ namespace Lava_Fall
         #region Spostamento basi
         private void spostamento_basi_Tick(object sender, EventArgs e)
         {
-            // TODO Spostare una base alla volta e non effettuare il controllo di tutti i controlli nella form
-            // TODO Progettare un algoritmo per riportare le basi in alto cambiando la posizione ed evitando che siano appiccicate
+            // each tick moves the base 10 px down
+            pbBase1.Top += 10;
+            pbBase2.Top += 10;
+            pbBase3.Top += 10;
+            pbBase4.Top += 10;
 
-            //BUG: LA SECONDA BASE NON RITORNA SOPRA
-            //Dichiaro una variabile per l'ultima base che si è spostata. Inizialmente il suo valore è 2 perché non esiste una base precedente.
-            //char ultimaBase = '2';
-            //Dichiaro una variabile per generare numeri casuali
-            Random rnd = new Random();
-
-            //Lo schermo è compreso tra 0 e 600
-            // Spostamento
-            foreach(Control oggetto in this.Controls)
-            {
-                // Verifica se l'oggetto è una picturebox e il nome del tag è una stringa
-                if (oggetto is PictureBox && oggetto.Tag is String)
-                {
-                    // Alla picturebox assegna l'oggetto preso
-                    PictureBox baseAttuale = (PictureBox)oggetto;
-
-                    //Entra se il tag dell'oggetto preso è base
-                    if (baseAttuale.Tag=="Base")
-                    {
-                        // Facciamo spostare la base di 5 px in basso
-                        // Controllo se ho raggiunto la lava
-                        if (baseAttuale.Location.Y >= 786)
-                            // In caso affermativo torna sopra
-                            baseAttuale.Location = new Point(rnd.Next(rnd.Next(0, baseAttuale.Location.X - 20), rnd.Next(baseAttuale.Location.X + 80, 600)), 0 - baseAttuale.Size.Height);
-                        else
-                            // In caso negativo fai scendere di 1 pixel
-                            baseAttuale.Location = new Point(baseAttuale.Location.X, baseAttuale.Location.Y + 5);
-                    }
-
-                    if(baseAttuale.Tag == "BasePrincipale")
-                    {
-                        if (baseAttuale.Location.Y <= 786)
-                            // Facciamo spostare la base di 5 px in basso
-                            baseAttuale.Location = new Point(baseAttuale.Location.X, baseAttuale.Location.Y + 5);
-                    }
-                }
-            }
+            // procedure to restore the bases
+            RespownBases();
 
             // Add 1 point to the points    
             increasePoints(1);
+        }
+
+        private void RespownBases()
+        {
+            if (pbBase1.Top > 657)
+            {
+                var PositionPb1 = pbBase1.PointToScreen(new Point(10, 10));
+            }
+            else if (pbBase4.Location.Y > _newY)
+            {
+
+                //PRENDO LA POSIZIONE DELLA BASE ATTUALMENTE (LA POSIZIONE DI QUANDO GIA DOVREBBE TORNARE SU LA BASE)
+                coordinates = pbBase4.Location;
+                
+
+                
+
+                pbBase4.Location = new Point(possiblePositions[2], coordinates.Y - _newY);
+
+                _newY += 650;
+            }
+            else
+                return;
+
         }
         #endregion
 

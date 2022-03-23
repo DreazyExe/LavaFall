@@ -113,7 +113,7 @@
             // 
             this.pbBase3.BackColor = System.Drawing.Color.Transparent;
             this.pbBase3.Image = global::Lava_Fall.Properties.Resources.piattaforma_normale;
-            this.pbBase3.Location = new System.Drawing.Point(258, 56);
+            this.pbBase3.Location = new System.Drawing.Point(367, 104);
             this.pbBase3.Name = "pbBase3";
             this.pbBase3.Size = new System.Drawing.Size(193, 68);
             this.pbBase3.TabIndex = 3;
