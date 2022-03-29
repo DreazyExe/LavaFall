@@ -210,6 +210,7 @@
             this.Controls.Add(this.lblCountDown);
             this.Controls.Add(this.pbPersonaggio);
             this.Controls.Add(this.pbBasePrincipale);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "FormGioco";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
