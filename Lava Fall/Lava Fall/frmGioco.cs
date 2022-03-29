@@ -138,20 +138,27 @@ namespace Lava_Fall
         {
             if (pbBase1.Top > 657)
             {
-                var PositionPb1 = pbBase1.PointToScreen(new Point(10, 10));
-            }
-            else if (pbBase4.Location.Y > _newY)
-            {
-
-                //PRENDO LA POSIZIONE DELLA BASE ATTUALMENTE (LA POSIZIONE DI QUANDO GIA DOVREBBE TORNARE SU LA BASE)
                 coordinates = pbBase4.Location;
-                
+                pbBase4.Location = new Point(possiblePositions[0], coordinates.Y - 668);
 
-                
-
-                pbBase4.Location = new Point(possiblePositions[2], coordinates.Y - _newY);
-
+            }
+            else if (pbBase4.Location.Y > 657)
+            {
+                coordinates = pbBase4.Location;
+                pbBase4.Location = new Point(possiblePositions[3], coordinates.Y - 668);
                 _newY += 650;
+            }
+            else if (pbBase2.Location.Y > 657)
+            {
+                coordinates = pbBase4.Location;
+                pbBase2.Location = new Point(possiblePositions[1], coordinates.Y - 668);
+
+            }
+            else if(pbBase3.Location.Y > 657)
+            {
+                coordinates = pbBase4.Location;
+                pbBase3.Location = new Point(possiblePositions[2], coordinates.Y - 668);
+
             }
             else
                 return;
