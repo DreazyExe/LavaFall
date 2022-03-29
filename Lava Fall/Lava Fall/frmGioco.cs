@@ -53,6 +53,8 @@ namespace Lava_Fall
         public FormGioco()
         {
             InitializeComponent();
+
+            SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
         }
 
         #region Starting countdown
