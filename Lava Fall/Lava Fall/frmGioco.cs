@@ -30,8 +30,7 @@ namespace Lava_Fall
         int _points = 0; // Point variable
         
         // Movement variables
-        bool right;     // Direction of the move (right)
-        bool left;      // Direction of the move (left)
+
         bool jump;      // Direction of the move (up)
         int initialForce = 50;    // Initial force of the jump
         int force = 0;  // ?
