@@ -91,7 +91,7 @@
             // 
             this.pbBase1.BackColor = System.Drawing.Color.Transparent;
             this.pbBase1.Image = global::Lava_Fall.Properties.Resources.piattaforma_normale;
-            this.pbBase1.Location = new System.Drawing.Point(95, 287);
+            this.pbBase1.Location = new System.Drawing.Point(63, 252);
             this.pbBase1.Name = "pbBase1";
             this.pbBase1.Size = new System.Drawing.Size(193, 68);
             this.pbBase1.TabIndex = 5;
@@ -102,7 +102,7 @@
             // 
             this.pbBase2.BackColor = System.Drawing.Color.Transparent;
             this.pbBase2.Image = global::Lava_Fall.Properties.Resources.piattaforma_normale;
-            this.pbBase2.Location = new System.Drawing.Point(605, 287);
+            this.pbBase2.Location = new System.Drawing.Point(589, 348);
             this.pbBase2.Name = "pbBase2";
             this.pbBase2.Size = new System.Drawing.Size(193, 68);
             this.pbBase2.TabIndex = 4;
@@ -113,7 +113,7 @@
             // 
             this.pbBase3.BackColor = System.Drawing.Color.Transparent;
             this.pbBase3.Image = global::Lava_Fall.Properties.Resources.piattaforma_normale;
-            this.pbBase3.Location = new System.Drawing.Point(367, 104);
+            this.pbBase3.Location = new System.Drawing.Point(548, 64);
             this.pbBase3.Name = "pbBase3";
             this.pbBase3.Size = new System.Drawing.Size(193, 68);
             this.pbBase3.TabIndex = 3;
@@ -124,7 +124,7 @@
             // 
             this.pbPersonaggio.BackColor = System.Drawing.Color.Transparent;
             this.pbPersonaggio.Image = global::Lava_Fall.Properties.Resources.Asset_17_4x1;
-            this.pbPersonaggio.Location = new System.Drawing.Point(358, 388);
+            this.pbPersonaggio.Location = new System.Drawing.Point(384, 387);
             this.pbPersonaggio.Name = "pbPersonaggio";
             this.pbPersonaggio.Size = new System.Drawing.Size(145, 142);
             this.pbPersonaggio.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
