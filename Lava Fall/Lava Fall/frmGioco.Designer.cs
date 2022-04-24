@@ -91,7 +91,7 @@
             // 
             this.pbBase1.BackColor = System.Drawing.Color.Transparent;
             this.pbBase1.Image = global::Lava_Fall.Properties.Resources.piattaforma_normale;
-            this.pbBase1.Location = new System.Drawing.Point(63, 252);
+            this.pbBase1.Location = new System.Drawing.Point(32, 40);
             this.pbBase1.Name = "pbBase1";
             this.pbBase1.Size = new System.Drawing.Size(193, 68);
             this.pbBase1.TabIndex = 5;
@@ -102,7 +102,7 @@
             // 
             this.pbBase2.BackColor = System.Drawing.Color.Transparent;
             this.pbBase2.Image = global::Lava_Fall.Properties.Resources.piattaforma_normale;
-            this.pbBase2.Location = new System.Drawing.Point(589, 348);
+            this.pbBase2.Location = new System.Drawing.Point(548, 252);
             this.pbBase2.Name = "pbBase2";
             this.pbBase2.Size = new System.Drawing.Size(193, 68);
             this.pbBase2.TabIndex = 4;
@@ -113,7 +113,7 @@
             // 
             this.pbBase3.BackColor = System.Drawing.Color.Transparent;
             this.pbBase3.Image = global::Lava_Fall.Properties.Resources.piattaforma_normale;
-            this.pbBase3.Location = new System.Drawing.Point(548, 64);
+            this.pbBase3.Location = new System.Drawing.Point(548, -30);
             this.pbBase3.Name = "pbBase3";
             this.pbBase3.Size = new System.Drawing.Size(193, 68);
             this.pbBase3.TabIndex = 3;
@@ -180,7 +180,7 @@
             // 
             this.pbBase4.BackColor = System.Drawing.Color.Transparent;
             this.pbBase4.Image = global::Lava_Fall.Properties.Resources.piattaforma_normale;
-            this.pbBase4.Location = new System.Drawing.Point(336, 525);
+            this.pbBase4.Location = new System.Drawing.Point(352, 523);
             this.pbBase4.Name = "pbBase4";
             this.pbBase4.Size = new System.Drawing.Size(193, 68);
             this.pbBase4.TabIndex = 9;

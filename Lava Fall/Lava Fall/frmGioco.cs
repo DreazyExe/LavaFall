@@ -13,6 +13,12 @@ namespace Lava_Fall
     public partial class FormGioco : Form
     {
         #region Global costants
+        // game state
+        enum eGameState
+        {
+            atstake,
+            suspended,
+        }
         // Movement costants
         const int MAXRIGHTFORMPOSITION = 650;
         const int MAXLEFTFORMPOSITION = 0;
@@ -50,6 +56,12 @@ namespace Lava_Fall
         // Array of possible position of objects (position x)
         int[] defaultXPositions = { 10 , 220 ,430, 650  };
 
+        // stores the position of the previous platform
+        int _lastRandomNumber;
+
+        // indix of state game
+        eGameState _stateGame;
+
         #endregion
 
         // FORM BUILDER
@@ -57,6 +69,8 @@ namespace Lava_Fall
         {
             InitializeComponent();
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            // when the program start the game is suspended
+            _stateGame = eGameState.suspended;
         }
 
         // STARTING COUNTDOWN - STATUS: RESOLVE BUGS
@@ -72,6 +86,8 @@ namespace Lava_Fall
             // If the countdown finished
             if (_counter <= 0)
             {
+                _stateGame = eGameState.atstake;
+
                 // Write "Go!" on the label of the countdown to indicate the beginning of the game
                 lblCountDown.Text = "Go!";
 
@@ -107,16 +123,20 @@ namespace Lava_Fall
         // MOVEMENT OF THE LAVA - STATUS: OK
         private void timerLava_Tick(object sender, EventArgs e)
         {
-            // Set the new frame of the lava
-            pbLava.Image = arrayLava[i];
+            if(_stateGame == eGameState.atstake)
+            {
+                // Set the new frame of the lava
+                pbLava.Image = arrayLava[i];
 
-            // Increase the indicator of frame
-            if (i < 11)
-                i++;
+                // Increase the indicator of frame
+                if (i < 11)
+                    i++;
 
-            // If frames are finished restart the animation
-            else
-                i = 0;
+                // If frames are finished restart the animation
+                else
+                    i = 0;
+            }
+            
         }
 
         // MOVE OF THE BASIS - STATUS: OK
@@ -168,11 +188,16 @@ namespace Lava_Fall
             Random random = new Random();
             // Generate a random number to choose the X position from the array of default X positions
             _randomNumber = random.Next(0, defaultXPositions.Length - 1);
-            int X = defaultXPositions[_randomNumber];
-            // Calculate the Y position (take the Y position of the image and substract 668 to go to the top of the form
-            int Y = objectToMove.Location.Y - 668;
-            // Move the object in the top of the form with the calculated coordinates
-            objectToMove.Location = new Point(X, Y);
+            // this condition prevents the platform from spawning in the same location as the previous one
+            if (_randomNumber != _lastRandomNumber && _randomNumber != _randomNumber+1 && _randomNumber != _randomNumber - 1)
+            {
+                int X = defaultXPositions[_randomNumber];
+                // Calculate the Y position (take the Y position of the image and substract 668 to go to the top of the form
+                int Y = objectToMove.Location.Y - 668;
+                // Move the object in the top of the form with the calculated coordinates
+                objectToMove.Location = new Point(X, Y);
+            }
+            _lastRandomNumber = _randomNumber;
         }
 
         // MOVE OF THE CHARACTER (EVENT IF A KEY IS PRESSED AND LEFT-RIGHT MOVEMENT) - STATUS: OK
@@ -183,29 +208,34 @@ namespace Lava_Fall
         /// <param name="key"></param>
         private void Form1_KeyDown(object sender, KeyEventArgs key)
         {
-            // Perform an action based on the pressed key
-            switch (key.KeyCode)
+            // if the game is not at stake you can't move
+            if(_stateGame == eGameState.atstake)
             {
-                // If the key is "left arrow" go back 20 px only if the character doesn't go outside the form
-                case Keys.Left:
-                    if(pbPersonaggio.Left - 20 >= MAXLEFTFORMPOSITION)
-                        pbPersonaggio.Left -= 20;
-                    break;
-                // If the key is "right arrow" move forward 20 px only if the character doesn't go outside the form
-                case Keys.Right:
-                    if (pbPersonaggio.Left + 20 <= MAXRIGHTFORMPOSITION)
-                        pbPersonaggio.Left += 20;
-                    break;
-                // Istructions if the key is "space"
-                case Keys.Space:
-                    // Jump only if the character is not jumping
-                    if (!jump)
-                    {
-                        jump = true;
-                        force = initialForce;
-                    }
-                    break;
+                // Perform an action based on the pressed key
+                switch (key.KeyCode)
+                {
+                    // If the key is "left arrow" go back 20 px only if the character doesn't go outside the form
+                    case Keys.Left:
+                        if (pbPersonaggio.Left - 20 >= MAXLEFTFORMPOSITION)
+                            pbPersonaggio.Left -= 20;
+                        break;
+                    // If the key is "right arrow" move forward 20 px only if the character doesn't go outside the form
+                    case Keys.Right:
+                        if (pbPersonaggio.Left + 20 <= MAXRIGHTFORMPOSITION)
+                            pbPersonaggio.Left += 20;
+                        break;
+                    // Istructions if the key is "space"
+                    case Keys.Space:
+                        // Jump only if the character is not jumping
+                        if (!jump)
+                        {
+                            jump = true;
+                            force = initialForce;
+                        }
+                        break;
+                }
             }
+            
         }
 
         // MOVE OF THE CHARACTER (JUMP) - STATUS: RESOLVE BUGS
