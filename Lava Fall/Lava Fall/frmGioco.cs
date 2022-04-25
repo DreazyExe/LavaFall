@@ -131,7 +131,6 @@ namespace Lava_Fall
                 // Increase the indicator of frame
                 if (i < 11)
                     i++;
-
                 // If frames are finished restart the animation
                 else
                     i = 0;
