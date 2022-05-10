@@ -128,9 +128,18 @@
   <ItemGroup>
     <Content Include="Resources\A.png" />
     <Content Include="Resources\B.png" />
+    <None Include="Resources\spaceBackground.png" />
+    <None Include="Resources\navicella2.png" />
+    <None Include="Resources\navicella1.png" />
+    <None Include="Resources\navicella3.png" />
+    <None Include="Resources\background.png" />
     <Content Include="Resources\C.png" />
+    <None Include="Resources\cloudBackground.png" />
     <Content Include="Resources\D.png" />
     <Content Include="Resources\E.png" />
+    <None Include="Resources\Elicottero1.png" />
+    <None Include="Resources\Elicottero2.png" />
+    <None Include="Resources\Elicottero3.png" />
     <Content Include="Resources\F.png" />
     <Content Include="Resources\G.png" />
     <Content Include="Resources\H.png" />
