@@ -12,13 +12,32 @@ namespace Lava_Fall
 {
     public partial class FormGioco : Form
     {
+        // TODO:
+        // -Risolvere i bug indicati nelle apposite sezioni;
+        // -Creare un logo (quadrato) per l'applicazione (sarà visibile nella barra delle applicazioni, nel collegamento del gioco e nel titolo della finestra di Windows);
+        // -Migliorare le collisioni;
+        // -Scrivere la guida di Lava Fall;
+        // -Creare un pulsante pausa nella form del gioco per interrompere temporaneamente il tutto;
+        // -Salvare i vari punteggi in un file e mostrarli all'utente all'avvio del software (appena ci verranno spiegati i file).
+        //
+        // Stiamo facendo un ottimo lavoro Picci ;)
+
         #region Global costants
-        // game state
+        // Game state
         enum eGameState
         {
             atstake,
             suspended,
         }
+
+        // Game background names
+        enum eBackgroundNames
+        {
+            lava,
+            clouds,
+            space,
+        }
+
         // Movement costants
         const int MAXRIGHTFORMPOSITION = 650;
         const int MAXLEFTFORMPOSITION = 0;
@@ -43,9 +62,12 @@ namespace Lava_Fall
         int _points = 0; // Point variable
         
         // Movement variables
-        bool jump;                // Indicates if the character is jumping
-        int initialForce = 75;    // Initial force of the jump
-        int force = 0;            // ?
+        bool _jump;                // Indicates if the character is jumping
+        int _initialForce = 75;    // Initial force of the jump
+        int _force = 0;            // Force of the jump
+
+        // Background state variable
+        int _background = 0;
 
         // VETTORE DI PROVA PER IL MIO ALGORITMO
         //(CONTIENE I PUNTI X DOVE PUO SPOWNARE LA BASE)
@@ -73,6 +95,7 @@ namespace Lava_Fall
             _stateGame = eGameState.suspended;
         }
 
+        #region Events
         // STARTING COUNTDOWN - STATUS: RESOLVE BUGS
         // Problems:
         // 1 - Go isn't in the middle of the screen
@@ -94,6 +117,9 @@ namespace Lava_Fall
                 // Enable movement timer
                 spostamento_basi.Enabled = true;
 
+                // Enable the change of background
+                backgroundChange.Enabled = true;
+
                 // Disable countdown timer
                 this.Enabled = false;
 
@@ -106,24 +132,10 @@ namespace Lava_Fall
                 lblCountDown.Text = _counter.ToString();
         }
 
-        // INCREASE POINTS - STATUS: OK
-        /// <summary>
-        /// Increases score of a set quantity
-        /// </summary>
-        /// <param name="quantityToAdd"> Quantity to add to the points.</param>
-        private void increasePoints(byte quantityToAdd)
-        {
-            // Add the quantity to the total points
-            _points += quantityToAdd;
-
-            // Refresh of the points label
-            lblPunteggio.Text = _points.ToString();
-        }
-        
         // MOVEMENT OF THE LAVA - STATUS: OK
         private void timerLava_Tick(object sender, EventArgs e)
         {
-            if(_stateGame == eGameState.atstake)
+            if (_stateGame == eGameState.atstake)
             {
                 // Set the new frame of the lava
                 pbLava.Image = arrayLava[i];
@@ -135,7 +147,7 @@ namespace Lava_Fall
                 else
                     i = 0;
             }
-            
+
         }
 
         // MOVE OF THE BASIS - STATUS: OK
@@ -151,9 +163,75 @@ namespace Lava_Fall
             RespawnBasesCheck();
 
             // Add 1 point to the points    
-            increasePoints(1);
+            increasePoints(255);
         }
 
+        // CHANGE OF THE BACKGROND - STATUS OK
+        private void backgroundChange_Tick(object sender, EventArgs e)
+        {
+            // If the point are equal or more than 10000 and the cloud background is disabled set it
+            if (_points >= 10000 && _points < 35000 && _background != (int)eBackgroundNames.clouds)
+                setCloudMode();
+            // Else if the point are equal or more than 35000 and the space background is disabled set it
+            else if (_points >= 35000 && _background != (int)eBackgroundNames.space)
+                setSpaceMode();
+        }
+
+        // MOVE OF THE CHARACTER (EVENT IF A KEY IS PRESSED AND LEFT-RIGHT MOVEMENT) - STATUS: OK
+        /// <summary>
+        /// Event if the user presses a key
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="key"></param>
+        private void Form1_KeyDown(object sender, KeyEventArgs key)
+        {
+            // if the game is not at stake you can't move
+            if (_stateGame == eGameState.atstake)
+            {
+                // Perform an action based on the pressed key
+                switch (key.KeyCode)
+                {
+                    // If the key is "left arrow" go back 20 px only if the character doesn't go outside the form
+                    case Keys.Left:
+                        if (pbPersonaggio.Left - 20 >= MAXLEFTFORMPOSITION)
+                            pbPersonaggio.Left -= 20;
+                        break;
+                    // If the key is "right arrow" move forward 20 px only if the character doesn't go outside the form
+                    case Keys.Right:
+                        if (pbPersonaggio.Left + 20 <= MAXRIGHTFORMPOSITION)
+                            pbPersonaggio.Left += 20;
+                        break;
+                    // Istructions if the key is "space"
+                    case Keys.Space:
+                        // Jump only if the character is not jumping
+                        if (!_jump)
+                        {
+                            _jump = true;
+                            _force = _initialForce;
+                        }
+                        break;
+                }
+            }
+
+        }
+        #endregion
+
+        #region Functions and procedures
+        // INCREASE POINTS - STATUS: OK
+        /// <summary>
+        /// Increases score of a set quantity
+        /// </summary>
+        /// <param name="quantityToAdd"> Quantity to add to the points.</param>
+        private void increasePoints(byte quantityToAdd)
+        {
+            // Add the quantity to the total points
+            _points += quantityToAdd;
+
+            // Refresh of the points label
+            lblPunteggio.Text = _points.ToString();
+        }
+
+        // RESPAWN BASES - STATUS: OK
         /// <summary>
         /// Controls if one of the bases reached lava and, if true, brings it to the top of the form
         /// </summary>
@@ -176,6 +254,7 @@ namespace Lava_Fall
                 return;
         }
 
+        // RESPAWN OBJECTS - STATUS: OK
         /// <summary>
         /// Respawns an object in the bottom of the form
         /// </summary>
@@ -188,7 +267,7 @@ namespace Lava_Fall
             // Generate a random number to choose the X position from the array of default X positions
             _randomNumber = random.Next(0, defaultXPositions.Length - 1);
             // this condition prevents the platform from spawning in the same location as the previous one
-            if (_randomNumber != _lastRandomNumber && _randomNumber != _randomNumber+1 && _randomNumber != _randomNumber - 1)
+            if (_randomNumber != _lastRandomNumber && _randomNumber != _randomNumber + 1 && _randomNumber != _randomNumber - 1)
             {
                 int X = defaultXPositions[_randomNumber];
                 // Calculate the Y position (take the Y position of the image and substract 668 to go to the top of the form
@@ -199,49 +278,78 @@ namespace Lava_Fall
             _lastRandomNumber = _randomNumber;
         }
 
-        // MOVE OF THE CHARACTER (EVENT IF A KEY IS PRESSED AND LEFT-RIGHT MOVEMENT) - STATUS: OK
+        // CHANGE OF THE BACKGROUND - STATUS: OK
         /// <summary>
-        /// Event if the user presses a key
+        /// Sets the graphic of the game to the cloud mode
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="key"></param>
-        private void Form1_KeyDown(object sender, KeyEventArgs key)
+        private void setCloudMode()
         {
-            // if the game is not at stake you can't move
-            if(_stateGame == eGameState.atstake)
-            {
-                // Perform an action based on the pressed key
-                switch (key.KeyCode)
-                {
-                    // If the key is "left arrow" go back 20 px only if the character doesn't go outside the form
-                    case Keys.Left:
-                        if (pbPersonaggio.Left - 20 >= MAXLEFTFORMPOSITION)
-                            pbPersonaggio.Left -= 20;
-                        break;
-                    // If the key is "right arrow" move forward 20 px only if the character doesn't go outside the form
-                    case Keys.Right:
-                        if (pbPersonaggio.Left + 20 <= MAXRIGHTFORMPOSITION)
-                            pbPersonaggio.Left += 20;
-                        break;
-                    // Istructions if the key is "space"
-                    case Keys.Space:
-                        // Jump only if the character is not jumping
-                        if (!jump)
-                        {
-                            jump = true;
-                            force = initialForce;
-                        }
-                        break;
-                }
-            }
-            
+            // Change background
+            this.BackgroundImage = Properties.Resources.cloudBackground;
+
+            // Change base1 dimensions and image
+            pbBase1.Width = Properties.Resources.elicottero3.Width;
+            pbBase1.Height = Properties.Resources.elicottero3.Height;
+            pbBase1.Image = Properties.Resources.elicottero3;
+
+            // Change base2 dimensions and image
+            pbBase2.Width = Properties.Resources.elicottero2.Width;
+            pbBase2.Height = Properties.Resources.elicottero2.Height;
+            pbBase2.Image = Properties.Resources.elicottero2;
+
+            // Change base3 dimensions and image
+            pbBase3.Width = Properties.Resources.elicottero1.Width;
+            pbBase3.Height = Properties.Resources.elicottero1.Height;
+            pbBase3.Image = Properties.Resources.elicottero1;
+
+            // Change base4 dimensions and image
+            pbBase4.Width = Properties.Resources.elicottero3.Width;
+            pbBase4.Height = Properties.Resources.elicottero3.Height;
+            pbBase4.Image = Properties.Resources.elicottero3;
+
+            // Remove the principal base
+            pbBasePrincipale.Visible = false;
+
+            // Change the background type
+            _background = (int)eBackgroundNames.clouds;
+        }
+
+        /// <summary>
+        /// Sets the graphic of the game to the space mode
+        /// </summary>
+        private void setSpaceMode()
+        {
+            // Change background
+            this.BackgroundImage = Properties.Resources.spaceBackground;
+
+            // Change base1 dimensions and image
+            pbBase1.Width = Properties.Resources.spaceship1.Width;
+            pbBase1.Height = Properties.Resources.spaceship1.Height;
+            pbBase1.Image = Properties.Resources.spaceship1;
+
+            // Change base2 dimensions and image
+            pbBase2.Width = Properties.Resources.spaceship2.Width;
+            pbBase2.Height = Properties.Resources.spaceship2.Height;
+            pbBase2.Image = Properties.Resources.spaceship2;
+
+            // Change base3 dimensions and image
+            pbBase3.Width = Properties.Resources.spaceship3.Width;
+            pbBase3.Height = Properties.Resources.spaceship3.Height;
+            pbBase3.Image = Properties.Resources.spaceship3;
+
+            // Change base4 dimensions and image
+            pbBase4.Width = Properties.Resources.spaceship1.Width;
+            pbBase4.Height = Properties.Resources.spaceship1.Height;
+            pbBase4.Image = Properties.Resources.spaceship1;
+
+            // Change the background type
+            _background = (int)eBackgroundNames.space;
         }
 
         // MOVE OF THE CHARACTER (JUMP) - STATUS: RESOLVE BUGS
         // Problems:
         // 1: Collision is not ok: The character automatically jumps
         // 2: If the character is jumping on a base it won't jump with the space key
-
         /// <summary>
         /// Makes the character jump
         /// </summary>
@@ -250,19 +358,19 @@ namespace Lava_Fall
         private void characterJump(object sender, EventArgs e)
         {
             // Verifies if there's the necessity to jump
-            if (jump)
+            if (_jump)
             {
                 // Decrease the distance between the top of the window and the character
-                pbPersonaggio.Top -= force;
+                pbPersonaggio.Top -= _force;
                 // Decrease the force of the jump (pixels movement)
-                force -= 20;
+                _force -= 20;
                 // If the character touches a base start the jump again
                 if (pbPersonaggio.Bounds.IntersectsWith(pbBase1.Bounds) || pbPersonaggio.Bounds.IntersectsWith(pbBase2.Bounds) || pbPersonaggio.Bounds.IntersectsWith(pbBase3.Bounds) || pbPersonaggio.Bounds.IntersectsWith(pbBase4.Bounds))
                 {
                     // Enable jump
-                    jump = true;
+                    _jump = true;
                     // Reset the initial force
-                    force = initialForce;
+                    _force = _initialForce;
                 }
             }
             // Verify if the character has passed the top of the form
@@ -271,8 +379,9 @@ namespace Lava_Fall
                 // Move down the character
                 pbPersonaggio.Top = 810 - pbPersonaggio.Height;
                 // Disable the jump
-                jump = false;
+                _jump = false;
             }
         }
+        #endregion
     }
 }
