@@ -43,6 +43,7 @@
             this.countDown = new System.Windows.Forms.Timer(this.components);
             this.pbBase4 = new System.Windows.Forms.PictureBox();
             this.spostamento_pg = new System.Windows.Forms.Timer(this.components);
+            this.backgroundChange = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pbBase1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbBase2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbBase3)).BeginInit();
@@ -123,7 +124,7 @@
             // pbPersonaggio
             // 
             this.pbPersonaggio.BackColor = System.Drawing.Color.Transparent;
-            this.pbPersonaggio.Image = global::Lava_Fall.Properties.Resources.Asset_17_4x1;
+            this.pbPersonaggio.Image = global::Lava_Fall.Properties.Resources.character;
             this.pbPersonaggio.Location = new System.Drawing.Point(384, 387);
             this.pbPersonaggio.Name = "pbPersonaggio";
             this.pbPersonaggio.Size = new System.Drawing.Size(145, 142);
@@ -193,6 +194,11 @@
             this.spostamento_pg.Interval = 50;
             this.spostamento_pg.Tick += new System.EventHandler(this.characterJump);
             // 
+            // backgroundChange
+            // 
+            this.backgroundChange.Interval = 1;
+            this.backgroundChange.Tick += new System.EventHandler(this.backgroundChange_Tick);
+            // 
             // FormGioco
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -214,7 +220,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "FormGioco";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "FormGioco";
+            this.Text = "Lava Fall";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.pbBase1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbBase2)).EndInit();
@@ -244,5 +250,6 @@
         private System.Windows.Forms.Timer countDown;
         private System.Windows.Forms.PictureBox pbBase4;
         private System.Windows.Forms.Timer spostamento_pg;
+        private System.Windows.Forms.Timer backgroundChange;
     }
 }
