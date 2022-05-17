@@ -103,7 +103,7 @@
             // 
             this.pbBase2.BackColor = System.Drawing.Color.Transparent;
             this.pbBase2.Image = global::Lava_Fall.Properties.Resources.piattaforma_normale;
-            this.pbBase2.Location = new System.Drawing.Point(548, 252);
+            this.pbBase2.Location = new System.Drawing.Point(589, 163);
             this.pbBase2.Name = "pbBase2";
             this.pbBase2.Size = new System.Drawing.Size(193, 68);
             this.pbBase2.TabIndex = 4;
@@ -203,7 +203,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Beige;
+            this.BackColor = System.Drawing.Color.White;
             this.BackgroundImage = global::Lava_Fall.Properties.Resources.sfondo;
             this.ClientSize = new System.Drawing.Size(794, 711);
             this.Controls.Add(this.pbLava);
