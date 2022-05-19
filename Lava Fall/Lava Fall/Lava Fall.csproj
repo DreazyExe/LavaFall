@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FrmClassifica.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmClassifica.Designer.cs">
+      <DependentUpon>FrmClassifica.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmHelp.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -66,6 +72,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FrmClassifica.resx">
+      <DependentUpon>FrmClassifica.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmGioco.resx">
       <DependentUpon>frmGioco.cs</DependentUpon>
     </EmbeddedResource>
@@ -114,12 +123,6 @@
     <None Include="Resources\help.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Asset 17%404x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Asset 17%404x1.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\Base.png" />
   </ItemGroup>
   <ItemGroup>
@@ -135,6 +138,7 @@
     <None Include="Resources\background.png" />
     <Content Include="Resources\C.png" />
     <None Include="Resources\cloudBackground.png" />
+    <None Include="Resources\character.png" />
     <Content Include="Resources\D.png" />
     <Content Include="Resources\E.png" />
     <None Include="Resources\Elicottero1.png" />
