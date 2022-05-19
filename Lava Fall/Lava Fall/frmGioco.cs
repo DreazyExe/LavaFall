@@ -39,6 +39,12 @@ namespace Lava_Fall
             space,
         }
 
+
+        enum eBackgroundToBeSet
+        {
+            cloudsBackground,
+            spaceBackground,
+        }
         // Movement costants
         const int MAXRIGHTFORMPOSITION = 650;
         const int MAXLEFTFORMPOSITION = 0;
@@ -96,14 +102,22 @@ namespace Lava_Fall
         bool _ChangePlatForm2 = false;
         bool _ChangePlatForm3 = false;
         bool _ChangePlatForm4 = false;
-        //clouds background
 
+        //clouds background
         PictureBox _bgClouds = new PictureBox
         {
-            Name = "prova",
+            Name = "bgClouds",
             Size = new Size(810, 750),
             Location = new Point(0, -750),
             Image = Lava_Fall.Properties.Resources.cloudBackground,
+        };
+        //space background
+        PictureBox _bgSpace = new PictureBox
+        {
+            Name = "bgSpace",
+            Size = new Size(810, 750),
+            Location = new Point(0, -750),
+            Image = Lava_Fall.Properties.Resources.spaceBackground,
         };
         #endregion
 
@@ -185,28 +199,23 @@ namespace Lava_Fall
             if (jump == false)
                 pbPersonaggio.Top += 10;
 
-            // Change of the background
-            if (_points >= 10000 && _points < 30000)
-            {
-                if(pbLava.Location.Y < 750)
-                    pbLava.Top += 10;
+            
 
-                if (_ChangeSuccesful == false)
-                {
-                    setCloudMode();
-                }
-                else
-                {
-                    this.BackgroundImage = Properties.Resources.cloudBackground;
-                    pbBase1.BackgroundImage = null;
-                    pbBase2.BackgroundImage = null;
-                    pbBase3.BackgroundImage = null;
-                    pbBase4.BackgroundImage = null;
-                }
-                _bgClouds.Top += 10;
+
+            // Change of the background
+            if(_points >= 10000 && _points < 30000)
+            {
+                setCloudsBackground();
             }
-            else if (_points > 30000)
+            else if(_points >= 45000)
+            {
                 _bgClouds.Visible = false;
+                setSpaceBackground();
+            }
+                
+
+
+            
 
             // Verify if the player has lost
             if (_points < 10000 && pbPersonaggio.Location.Y > 730 || _points > 10000 && pbPersonaggio.Location.Y > 750)
@@ -347,108 +356,172 @@ namespace Lava_Fall
             _lastRandomNumber = _randomNumber;
         }
 
+        #region switch background
+
+        /// <summary>
+        /// set clouds background
+        /// </summary>
+        private void setCloudsBackground()
+        {
+            if (pbLava.Location.Y < 750)
+                pbLava.Top += 10;
+
+            if (_ChangeSuccesful == false)
+            {
+                setBackground(eBackgroundToBeSet.cloudsBackground);
+            }
+            else
+            {
+                _ChangePlatForm4 = false;
+                _ChangePlatForm3 = false;
+                _ChangePlatForm2 = false;
+                _ChangePlatForm1 = false;
+                _ChangeSuccesful = false;
+
+                this.BackgroundImage = Properties.Resources.cloudBackground;
+                _bgClouds.Visible = false;
+                pbBase1.BackgroundImage = null;
+                pbBase2.BackgroundImage = null;
+                pbBase3.BackgroundImage = null;
+                pbBase4.BackgroundImage = null;
+            }
+
+            _bgClouds.Top += 10;
+        }
+        private void setSpaceBackground()
+        {
+            if (_ChangeSuccesful == false)
+            {
+
+                setBackground(eBackgroundToBeSet.spaceBackground);
+            }
+            else
+            {
+                this.BackgroundImage = Properties.Resources.spaceBackground;
+                pbBase1.BackgroundImage = null;
+                pbBase2.BackgroundImage = null;
+                pbBase3.BackgroundImage = null;
+                pbBase4.BackgroundImage = null;
+            }
+
+            _bgSpace.Top += 10;
+        }
         // CHANGE OF THE BACKGROUND - STATUS: OK
         /// <summary>
         /// Sets the graphic of the game to the cloud mode
         /// </summary>
-        private void setCloudMode()
+        private void setBackground(eBackgroundToBeSet background)
         {
+            // I take the two backgrounds
+            Image _backgroundClouds = Lava_Fall.Properties.Resources.cloudBackground;
+            Image _backgroundSpace = Lava_Fall.Properties.Resources.spaceBackground;
 
-            int backgroundLocationY = _bgClouds.Location.Y;
+            // resources platforms
+            //---------- helicopter ----------
+            Image helicopter3 = Properties.Resources.elicottero3;
+            Image helicopter2 = Properties.Resources.elicottero2;
+            Image helicopter1 = Properties.Resources.elicottero1;
+            //---------- spacecraft ----------
+            Image spacecraft1 = Properties.Resources.spaceship1;
+            Image spacecraft2 = Properties.Resources.spaceship2;
+            Image spacecraft3 = Properties.Resources.spaceship3;
 
-            if(pbBase1.Location.Y > 657 && _ChangePlatForm1 == false && backgroundLocationY > -550)
+            if(background == eBackgroundToBeSet.cloudsBackground)
             {
-                // Change base1 dimensions and image
-                pbBase1.Width = Properties.Resources.elicottero3.Width;
-                pbBase1.Height = Properties.Resources.elicottero3.Height;
-                pbBase1.Image = Properties.Resources.elicottero3;
-                pbBase1.BackgroundImage = Lava_Fall.Properties.Resources.cloudBackground;
-
-                _ChangePlatForm1 = true;
+                //take the y of the background
+                int backgroundLocationY = _bgClouds.Location.Y;
+                if (pbBase1.Location.Y > 657 && _ChangePlatForm1 == false && backgroundLocationY > -550)
+                {
+                    // Change base1 dimensions and image
+                    pbBase1.Width = helicopter3.Width;
+                    pbBase1.Height = helicopter3.Height;
+                    pbBase1.Image = helicopter3;
+                    pbBase1.BackgroundImage = _backgroundClouds;
+                    _ChangePlatForm1 = true;
+                }
+                if (pbBase2.Location.Y > 657 && _ChangePlatForm2 == false && backgroundLocationY > -550)
+                {
+                    // Change base2 dimensions and image
+                    pbBase2.Width = helicopter2.Width;
+                    pbBase2.Height = helicopter2.Height;
+                    pbBase2.Image = helicopter2;
+                    pbBase2.BackgroundImage = _backgroundClouds;
+                    _ChangePlatForm2 = true;
+                }
+                if (pbBase3.Location.Y > 657 && _ChangePlatForm3 == false && backgroundLocationY > -550)
+                {
+                    // Change base3 dimensions and image
+                    pbBase3.Width = helicopter1.Width;
+                    pbBase3.Height = helicopter1.Height;
+                    pbBase3.Image = helicopter1;
+                    pbBase3.BackgroundImage = _backgroundClouds;
+                    _ChangePlatForm3 = true;
+                }
+                if (pbBase4.Location.Y > 657 && _ChangePlatForm4 == false && backgroundLocationY > -550)
+                {
+                    // Change base4 dimensions and image
+                    pbBase4.Width = helicopter3.Width;
+                    pbBase4.Height = helicopter3.Height;
+                    pbBase4.Image = helicopter3;
+                    pbBase4.BackgroundImage = _backgroundClouds;
+                    _ChangePlatForm4 = true;
+                }
+                // check if I changed all the platform immage
+                if (_ChangePlatForm1 && _ChangePlatForm2 && _ChangePlatForm3 && _ChangePlatForm4)
+                {
+                    _ChangeSuccesful = true;
+                }
             }
-            
-            if(pbBase2.Location.Y > 657 && _ChangePlatForm2 == false && backgroundLocationY > -550)
+            else if(background == eBackgroundToBeSet.spaceBackground)
             {
-                // Change base2 dimensions and image
-                pbBase2.Width = Properties.Resources.elicottero2.Width;
-                pbBase2.Height = Properties.Resources.elicottero2.Height;
-                pbBase2.Image = Properties.Resources.elicottero2;
-                pbBase2.BackgroundImage = Lava_Fall.Properties.Resources.cloudBackground;
-
-                _ChangePlatForm2 = true;
+                _bgSpace.Visible = true;
+                //take the y of the background
+                int backgroundLocationY = _bgSpace.Location.Y;
+                if (pbBase1.Location.Y > 657 && _ChangePlatForm1 == false && backgroundLocationY > -550)
+                {
+                    // Change base1 dimensions and image
+                    pbBase1.Width = spacecraft3.Width;
+                    pbBase1.Height = spacecraft3.Height;
+                    pbBase1.Image = spacecraft3;
+                    pbBase1.BackgroundImage = _backgroundSpace;
+                    _ChangePlatForm1 = true;
+                }
+                if (pbBase2.Location.Y > 657 && _ChangePlatForm2 == false && backgroundLocationY > -550)
+                {
+                    // Change base2 dimensions and image
+                    pbBase2.Width = spacecraft2.Width;
+                    pbBase2.Height = spacecraft2.Height;
+                    pbBase2.Image = spacecraft2;
+                    pbBase2.BackgroundImage = _backgroundSpace;
+                    _ChangePlatForm2 = true;
+                }
+                if (pbBase3.Location.Y > 657 && _ChangePlatForm3 == false && backgroundLocationY > -550)
+                {
+                    // Change base3 dimensions and image
+                    pbBase3.Width = spacecraft1.Width;
+                    pbBase3.Height = spacecraft1.Height;
+                    pbBase3.Image = spacecraft1;
+                    pbBase3.BackgroundImage = _backgroundSpace;
+                    _ChangePlatForm3 = true;
+                }
+                if (pbBase4.Location.Y > 657 && _ChangePlatForm4 == false && backgroundLocationY > -550)
+                {
+                    // Change base4 dimensions and image
+                    pbBase4.Width = spacecraft3.Width;
+                    pbBase4.Height = spacecraft3.Height;
+                    pbBase4.Image = spacecraft3;
+                    pbBase4.BackgroundImage = _backgroundSpace;
+                    _ChangePlatForm4 = true;
+                }
+                // check if I changed all the platform immage
+                if (_ChangePlatForm1 && _ChangePlatForm2 && _ChangePlatForm3 && _ChangePlatForm4)
+                {
+                    _ChangeSuccesful = true;
+                }
             }
-
-            if(pbBase3.Location.Y > 657 && _ChangePlatForm3 == false && backgroundLocationY > -550)
-            {
-                // Change base3 dimensions and image
-                pbBase3.Width = Properties.Resources.elicottero1.Width;
-                pbBase3.Height = Properties.Resources.elicottero1.Height;
-                pbBase3.Image = Properties.Resources.elicottero1;
-                pbBase3.BackgroundImage = Lava_Fall.Properties.Resources.cloudBackground;
-
-                _ChangePlatForm3 = true;
-            }
-
-            if (pbBase4.Location.Y > 657 && _ChangePlatForm4 == false && backgroundLocationY > -550)
-            {
-                // Change base4 dimensions and image
-                pbBase4.Width = Properties.Resources.elicottero3.Width;
-                pbBase4.Height = Properties.Resources.elicottero3.Height;
-                pbBase4.Image = Properties.Resources.elicottero3;
-                pbBase4.BackgroundImage = Lava_Fall.Properties.Resources.cloudBackground;
-                _ChangePlatForm4 = true;
-            }
-
-
-            if (_ChangePlatForm1 && _ChangePlatForm2 && _ChangePlatForm3 && _ChangePlatForm4)
-            {
-                _ChangeSuccesful = true;
-
-            }
-
-
-
-
-
-
-            //// Remove the principal base
-            //pbBasePrincipale.Visible = false;
-
-            //// Change the background type
-            //_background = (int)eBackgroundNames.clouds;
         }
 
-        /// <summary>
-        /// Sets the graphic of the game to the space mode
-        /// </summary>
-        private void setSpaceMode()
-        {
-            // Change background
-            this.BackgroundImage = Properties.Resources.spaceBackground;
-
-            // Change base1 dimensions and image
-            pbBase1.Width = Properties.Resources.spaceship1.Width;
-            pbBase1.Height = Properties.Resources.spaceship1.Height;
-            pbBase1.Image = Properties.Resources.spaceship1;
-
-            // Change base2 dimensions and image
-            pbBase2.Width = Properties.Resources.spaceship2.Width;
-            pbBase2.Height = Properties.Resources.spaceship2.Height;
-            pbBase2.Image = Properties.Resources.spaceship2;
-
-            // Change base3 dimensions and image
-            pbBase3.Width = Properties.Resources.spaceship3.Width;
-            pbBase3.Height = Properties.Resources.spaceship3.Height;
-            pbBase3.Image = Properties.Resources.spaceship3;
-
-            // Change base4 dimensions and image
-            pbBase4.Width = Properties.Resources.spaceship1.Width;
-            pbBase4.Height = Properties.Resources.spaceship1.Height;
-            pbBase4.Image = Properties.Resources.spaceship1;
-
-            // Change the background type
-            _background = (int)eBackgroundNames.space;
-        }
+        #endregion
 
         // MOVE OF THE CHARACTER (JUMP) - STATUS: RESOLVE BUGS
         // Problems:
