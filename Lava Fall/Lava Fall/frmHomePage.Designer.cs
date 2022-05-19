@@ -40,7 +40,7 @@
             // pbLogo
             // 
             this.pbLogo.Image = global::Lava_Fall.Properties.Resources.LogoFinale;
-            this.pbLogo.Location = new System.Drawing.Point(96, 245);
+            this.pbLogo.Location = new System.Drawing.Point(89, 165);
             this.pbLogo.Name = "pbLogo";
             this.pbLogo.Size = new System.Drawing.Size(618, 114);
             this.pbLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -61,9 +61,9 @@
             // 
             this.pbPlay.BackColor = System.Drawing.Color.Transparent;
             this.pbPlay.Image = global::Lava_Fall.Properties.Resources.play;
-            this.pbPlay.Location = new System.Drawing.Point(251, 436);
+            this.pbPlay.Location = new System.Drawing.Point(274, 563);
             this.pbPlay.Name = "pbPlay";
-            this.pbPlay.Size = new System.Drawing.Size(294, 103);
+            this.pbPlay.Size = new System.Drawing.Size(254, 68);
             this.pbPlay.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbPlay.TabIndex = 4;
             this.pbPlay.TabStop = false;
