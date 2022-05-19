@@ -28,6 +28,7 @@ namespace Lava_Fall
         {
             atstake,
             suspended,
+            lost,
         }
 
         // Game background names
@@ -102,12 +103,8 @@ namespace Lava_Fall
             Name = "prova",
             Size = new Size(810, 750),
             Location = new Point(0, -750),
-            Image = Image.FromFile(@"C:\Users\simon\OneDrive\Documenti\GitHub\Gioco_Dell-Anno\Lava Fall\Lava Fall\Resources\cloudBackground.png"),
-
+            Image = Lava_Fall.Properties.Resources.cloudBackground,
         };
-
-        
-
         #endregion
 
         // FORM BUILDER
@@ -188,7 +185,7 @@ namespace Lava_Fall
             if (jump == false)
                 pbPersonaggio.Top += 10;
 
-
+            // Change of the background
             if (_points >= 10000 && _points < 30000)
             {
                 if(pbLava.Location.Y < 750)
@@ -209,14 +206,17 @@ namespace Lava_Fall
                 _bgClouds.Top += 10;
             }
             else if (_points > 30000)
-            {
                 _bgClouds.Visible = false;
+
+            // Verify if the player has lost
+            if (_points < 10000 && pbPersonaggio.Location.Y > 730 || _points > 10000 && pbPersonaggio.Location.Y > 750)
+            {
+                _stateGame = eGameState.lost;
+                FrmClassifica frmclassifica = new FrmClassifica();
+                this.Close();
             }
+                
 
-
-
-
-            
             // If one of the basis is in the bottom of form respawn it in the top
             RespawnBasesCheck();
 
@@ -224,24 +224,13 @@ namespace Lava_Fall
             increasePoints(255);
         }
          
-        
-
-
         private void StartBackground()
         {
-
-            
             this.Controls.Add(_bgClouds);
-
-            
-
         }
         // CHANGE OF THE BACKGROND - STATUS OK
         private void backgroundChange_Tick(object sender, EventArgs e)
         {
-            
-
-
             //idea di tomas
             //// If the point are equal or more than 10000 and the cloud background is disabled set it
             //if (_points >= 10000 && _points < 35000 && _background != (int)eBackgroundNames.clouds)
@@ -373,7 +362,7 @@ namespace Lava_Fall
                 pbBase1.Width = Properties.Resources.elicottero3.Width;
                 pbBase1.Height = Properties.Resources.elicottero3.Height;
                 pbBase1.Image = Properties.Resources.elicottero3;
-                pbBase1.BackgroundImage = Image.FromFile(@"C:\Users\simon\OneDrive\Documenti\GitHub\Gioco_Dell-Anno\Lava Fall\Lava Fall\Resources\cloudBackground.png");
+                pbBase1.BackgroundImage = Lava_Fall.Properties.Resources.cloudBackground;
 
                 _ChangePlatForm1 = true;
             }
@@ -384,7 +373,7 @@ namespace Lava_Fall
                 pbBase2.Width = Properties.Resources.elicottero2.Width;
                 pbBase2.Height = Properties.Resources.elicottero2.Height;
                 pbBase2.Image = Properties.Resources.elicottero2;
-                pbBase2.BackgroundImage = Image.FromFile(@"C:\Users\simon\OneDrive\Documenti\GitHub\Gioco_Dell-Anno\Lava Fall\Lava Fall\Resources\cloudBackground.png");
+                pbBase2.BackgroundImage = Lava_Fall.Properties.Resources.cloudBackground;
 
                 _ChangePlatForm2 = true;
             }
@@ -395,7 +384,7 @@ namespace Lava_Fall
                 pbBase3.Width = Properties.Resources.elicottero1.Width;
                 pbBase3.Height = Properties.Resources.elicottero1.Height;
                 pbBase3.Image = Properties.Resources.elicottero1;
-                pbBase3.BackgroundImage = Image.FromFile(@"C:\Users\simon\OneDrive\Documenti\GitHub\Gioco_Dell-Anno\Lava Fall\Lava Fall\Resources\cloudBackground.png");
+                pbBase3.BackgroundImage = Lava_Fall.Properties.Resources.cloudBackground;
 
                 _ChangePlatForm3 = true;
             }
@@ -406,7 +395,7 @@ namespace Lava_Fall
                 pbBase4.Width = Properties.Resources.elicottero3.Width;
                 pbBase4.Height = Properties.Resources.elicottero3.Height;
                 pbBase4.Image = Properties.Resources.elicottero3;
-                pbBase4.BackgroundImage = Image.FromFile(@"C:\Users\simon\OneDrive\Documenti\GitHub\Gioco_Dell-Anno\Lava Fall\Lava Fall\Resources\cloudBackground.png");
+                pbBase4.BackgroundImage = Lava_Fall.Properties.Resources.cloudBackground;
                 _ChangePlatForm4 = true;
             }
 
