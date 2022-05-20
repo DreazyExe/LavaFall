@@ -42,7 +42,7 @@ namespace Lava_Fall
         private void pbPlay_Click(object sender, EventArgs e)
         {
             // Save the name of the player in the file
-            if (tbName.Text == null)
+            if (tbName.Text == string.Empty)
                 writeNameToClassification("Anonimo");
             else
                 writeNameToClassification(tbName.Text);
