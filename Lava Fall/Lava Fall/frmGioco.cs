@@ -62,7 +62,7 @@ namespace Lava_Fall
 
         // Lava movement
         int i = 0;  //Counter of the image
-        System.Drawing.Image[] _arrayLava = 
+        System.Drawing.Image[] arrayLava = 
         {
             Properties.Resources.B, Properties.Resources.C, Properties.Resources.D,
             Properties.Resources.E, Properties.Resources.F, Properties.Resources.G,
@@ -73,7 +73,7 @@ namespace Lava_Fall
         // Points
         int _points = 0; // Point variable
         
-        // Character movement variables
+        // Movement variables
         bool _jump;                // Indicates if the character is jumping
         bool jump = false;
         int _initialForce = 75;    // Initial force of the jump
@@ -82,15 +82,6 @@ namespace Lava_Fall
         int[] defaultXPositions = { 10 , 220 , 430, 650  };
         // Positions of the last respawned platform
         int _lastRandomNumber;
-
-        // Character death (array of character death images)
-        System.Drawing.Image[] _arrayDeath =
-        {
-            Properties.Resources.death1, Properties.Resources.death2, Properties.Resources.death3,
-            Properties.Resources.death4, Properties.Resources.death5, Properties.Resources.death6,
-            Properties.Resources.death7, Properties.Resources.death8, Properties.Resources.death9,
-            Properties.Resources.death10, Properties.Resources.death11, Properties.Resources.death12
-        };
 
         // State of the game
         eGameState _stateGame;
@@ -173,10 +164,10 @@ namespace Lava_Fall
             if (_stateGame == eGameState.atstake)
             {
                 // Set the new frame of the lava
-                pbLava.Image = _arrayLava[i];
+                pbLava.Image = arrayLava[i];
 
                 // Increase the indicator of frame
-                if (i < _arrayLava.Length - 1)
+                if (i < 11)
                     i++;
                 // If frames are finished restart the animation
                 else
@@ -214,16 +205,6 @@ namespace Lava_Fall
             {
                 // Save the points in the file
                 savePointToClassification();
-                // Start the death animation
-                for (int i = 0; i < _arrayDeath.Length - 1; i++)
-                {
-                    // Change the frame
-                    pbPersonaggio.Image = _arrayDeath[i];
-                    // TODO: Wait before changing frame
-                    //System.Threading.Thread.Sleep(208);
-                }
-
-                // When it finishes do the other actions
                 // Open the classification
                 FrmClassifica frmclassifica = new FrmClassifica();
                 frmclassifica.Show();
@@ -233,7 +214,7 @@ namespace Lava_Fall
             
             // POINTS
             // Add 1 point to the points    
-            increasePoints(1);
+            increasePoints(255);
         }
         
         // ADD TEMPORARY PICTUREBOXES TO THE CONTROLS - STATUS: OK
@@ -242,6 +223,18 @@ namespace Lava_Fall
             // Add the temporary PictureBoxes to the controls
             this.Controls.Add(_bgClouds);
             this.Controls.Add(_bgSpace);
+        }
+
+        // CHANGE OF THE BACKGROND - STATUS OK
+        private void backgroundChange_Tick(object sender, EventArgs e)
+        {
+            //idea di tomas
+            //// If the point are equal or more than 10000 and the cloud background is disabled set it
+            //if (_points >= 10000 && _points < 35000 && _background != (int)eBackgroundNames.clouds)
+            //    setCloudMode();
+            //// Else if the point are equal or more than 35000 and the space background is disabled set it
+            //else if (_points >= 35000 && _background != (int)eBackgroundNames.space)
+            //    setSpaceMode();
         }
 
         // MOVE OF THE CHARACTER (EVENT IF A KEY IS PRESSED AND LEFT-RIGHT MOVEMENT) - STATUS: OK
@@ -359,7 +352,7 @@ namespace Lava_Fall
             _lastRandomNumber = _randomNumber;
         }
 
-        // SWITCH BACKGROUND - STATUS OK
+        // SWITCH BACKGROUND - STATUS CREARE PROCEDURE
         /// <summary>
         /// Set clouds background
         /// </summary>
