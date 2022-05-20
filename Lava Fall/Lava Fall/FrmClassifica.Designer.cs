@@ -44,11 +44,13 @@
             this.clNpartite,
             this.clData,
             this.clPunteggio});
+            this.lvClassifica.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lvClassifica.ForeColor = System.Drawing.SystemColors.Window;
             this.lvClassifica.GridLines = true;
             this.lvClassifica.HideSelection = false;
             this.lvClassifica.Location = new System.Drawing.Point(111, 183);
             this.lvClassifica.Name = "lvClassifica";
-            this.lvClassifica.Size = new System.Drawing.Size(566, 416);
+            this.lvClassifica.Size = new System.Drawing.Size(563, 416);
             this.lvClassifica.TabIndex = 0;
             this.lvClassifica.UseCompatibleStateImageBehavior = false;
             this.lvClassifica.View = System.Windows.Forms.View.Details;

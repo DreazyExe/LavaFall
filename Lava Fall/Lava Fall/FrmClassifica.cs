@@ -27,9 +27,8 @@ namespace Lava_Fall
             while (_line != null)
             {
                 // Create a new ListView item
-                ListViewItem _newMatchInformation = new ListViewItem();
+                ListViewItem _newMatchInformation = new ListViewItem(_line.Split('|'));
                 // Save all the informations of the match
-                _newMatchInformation.SubItems.Clear();
                 foreach (string information in _line.Split('|'))
                     _newMatchInformation.SubItems.Add(information);
                 // Add this ListView item to the ListView
