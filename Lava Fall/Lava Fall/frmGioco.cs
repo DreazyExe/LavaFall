@@ -13,16 +13,6 @@ namespace Lava_Fall
 {
     public partial class FormGioco : Form
     {
-        // TODO:
-        // -Risolvere i bug indicati nelle apposite sezioni;
-        // -Creare un logo (quadrato) per l'applicazione (sarà visibile nella barra delle applicazioni, nel collegamento del gioco e nel titolo della finestra di Windows);
-        // -Migliorare le collisioni;
-        // -Scrivere la guida di Lava Fall;
-        // -Creare un pulsante pausa nella form del gioco per interrompere temporaneamente il tutto;
-        // -Salvare i vari punteggi in un file e mostrarli all'utente all'avvio del software (appena ci verranno spiegati i file).
-        //
-        // Stiamo facendo un ottimo lavoro Picci ;)
-
         #region Global costants
         // Game state
         enum eGameState
@@ -190,28 +180,23 @@ namespace Lava_Fall
             RespawnBasesCheck();
 
             // Move down the character if he isn't jumping
-            /*
             if (jump == false)
                 pbPersonaggio.Top += 10;
-                */
-
-
 
             // CHANGE OF THE BACKGROUND
             // If the points are between 10000 and 30000 set clouds background (if not set before)
-            if (_points >= 10000 && _points < 35000 && _actualBackground != eBackgrounds.clouds)
+            if (_points >= 10000 && _points < 35000)
             {
                 setCloudsBackground();
                 gameClock.Interval = 45;
             }                
             // Else if the points are more that 35000 set space background (if not set before)
-            else if (_points >= 35000 && _actualBackground != eBackgrounds.space)
+            else if (_points >= 35000)
             {
                 setSpaceBackground();
                 gameClock.Interval = 35;
             }
                 
-
             // VERIFY IF THE PLAYER HAS LOST
             if (pbPersonaggio.Bottom > BOTTOMSCREEN)
             {
@@ -226,7 +211,7 @@ namespace Lava_Fall
             
             // POINTS
             // Add 1 point to the points    
-            increasePoints(1);
+            increasePoints(50);
         }
         
         // ADD TEMPORARY PICTUREBOXES TO THE CONTROLS - STATUS: OK
@@ -235,18 +220,6 @@ namespace Lava_Fall
             // Add the temporary PictureBoxes to the controls
             this.Controls.Add(_bgClouds);
             this.Controls.Add(_bgSpace);
-        }
-
-        // CHANGE OF THE BACKGROND - STATUS OK
-        private void backgroundChange_Tick(object sender, EventArgs e)
-        {
-            //idea di tomas
-            //// If the point are equal or more than 10000 and the cloud background is disabled set it
-            //if (_points >= 10000 && _points < 35000 && _background != (int)eBackgroundNames.clouds)
-            //    setCloudMode();
-            //// Else if the point are equal or more than 35000 and the space background is disabled set it
-            //else if (_points >= 35000 && _background != (int)eBackgroundNames.space)
-            //    setSpaceMode();
         }
 
         // MOVE OF THE CHARACTER (EVENT IF A KEY IS PRESSED AND LEFT-RIGHT MOVEMENT) - STATUS: OK
@@ -446,11 +419,12 @@ namespace Lava_Fall
             }
 
             // Move down clouds PictureBox temporary background
-            _bgClouds.Top += 10;
+            if(_bgClouds.Location.Y < 657)
+                _bgClouds.Top += 10;
         }
 
         /// <summary>
-        /// Sets space background
+        /// Set space background
         /// </summary>
         private void setSpaceBackground()
         {
