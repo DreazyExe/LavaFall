@@ -189,8 +189,18 @@ namespace Lava_Fall
             RespawnBasesCheck();
 
             // Move down the character if he isn't jumping
+            /*
             if (jump == false)
                 pbPersonaggio.Top += 10;
+                */
+
+            if (pbPersonaggio.Bounds.IntersectsWith(pbBase4.Bounds))
+            {
+                jump = false;
+                _jump = false;
+                pbPersonaggio.Location = new Point(pbBase4.Location.X, pbBase4.Location.Y);
+
+            }
 
             // CHANGE OF THE BACKGROUND
             // If the points are between 10000 and 30000 set clouds background (if not set before)
@@ -545,14 +555,6 @@ namespace Lava_Fall
                 pbPersonaggio.Top -= _force;
                 // Decrease the force of the jump (pixels movement)
                 _force -= 20;
-                // If the character touches a base start the jump again
-                if (pbPersonaggio.Bounds.IntersectsWith(pbBase1.Bounds) || pbPersonaggio.Bounds.IntersectsWith(pbBase2.Bounds) || pbPersonaggio.Bounds.IntersectsWith(pbBase3.Bounds) || pbPersonaggio.Bounds.IntersectsWith(pbBase4.Bounds))
-                {
-                    // Enable jump
-                    _jump = true;
-                    // Reset the initial force
-                    _force = _initialForce;
-                }
             }
             // Verify if the character has passed the top of the form
             if (pbPersonaggio.Top + pbPersonaggio.Height >= 810)
