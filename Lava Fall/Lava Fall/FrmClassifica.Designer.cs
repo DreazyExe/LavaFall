@@ -70,7 +70,7 @@
             // 
             // clPunteggio
             // 
-            this.clPunteggio.Text = "Punteeggio";
+            this.clPunteggio.Text = "Punteggio";
             this.clPunteggio.Width = 128;
             // 
             // lbClassifica
@@ -95,6 +95,7 @@
             this.Controls.Add(this.lvClassifica);
             this.Name = "FrmClassifica";
             this.Text = "FrmClassifica";
+            this.Load += new System.EventHandler(this.FrmClassifica_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -32,9 +32,12 @@
             this.button2 = new System.Windows.Forms.Button();
             this.pbPlay = new System.Windows.Forms.PictureBox();
             this.pbHelp = new System.Windows.Forms.PictureBox();
+            this.tbName = new System.Windows.Forms.TextBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPlay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbHelp)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // pbLogo
@@ -61,9 +64,9 @@
             // 
             this.pbPlay.BackColor = System.Drawing.Color.Transparent;
             this.pbPlay.Image = global::Lava_Fall.Properties.Resources.play;
-            this.pbPlay.Location = new System.Drawing.Point(274, 563);
+            this.pbPlay.Location = new System.Drawing.Point(473, 459);
             this.pbPlay.Name = "pbPlay";
-            this.pbPlay.Size = new System.Drawing.Size(254, 68);
+            this.pbPlay.Size = new System.Drawing.Size(194, 59);
             this.pbPlay.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbPlay.TabIndex = 4;
             this.pbPlay.TabStop = false;
@@ -81,6 +84,25 @@
             this.pbHelp.TabStop = false;
             this.pbHelp.Click += new System.EventHandler(this.pbHelp_Click);
             // 
+            // tbName
+            // 
+            this.tbName.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbName.Location = new System.Drawing.Point(148, 465);
+            this.tbName.Name = "tbName";
+            this.tbName.Size = new System.Drawing.Size(294, 46);
+            this.tbName.TabIndex = 6;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1.Image = global::Lava_Fall.Properties.Resources.Tavola_disegno_312x;
+            this.pictureBox1.Location = new System.Drawing.Point(123, 431);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(348, 96);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 7;
+            this.pictureBox1.TabStop = false;
+            // 
             // frmHomePage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -88,10 +110,12 @@
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.BackgroundImage = global::Lava_Fall.Properties.Resources.sfondo;
             this.ClientSize = new System.Drawing.Size(794, 711);
+            this.Controls.Add(this.tbName);
             this.Controls.Add(this.pbHelp);
             this.Controls.Add(this.pbPlay);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.pbLogo);
+            this.Controls.Add(this.pictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "frmHomePage";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -99,7 +123,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPlay)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbHelp)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -108,6 +134,8 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.PictureBox pbPlay;
         private System.Windows.Forms.PictureBox pbHelp;
+        private System.Windows.Forms.TextBox tbName;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmClassifica.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -72,6 +78,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmClassifica.resx">
       <DependentUpon>FrmClassifica.cs</DependentUpon>
     </EmbeddedResource>
@@ -131,6 +140,7 @@
   <ItemGroup>
     <Content Include="Resources\A.png" />
     <Content Include="Resources\B.png" />
+    <None Include="Resources\Tavola_disegno_312x.png" />
     <None Include="Resources\spaceBackground.png" />
     <None Include="Resources\navicella2.png" />
     <None Include="Resources\navicella1.png" />

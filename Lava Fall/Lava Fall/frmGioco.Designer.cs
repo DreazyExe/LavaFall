@@ -32,7 +32,7 @@
             this.timerLava = new System.Windows.Forms.Timer(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.lblPunteggio = new System.Windows.Forms.Label();
-            this.spostamento_basi = new System.Windows.Forms.Timer(this.components);
+            this.gameClock = new System.Windows.Forms.Timer(this.components);
             this.pbBase1 = new System.Windows.Forms.PictureBox();
             this.pbBase2 = new System.Windows.Forms.PictureBox();
             this.pbBase3 = new System.Windows.Forms.PictureBox();
@@ -43,7 +43,6 @@
             this.countDown = new System.Windows.Forms.Timer(this.components);
             this.pbBase4 = new System.Windows.Forms.PictureBox();
             this.spostamento_pg = new System.Windows.Forms.Timer(this.components);
-            this.backgroundChange = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pbBase1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbBase2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbBase3)).BeginInit();
@@ -83,16 +82,16 @@
             this.lblPunteggio.TabIndex = 2;
             this.lblPunteggio.Text = "0";
             // 
-            // spostamento_basi
+            // gameClock
             // 
-            this.spostamento_basi.Interval = 300;
-            this.spostamento_basi.Tick += new System.EventHandler(this.spostamento_basi_Tick);
+            this.gameClock.Interval = 300;
+            this.gameClock.Tick += new System.EventHandler(this.gameClock_Tick);
             // 
             // pbBase1
             // 
             this.pbBase1.BackColor = System.Drawing.Color.Transparent;
             this.pbBase1.Image = global::Lava_Fall.Properties.Resources.piattaforma_normale;
-            this.pbBase1.Location = new System.Drawing.Point(32, 40);
+            this.pbBase1.Location = new System.Drawing.Point(107, 213);
             this.pbBase1.Name = "pbBase1";
             this.pbBase1.Size = new System.Drawing.Size(193, 68);
             this.pbBase1.TabIndex = 5;
@@ -103,7 +102,7 @@
             // 
             this.pbBase2.BackColor = System.Drawing.Color.Transparent;
             this.pbBase2.Image = global::Lava_Fall.Properties.Resources.piattaforma_normale;
-            this.pbBase2.Location = new System.Drawing.Point(589, 163);
+            this.pbBase2.Location = new System.Drawing.Point(578, 329);
             this.pbBase2.Name = "pbBase2";
             this.pbBase2.Size = new System.Drawing.Size(193, 68);
             this.pbBase2.TabIndex = 4;
@@ -114,7 +113,7 @@
             // 
             this.pbBase3.BackColor = System.Drawing.Color.Transparent;
             this.pbBase3.Image = global::Lava_Fall.Properties.Resources.piattaforma_normale;
-            this.pbBase3.Location = new System.Drawing.Point(548, -30);
+            this.pbBase3.Location = new System.Drawing.Point(455, 31);
             this.pbBase3.Name = "pbBase3";
             this.pbBase3.Size = new System.Drawing.Size(193, 68);
             this.pbBase3.TabIndex = 3;
@@ -194,11 +193,6 @@
             this.spostamento_pg.Interval = 50;
             this.spostamento_pg.Tick += new System.EventHandler(this.characterJump);
             // 
-            // backgroundChange
-            // 
-            this.backgroundChange.Interval = 1;
-            this.backgroundChange.Tick += new System.EventHandler(this.backgroundChange_Tick);
-            // 
             // FormGioco
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -241,7 +235,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblPunteggio;
         private System.Windows.Forms.PictureBox pbBase3;
-        private System.Windows.Forms.Timer spostamento_basi;
+        private System.Windows.Forms.Timer gameClock;
         private System.Windows.Forms.PictureBox pbBase2;
         private System.Windows.Forms.PictureBox pbBase1;
         private System.Windows.Forms.PictureBox pbPersonaggio;
@@ -250,6 +244,5 @@
         private System.Windows.Forms.Timer countDown;
         private System.Windows.Forms.PictureBox pbBase4;
         private System.Windows.Forms.Timer spostamento_pg;
-        private System.Windows.Forms.Timer backgroundChange;
     }
 }

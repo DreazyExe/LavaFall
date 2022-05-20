@@ -339,5 +339,15 @@ namespace Lava_Fall.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Cerca una risorsa localizzata di tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Tavola_disegno_312x {
+            get {
+                object obj = ResourceManager.GetObject("Tavola_disegno_312x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }
