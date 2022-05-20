@@ -185,6 +185,7 @@ namespace Lava_Fall
             pbBase3.Top += 10;
             pbBase4.Top += 10;
             pbBasePrincipale.Top += 10;
+            
             // If one of the basis is in the bottom of form respawn it in the top
             RespawnBasesCheck();
 
@@ -194,21 +195,22 @@ namespace Lava_Fall
                 pbPersonaggio.Top += 10;
                 */
 
-            if (pbPersonaggio.Bounds.IntersectsWith(pbBase4.Bounds))
-            {
-                jump = false;
-                _jump = false;
-                pbPersonaggio.Location = new Point(pbBase4.Location.X, pbBase4.Location.Y);
 
-            }
 
             // CHANGE OF THE BACKGROUND
             // If the points are between 10000 and 30000 set clouds background (if not set before)
             if (_points >= 10000 && _points < 35000 && _actualBackground != eBackgrounds.clouds)
+            {
                 setCloudsBackground();
+                gameClock.Interval = 45;
+            }                
             // Else if the points are more that 35000 set space background (if not set before)
             else if (_points >= 35000 && _actualBackground != eBackgrounds.space)
+            {
                 setSpaceBackground();
+                gameClock.Interval = 35;
+            }
+                
 
             // VERIFY IF THE PLAYER HAS LOST
             if (pbPersonaggio.Bottom > BOTTOMSCREEN)
@@ -224,7 +226,7 @@ namespace Lava_Fall
             
             // POINTS
             // Add 1 point to the points    
-            increasePoints(255);
+            increasePoints(1);
         }
         
         // ADD TEMPORARY PICTUREBOXES TO THE CONTROLS - STATUS: OK
@@ -548,6 +550,46 @@ namespace Lava_Fall
         /// <param name="e"></param>
         private void characterJump(object sender, EventArgs e)
         {
+
+            //if(pbPersonaggio.Left + pbPersonaggio.Width -1 > pbBase4.Left && pbPersonaggio.Left+pbPersonaggio.Width+5<pbBase4.Left + pbBase4.Width+pbPersonaggio.Width && pbPersonaggio.Top + pbPersonaggio.Height >= pbBase4.Top && pbPersonaggio.Top < pbBase4.Top)
+            //{
+            //    //pbPersonaggio.Top = this.Height - pbBase4.Top - pbPersonaggio.Height;
+            //    pbPersonaggio.Top = pbBase4.Location.Y + pbBase4.Height - pbPersonaggio.Height-50;
+            //    _force = 0;
+            //    _jump = false;
+            //}
+            //if (pbPersonaggio.Left + pbPersonaggio.Width - 1 > pbBase3.Left && pbPersonaggio.Left + pbPersonaggio.Width + 5 < pbBase3.Left + pbBase3.Width + pbPersonaggio.Width && pbPersonaggio.Top + pbPersonaggio.Height >= pbBase3.Top && pbPersonaggio.Top < pbBase3.Top)
+            //{
+            //    //pbPersonaggio.Top = this.Height - pbBase3.Top - pbPersonaggio.Height;
+            //    pbPersonaggio.Top = pbBase3.Location.Y + pbBase4.Height - pbPersonaggio.Height-50;
+            //    _force = 0;
+            //    _jump = false;
+            //}
+            //if (pbPersonaggio.Left + pbPersonaggio.Width - 1 > pbBase2.Left && pbPersonaggio.Left + pbPersonaggio.Width + 5 < pbBase2.Left + pbBase2.Width + pbPersonaggio.Width && pbPersonaggio.Top + pbPersonaggio.Height >= pbBase2.Top && pbPersonaggio.Top < pbBase2.Top)
+            //{
+            //    //pbPersonaggio.Top = this.Height - pbBase2.Top - pbPersonaggio.Height;
+            //    pbPersonaggio.Top = pbBase2.Location.Y + pbBase4.Height - pbPersonaggio.Height-50;
+            //    _force = 0;
+            //    _jump = false;
+            //}
+            //if (pbPersonaggio.Left + pbPersonaggio.Width - 1 > pbBase1.Left && pbPersonaggio.Left + pbPersonaggio.Width + 5 < pbBase1.Left + pbBase1.Width + pbPersonaggio.Width && pbPersonaggio.Top + pbPersonaggio.Height >= pbBase1.Top && pbPersonaggio.Top < pbBase1.Top)
+            //{
+            //    //pbPersonaggio.Top = this.Height - pbBase1.Top - pbPersonaggio.Height;
+            //    pbPersonaggio.Top = pbBase1.Location.Y + pbBase4.Height - pbPersonaggio.Height-50;
+            //    _force = 0;
+            //    _jump = false;
+            //}
+
+            // If the character touches a base start the jump again
+            if (pbPersonaggio.Bounds.IntersectsWith(pbBase1.Bounds) || pbPersonaggio.Bounds.IntersectsWith(pbBase2.Bounds) || pbPersonaggio.Bounds.IntersectsWith(pbBase3.Bounds) || pbPersonaggio.Bounds.IntersectsWith(pbBase4.Bounds))
+            {
+                // Enable jump
+                _jump = true;
+                // Reset the initial force
+                _force = _initialForce;
+            }
+
+
             // Verifies if there's the necessity to jump
             if (_jump)
             {
