@@ -46,12 +46,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="FrmClassifica.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -78,9 +72,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="FrmClassifica.resx">
       <DependentUpon>FrmClassifica.cs</DependentUpon>
     </EmbeddedResource>
@@ -150,6 +141,18 @@
     <None Include="Resources\cloudBackground.png" />
     <None Include="Resources\character.png" />
     <Content Include="Resources\D.png" />
+    <None Include="Resources\death7.png" />
+    <None Include="Resources\death8.png" />
+    <None Include="Resources\death9.png" />
+    <None Include="Resources\death10.png" />
+    <None Include="Resources\death11.png" />
+    <None Include="Resources\death12.png" />
+    <None Include="Resources\death1.png" />
+    <None Include="Resources\death2.png" />
+    <None Include="Resources\death3.png" />
+    <None Include="Resources\death4.png" />
+    <None Include="Resources\death5.png" />
+    <None Include="Resources\death6.png" />
     <Content Include="Resources\E.png" />
     <None Include="Resources\Elicottero1.png" />
     <None Include="Resources\Elicottero2.png" />

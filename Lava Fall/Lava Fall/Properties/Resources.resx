@@ -205,4 +205,40 @@
   <data name="Tavola_disegno_312x" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Tavola_disegno_312x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="death1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\death1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="death10" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\death10.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="death11" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\death11.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="death12" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\death12.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="death2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\death2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="death3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\death3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="death4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\death4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="death5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\death5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="death6" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\death6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="death7" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\death7.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="death8" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\death8.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="death9" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\death9.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
