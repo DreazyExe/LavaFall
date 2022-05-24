@@ -43,7 +43,8 @@
             this.lblCountDown = new System.Windows.Forms.Label();
             this.countDown = new System.Windows.Forms.Timer(this.components);
             this.pbBase4 = new System.Windows.Forms.PictureBox();
-            this.spostamento_pg = new System.Windows.Forms.Timer(this.components);
+            this.characterJump = new System.Windows.Forms.Timer(this.components);
+            this.gravity = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pbBase1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbBase2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbBase3)).BeginInit();
@@ -188,11 +189,16 @@
             this.pbBase4.TabStop = false;
             this.pbBase4.Tag = "Base";
             // 
-            // spostamento_pg
+            // characterJump
             // 
-            this.spostamento_pg.Enabled = true;
-            this.spostamento_pg.Interval = 50;
-            this.spostamento_pg.Tick += new System.EventHandler(this.characterJump);
+            this.characterJump.Interval = 40;
+            this.characterJump.Tick += new System.EventHandler(this.characterJump_Tick);
+            // 
+            // gravity
+            // 
+            this.gravity.Enabled = true;
+            this.gravity.Interval = 40;
+            this.gravity.Tick += new System.EventHandler(this.gravity_Tick);
             // 
             // FormGioco
             // 
@@ -217,7 +223,7 @@
             this.Name = "FormGioco";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Lava Fall";
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmGioco_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.pbBase1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbBase2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbBase3)).EndInit();
@@ -245,6 +251,7 @@
         private System.Windows.Forms.Label lblCountDown;
         private System.Windows.Forms.Timer countDown;
         private System.Windows.Forms.PictureBox pbBase4;
-        private System.Windows.Forms.Timer spostamento_pg;
+        private System.Windows.Forms.Timer characterJump;
+        private System.Windows.Forms.Timer gravity;
     }
 }

@@ -13,19 +13,24 @@ namespace Lava_Fall
 {
     public partial class FrmClassifica : Form
     {
+        #region Global variables
+        // Array of matches
+        List<Program.sMatch> _matches;
+        #endregion
         public FrmClassifica()
         {
             InitializeComponent();
         }
-        #region Events
+
         private void FrmClassifica_Load(object sender, EventArgs e)
         {
             // Open the classification
             StreamReader _classification = new StreamReader(@"..\classification.txt");
-            // Read all the lines and add their content to the table
+            // Read one line of the file at time
             string _line = _classification.ReadLine();
             while (_line != null)
             {
+                // Save all the parts of the line on an array
                 // Create a new ListView item
                 ListViewItem _newMatchInformation = new ListViewItem(_line.Split('|'));
                 // Save all the informations of the match
@@ -39,6 +44,5 @@ namespace Lava_Fall
             // chisura del file
             _classification.Close();
         }
-        #endregion
     }
 }

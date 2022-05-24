@@ -18,5 +18,39 @@ namespace Lava_Fall
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new frmHomePage());
         }
+
+        #region Public structs
+        // Game match informations struct
+        public struct sMatch
+        {
+            string nickname;
+            int nMatch;
+            string date;
+            int points;
+        }
+        #endregion
+
+        #region Public enumerators
+        // Game state
+        public enum eGameState
+        {
+            atstake,
+            suspended,
+            lost,
+        }
+
+        // Game background names
+        public enum eBackgrounds
+        {
+            lava,
+            clouds,
+            space,
+        }
+        #endregion
+
+        #region Public variables
+        // Points
+        public static int _points = 0;
+        #endregion
     }
 }

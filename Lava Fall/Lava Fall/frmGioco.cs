@@ -14,31 +14,14 @@ namespace Lava_Fall
     public partial class FormGioco : Form
     {
         #region Global costants
-        // Game state
-        enum eGameState
-        {
-            atstake,
-            suspended,
-            lost,
-        }
-
-        // Game background names
-        enum eBackgrounds
-        {
-            lava,
-            clouds,
-            space,
-        }
-
-        enum eBackgroundToBeSet
-        {
-            cloudsBackground,
-            spaceBackground,
-        }
         // Movement costants
         const int MAXRIGHTFORMPOSITION = 650;
         const int MAXLEFTFORMPOSITION = 0;
         const int CHARACTERWIDTH = 145;
+
+        // Jump costants
+        const int STARTINGFORCE = 60;
+        const int MOVEMENT = 10;
 
         // Change background
         const int TOPSCREEN = -750;
@@ -47,10 +30,19 @@ namespace Lava_Fall
         #endregion
 
         #region Global variables
-        // Starting count
+        // Starting count variable
         int _counter = 3;
 
-        // Lava movement
+        // Jump variables
+        int _actualForce;
+        bool _jump = false;
+        bool _descent = false;
+
+        // Bases movement variables
+        int[] defaultXPositions = { 10, 220, 430, 650 };    // Array of possible position of objects (position x)
+        int _lastRandomNumber;                              // Positions of the last respawned platform
+
+        // Lava movement variables
         int i = 0;  //Counter of the image
         System.Drawing.Image[] arrayLava = 
         {
@@ -60,29 +52,18 @@ namespace Lava_Fall
             Properties.Resources.K, Properties.Resources.L, Properties.Resources.A
         };  //Array of lava images
 
-        // Points
-        int _points = 0; // Point variable
-        
-        // Movement variables
-        bool _jump;                // Indicates if the character is jumping
-        bool jump = false;
-        int _initialForce = 75;    // Initial force of the jump
-        int _force = 0;            // Force of the jump
-        // Array of possible position of objects (position x)
-        int[] defaultXPositions = { 10 , 220 , 430, 650  };
-        // Positions of the last respawned platform
-        int _lastRandomNumber;
+        // State of the game variable
+        Program.eGameState _stateGame;
 
-        // State of the game
-        eGameState _stateGame;
+        // Actual background variable
+        Program.eBackgrounds _actualBackground = Program.eBackgrounds.lava;
 
-        // Platforms movement
-        // Status of the change
-        bool _ChangeSuccesful = false;
-        bool _ChangePlatForm1 = false;
-        bool _ChangePlatForm2 = false;
-        bool _ChangePlatForm3 = false;
-        bool _ChangePlatForm4 = false;
+        // Background change variables
+        bool _ChangeSuccesful = false;      // State of the change
+        bool _ChangePlatForm1 = false;      // Was platform 1 changed?
+        bool _ChangePlatForm2 = false;      // Was platform 2 changed?
+        bool _ChangePlatForm3 = false;      // Was platform 3 changed?
+        bool _ChangePlatForm4 = false;      // Was platform 4 changed?
         // Cloud temporary background
         PictureBox _bgClouds = new PictureBox
         {
@@ -99,8 +80,6 @@ namespace Lava_Fall
             Location = new Point(0, TOPSCREEN),
             Image = Lava_Fall.Properties.Resources.cloudBackground,
         };
-        // Actual background
-        eBackgrounds _actualBackground = eBackgrounds.lava;
         #endregion
 
         #region Form builder
@@ -109,7 +88,7 @@ namespace Lava_Fall
             InitializeComponent();
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             // when the program start the game is suspended
-            _stateGame = eGameState.suspended;
+            _stateGame = Program.eGameState.suspended;
         }
         #endregion
 
@@ -128,7 +107,7 @@ namespace Lava_Fall
             if (_counter <= 0)
             {
                 // Change the state of the game
-                _stateGame = eGameState.atstake;
+                _stateGame = Program.eGameState.atstake;
 
                 // Write "Go!" on the label of the countdown to indicate the beginning of the game
                 lblCountDown.Text = "Go!";
@@ -151,7 +130,7 @@ namespace Lava_Fall
         // MOVEMENT OF THE LAVA - STATUS: OK
         private void timerLava_Tick(object sender, EventArgs e)
         {
-            if (_stateGame == eGameState.atstake)
+            if (_stateGame == Program.eGameState.atstake)
             {
                 // Set the new frame of the lava
                 pbLava.Image = arrayLava[i];
@@ -179,19 +158,15 @@ namespace Lava_Fall
             // If one of the basis is in the bottom of form respawn it in the top
             RespawnBasesCheck();
 
-            // Move down the character if he isn't jumping
-            if (jump == false)
-                pbPersonaggio.Top += 10;
-
             // CHANGE OF THE BACKGROUND
             // If the points are between 10000 and 30000 set clouds background (if not set before)
-            if (_points >= 10000 && _points < 35000)
+                if (Program._points >= 10000 && Program._points < 35000)
             {
                 setCloudsBackground();
                 gameClock.Interval = 45;
             }                
             // Else if the points are more that 35000 set space background (if not set before)
-            else if (_points >= 35000)
+            else if (Program._points >= 35000)
             {
                 setSpaceBackground();
                 gameClock.Interval = 35;
@@ -213,7 +188,32 @@ namespace Lava_Fall
             // Add 1 point to the points    
             increasePoints(50);
         }
-        
+
+        // JUMP OF THE CHARACTER - STATUS: OK
+        private void characterJump_Tick(object sender, EventArgs e)
+        {
+            // Verify if the character has to jump or descent
+            if (_actualForce > 0 && _jump)
+                // If he has to jump start the jump
+                jump();
+            else if (_descent)
+                // If he has to descent start the descent
+                startCharacterDescent();
+        }
+
+        // GRAVITY OF THE CHARACTER - STATUS: OK
+        private void gravity_Tick(object sender, EventArgs e)
+        {
+            // If the character is not on a platform start his descent (for the gravity)
+            if (!pbPersonaggio.Bounds.IntersectsWith(pbBase1.Bounds) && !pbPersonaggio.Bounds.IntersectsWith(pbBase2.Bounds) && !pbPersonaggio.Bounds.IntersectsWith(pbBase3.Bounds) && !pbPersonaggio.Bounds.IntersectsWith(pbBase4.Bounds) && !pbPersonaggio.Bounds.IntersectsWith(pbBasePrincipale.Bounds) && !_jump && !_descent)
+            {
+                // Set the actual force of the character
+                _actualForce = 10;
+                // Start his descent
+                startCharacterDescent();
+            }
+        }
+
         // ADD TEMPORARY PICTUREBOXES TO THE CONTROLS - STATUS: OK
         private void StartBackground()
         {
@@ -228,10 +228,10 @@ namespace Lava_Fall
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="key"></param>
-        private void Form1_KeyDown(object sender, KeyEventArgs key)
+        private void frmGioco_KeyDown(object sender, KeyEventArgs key)
         {
             // if the game is not at stake you can't move
-            if (_stateGame == eGameState.atstake)
+            if (_stateGame == Program.eGameState.atstake)
             {
                 // Perform an action based on the pressed key
                 switch (key.KeyCode)
@@ -249,12 +249,15 @@ namespace Lava_Fall
                     // Istructions if the key is "space"
                     case Keys.Space:
                         // Jump only if the character is not jumping
-                        if (!_jump)
+                        if (!_jump && !_descent)
                         {
-                            jump = true;
+                            // Set the starting force of the jump
+                            _actualForce = STARTINGFORCE;
+                            // Indicate that the character is jumping
                             _jump = true;
-                            _force = _initialForce;
-                        }
+                            // Enable the jump
+                            characterJump.Enabled = true;
+                        }   
                         break;
                 }
             }
@@ -270,16 +273,16 @@ namespace Lava_Fall
         /// <param name="quantityToAdd"> Quantity to add to the points.</param>
         private void increasePoints(byte quantityToAdd)
         {
-            if (_points > 10000 && _points < 22000)
+            if (Program._points > 10000 && Program._points < 22000)
             {
                 StartBackground();
             }
 
             // Add the quantity to the total points
-            _points += quantityToAdd;
+            Program._points += quantityToAdd;
 
             // Refresh of the points label
-            lblPunteggio.Text = _points.ToString();
+            lblPunteggio.Text = Program._points.ToString();
         }
 
         // SAVE POINTS
@@ -287,7 +290,7 @@ namespace Lava_Fall
         {
             // Save the points to the file
             using (StreamWriter sw = File.AppendText(@"..\classification.txt"))
-                sw.Write("|" + _points + "\r\n");
+                sw.Write("|" + Program._points + "\r\n");
         }
 
         // RESPAWN BASES - STATUS: OK
@@ -415,7 +418,7 @@ namespace Lava_Fall
                 pbBase3.BackgroundImage = null;
                 pbBase4.BackgroundImage = null;
 
-                _actualBackground = eBackgrounds.clouds;
+                _actualBackground = Program.eBackgrounds.clouds;
             }
 
             // Move down clouds PictureBox temporary background
@@ -513,73 +516,61 @@ namespace Lava_Fall
             pbDaModificare.BackgroundImage = formBackground;
         }
 
-        // MOVE OF THE CHARACTER (JUMP) - STATUS: RESOLVE BUGS
-        // Problems:
-        // 1: Collision is not ok: The character automatically jumps
-        // 2: If the character is jumping on a base it won't jump with the space key
+        // MOVE OF THE CHARACTER (JUMP AND DESCENT) - STATUS: OK
         /// <summary>
         /// Makes the character jump
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void characterJump(object sender, EventArgs e)
+        private void jump()
         {
-
-            //if(pbPersonaggio.Left + pbPersonaggio.Width -1 > pbBase4.Left && pbPersonaggio.Left+pbPersonaggio.Width+5<pbBase4.Left + pbBase4.Width+pbPersonaggio.Width && pbPersonaggio.Top + pbPersonaggio.Height >= pbBase4.Top && pbPersonaggio.Top < pbBase4.Top)
-            //{
-            //    //pbPersonaggio.Top = this.Height - pbBase4.Top - pbPersonaggio.Height;
-            //    pbPersonaggio.Top = pbBase4.Location.Y + pbBase4.Height - pbPersonaggio.Height-50;
-            //    _force = 0;
-            //    _jump = false;
-            //}
-            //if (pbPersonaggio.Left + pbPersonaggio.Width - 1 > pbBase3.Left && pbPersonaggio.Left + pbPersonaggio.Width + 5 < pbBase3.Left + pbBase3.Width + pbPersonaggio.Width && pbPersonaggio.Top + pbPersonaggio.Height >= pbBase3.Top && pbPersonaggio.Top < pbBase3.Top)
-            //{
-            //    //pbPersonaggio.Top = this.Height - pbBase3.Top - pbPersonaggio.Height;
-            //    pbPersonaggio.Top = pbBase3.Location.Y + pbBase4.Height - pbPersonaggio.Height-50;
-            //    _force = 0;
-            //    _jump = false;
-            //}
-            //if (pbPersonaggio.Left + pbPersonaggio.Width - 1 > pbBase2.Left && pbPersonaggio.Left + pbPersonaggio.Width + 5 < pbBase2.Left + pbBase2.Width + pbPersonaggio.Width && pbPersonaggio.Top + pbPersonaggio.Height >= pbBase2.Top && pbPersonaggio.Top < pbBase2.Top)
-            //{
-            //    //pbPersonaggio.Top = this.Height - pbBase2.Top - pbPersonaggio.Height;
-            //    pbPersonaggio.Top = pbBase2.Location.Y + pbBase4.Height - pbPersonaggio.Height-50;
-            //    _force = 0;
-            //    _jump = false;
-            //}
-            //if (pbPersonaggio.Left + pbPersonaggio.Width - 1 > pbBase1.Left && pbPersonaggio.Left + pbPersonaggio.Width + 5 < pbBase1.Left + pbBase1.Width + pbPersonaggio.Width && pbPersonaggio.Top + pbPersonaggio.Height >= pbBase1.Top && pbPersonaggio.Top < pbBase1.Top)
-            //{
-            //    //pbPersonaggio.Top = this.Height - pbBase1.Top - pbPersonaggio.Height;
-            //    pbPersonaggio.Top = pbBase1.Location.Y + pbBase4.Height - pbPersonaggio.Height-50;
-            //    _force = 0;
-            //    _jump = false;
-            //}
-
-            // If the character touches a base start the jump again
-            if (pbPersonaggio.Bounds.IntersectsWith(pbBase1.Bounds) || pbPersonaggio.Bounds.IntersectsWith(pbBase2.Bounds) || pbPersonaggio.Bounds.IntersectsWith(pbBase3.Bounds) || pbPersonaggio.Bounds.IntersectsWith(pbBase4.Bounds))
+            // Move up by as many pixels as the actaul force is
+            pbPersonaggio.Top -= _actualForce;
+            // Decrease the actual force of the jump
+            _actualForce -= MOVEMENT;
+            // Disable jump and enable descent if it finished (se la sua forza vale 0)
+            if (_actualForce <= 0)
             {
-                // Enable jump
-                _jump = true;
-                // Reset the initial force
-                _force = _initialForce;
-            }
-
-
-            // Verifies if there's the necessity to jump
-            if (_jump)
-            {
-                // Decrease the distance between the top of the window and the character
-                pbPersonaggio.Top -= _force;
-                // Decrease the force of the jump (pixels movement)
-                _force -= 20;
-            }
-            // Verify if the character has passed the top of the form
-            if (pbPersonaggio.Top + pbPersonaggio.Height >= 810)
-            {
-                // Move down the character
-                pbPersonaggio.Top = 810 - pbPersonaggio.Height;
-                // Disable the jump
                 _jump = false;
+                _descent = true;
             }
+        }
+
+        /// <summary>
+        /// Starts the descent of the character
+        /// </summary>
+        private void startCharacterDescent()
+        {
+            // If the character touches a base stop his descent
+            if (pbPersonaggio.Bounds.IntersectsWith(pbBase1.Bounds))
+                stopCharacterDescent(pbBase1);
+            else if (pbPersonaggio.Bounds.IntersectsWith(pbBase2.Bounds))
+                stopCharacterDescent(pbBase2);
+            else if (pbPersonaggio.Bounds.IntersectsWith(pbBase3.Bounds))
+                stopCharacterDescent(pbBase3);
+            else if (pbPersonaggio.Bounds.IntersectsWith(pbBase4.Bounds))
+                stopCharacterDescent(pbBase4);
+            else if (pbPersonaggio.Bounds.IntersectsWith(pbBasePrincipale.Bounds))
+                stopCharacterDescent(pbBasePrincipale);
+            else
+            {
+                // Increase the actual force of the jump
+                _actualForce += MOVEMENT;
+                // Move down by as many pixels as the actual force
+                pbPersonaggio.Top += _actualForce;
+            }
+        }
+
+        /// <summary>
+        /// Stops the descent of a PictureBox
+        /// </summary>
+        /// <param name="pbObject"> PictureBox to stop</param>
+        private void stopCharacterDescent(PictureBox pbObject)
+        {
+            // Porta il personaggio esattamente sopra la base
+            pbPersonaggio.Location = new Point(pbPersonaggio.Location.X, pbObject.Location.Y - pbPersonaggio.Height + 1);
+            // Indica che il personaggio non sta più scendendo
+            _descent = false;
+            // Termina il salto
+            characterJump.Enabled = false;
         }
         #endregion
     }
