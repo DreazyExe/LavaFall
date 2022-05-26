@@ -46,6 +46,7 @@
             this.characterJump = new System.Windows.Forms.Timer(this.components);
             this.gravity = new System.Windows.Forms.Timer(this.components);
             this.timerChangeBackground = new System.Windows.Forms.Timer(this.components);
+            this.timerChangeBaseBackgrounds = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pbBase1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbBase2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbBase3)).BeginInit();
@@ -205,6 +206,10 @@
             // 
             this.timerChangeBackground.Tick += new System.EventHandler(this.timerChangeBackground_Tick);
             // 
+            // timerChangeBaseBackgrounds
+            // 
+            this.timerChangeBaseBackgrounds.Tick += new System.EventHandler(this.timerChangeBaseBackgrounds_Tick);
+            // 
             // FormGioco
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -259,5 +264,6 @@
         private System.Windows.Forms.Timer characterJump;
         private System.Windows.Forms.Timer gravity;
         private System.Windows.Forms.Timer timerChangeBackground;
+        private System.Windows.Forms.Timer timerChangeBaseBackgrounds;
     }
 }
