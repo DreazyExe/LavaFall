@@ -23,10 +23,10 @@ namespace Lava_Fall
         // Game match informations struct
         public struct sMatch
         {
-            string nickname;
-            int nMatch;
-            string date;
-            int points;
+            public string nickname;
+            public int nMatch;
+            public string date;
+            public int points;
         }
         #endregion
 

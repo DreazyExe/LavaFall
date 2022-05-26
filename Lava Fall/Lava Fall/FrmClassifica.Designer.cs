@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmClassifica));
             this.lvClassifica = new System.Windows.Forms.ListView();
             this.clNickname = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.clNpartite = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -95,6 +96,7 @@
             this.ClientSize = new System.Drawing.Size(794, 711);
             this.Controls.Add(this.lbClassifica);
             this.Controls.Add(this.lvClassifica);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmClassifica";
             this.Text = "FrmClassifica";
             this.Load += new System.EventHandler(this.FrmClassifica_Load);
