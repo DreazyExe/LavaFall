@@ -64,21 +64,14 @@ namespace Lava_Fall
         bool _ChangePlatForm2 = false;      // Was platform 2 changed?
         bool _ChangePlatForm3 = false;      // Was platform 3 changed?
         bool _ChangePlatForm4 = false;      // Was platform 4 changed?
-        // Cloud temporary background
-        PictureBox _bgClouds = new PictureBox
+        // Background to set
+        Image _newBackgroundToSet;
+        // PictureBox of gradual background changing
+        PictureBox pbBackgroundChanger = new PictureBox
         {
-            Name = "bgClouds",
+            Name = "pbBackgroundChanger",
             Size = new Size(810, 750),
             Location = new Point(0, TOPSCREEN),
-            Image = Lava_Fall.Properties.Resources.cloudBackground,
-        };
-        // Space temporary background
-        PictureBox _bgSpace = new PictureBox
-        {
-            Name = "bgSpace",
-            Size = new Size(810, 750),
-            Location = new Point(0, TOPSCREEN),
-            Image = Lava_Fall.Properties.Resources.cloudBackground,
         };
         #endregion
 
@@ -160,9 +153,14 @@ namespace Lava_Fall
 
             // CHANGE OF THE BACKGROUND
             // If the points are between 10000 and 30000 set clouds background (if not set before)
-                if (Program._points >= 10000 && Program._points < 35000)
+            if (Program._points >= 10000 && Program._points < 35000)
             {
-                setCloudsBackground();
+                // Start the background change
+                timerChangeBackground.Enabled = true;
+                // Indicate the background to set
+                _newBackgroundToSet = Properties.Resources.cloudBackground;
+                pbBackgroundChanger.Image = Properties.Resources.cloudBackground;
+                // Make the game faster
                 gameClock.Interval = 45;
             }                
             // Else if the points are more that 35000 set space background (if not set before)
@@ -218,8 +216,7 @@ namespace Lava_Fall
         private void StartBackground()
         {
             // Add the temporary PictureBoxes to the controls
-            this.Controls.Add(_bgClouds);
-            this.Controls.Add(_bgSpace);
+            this.Controls.Add(pbBackgroundChanger);
         }
 
         // MOVE OF THE CHARACTER (EVENT IF A KEY IS PRESSED AND LEFT-RIGHT MOVEMENT) - STATUS: OK
@@ -344,29 +341,20 @@ namespace Lava_Fall
         /// <summary>
         /// Set clouds background
         /// </summary>
-        private void setCloudsBackground()
+        private void changeTheme(Image bgBase1, Image bgBase2, Image bgBase3, Image bgToSet)
         {
-            // Move down lava
-            if (pbLava.Location.Y < 750)
-                pbLava.Top += 10;
-
             // When the change of the platforms backgrounds hasn't finished yet
             if (!_ChangeSuccesful)
             {
-                // Cloud background images
-                Image _backgroundClouds = Lava_Fall.Properties.Resources.cloudBackground;
-                Image _helicopter3 = Properties.Resources.elicottero3;
-                Image _helicopter2 = Properties.Resources.elicottero2;
-                Image _helicopter1 = Properties.Resources.elicottero1;
-
+                pbBackgroundChanger.Top += 10;
                 // Save the y of the background
-                int backgroundLocationY = _bgClouds.Location.Y;
+                int backgroundLocationY = pbBackgroundChanger.Location.Y;
                 // Change the background of a platform only if it hasn't changed before, if the new background position has passed the center of the screen and if the base has passed the bottom of the form
                 // Check for first platform
                 if (!_ChangePlatForm1 && pbBase1.Location.Y > BOTTOMSCREEN && backgroundLocationY > MIDDLESCREEN)
                 {
                     // Change base1 dimensions and image
-                    changeBaseBackground(pbBase1, _helicopter3, _backgroundClouds);
+                    changeBaseBackground(pbBase1, bgBase1, bgToSet);
                     // Confirm the change
                     _ChangePlatForm1 = true;
                 }
@@ -374,7 +362,7 @@ namespace Lava_Fall
                 if (!_ChangePlatForm2 && pbBase2.Location.Y > BOTTOMSCREEN && backgroundLocationY > MIDDLESCREEN)
                 {
                     // Change base2 dimensions and image
-                    changeBaseBackground(pbBase2, _helicopter2, _backgroundClouds);
+                    changeBaseBackground(pbBase2, bgBase2, bgToSet);
                     // Confirm the change
                     _ChangePlatForm2 = true;
                 }
@@ -382,7 +370,7 @@ namespace Lava_Fall
                 if (!_ChangePlatForm3 && pbBase3.Location.Y > BOTTOMSCREEN && backgroundLocationY > MIDDLESCREEN)
                 {
                     // Change base3 dimensions and image
-                    changeBaseBackground(pbBase3, _helicopter1, _backgroundClouds);
+                    changeBaseBackground(pbBase3, bgBase3, bgToSet);
                     // Confirm the change
                     _ChangePlatForm3 = true;
                 }
@@ -390,7 +378,7 @@ namespace Lava_Fall
                 if (pbBase4.Location.Y > BOTTOMSCREEN && _ChangePlatForm4 == false && backgroundLocationY > MIDDLESCREEN)
                 {
                     // Change base4 dimensions and image
-                    changeBaseBackground(pbBase4, _helicopter3, _backgroundClouds);
+                    changeBaseBackground(pbBase4, bgBase3, bgToSet);
                     _ChangePlatForm4 = true;
                 }
                 // Check if the change of platforms background has finished
@@ -410,7 +398,7 @@ namespace Lava_Fall
                 // Set the cloud background to the form
                 this.BackgroundImage = Properties.Resources.cloudBackground;
                 // Hide the clouds temporary PictureBox
-                _bgClouds.Visible = false;
+                pbBackgroundChanger.Visible = false;
 
                 // Remove the temporary bases background
                 pbBase1.BackgroundImage = null;
@@ -421,9 +409,6 @@ namespace Lava_Fall
                 _actualBackground = Program.eBackgrounds.clouds;
             }
 
-            // Move down clouds PictureBox temporary background
-            if(_bgClouds.Location.Y < 657)
-                _bgClouds.Top += 10;
         }
 
         /// <summary>
@@ -441,7 +426,7 @@ namespace Lava_Fall
                 Image spacecraft3 = Properties.Resources.spaceship3;
 
                 // Save the y of the background
-                int backgroundLocationY = _bgSpace.Location.Y;
+                int backgroundLocationY = pbBackgroundChanger.Location.Y;
 
                 // Change the background of a platform only if it hasn't changed before, if the new background position has passed the center of the screen and if the base has passed the bottom of the form
                 // Check for first platform
@@ -492,7 +477,7 @@ namespace Lava_Fall
                 // Set the space background to the form
                 this.BackgroundImage = Properties.Resources.spaceBackground;
                 // Hide the space temporary PictureBox
-                _bgClouds.Visible = false;
+                pbBackgroundChanger.Visible = false;
 
                 // Remove the temporary bases background
                 pbBase1.BackgroundImage = null;
@@ -501,7 +486,7 @@ namespace Lava_Fall
                 pbBase4.BackgroundImage = null;
             }
             // Move down space PictureBox temporary background
-            _bgSpace.Top += 10;
+            pbBackgroundChanger.Top += 10;
         }
 
         /// <summary>
@@ -573,5 +558,32 @@ namespace Lava_Fall
             characterJump.Enabled = false;
         }
         #endregion
+
+        private void timerChangeBackground_Tick(object sender, EventArgs e)
+        {
+            // Verify if the background to set is clouds
+            if(_newBackgroundToSet == Properties.Resources.cloudBackground)
+            {
+                // Verify if the background hasn't finished to change
+                if (pbBackgroundChanger.Bottom < this.Height + (this.ClientRectangle.Height - this.Height))
+                {
+                    // Move down lava
+                    if (pbLava.Location.Y < 750)
+                        pbLava.Top += 10;
+                    // Move the temporary background changer PictureBox and change platforms
+                    changeTheme(Properties.Resources.elicottero1, Properties.Resources.elicottero2, Properties.Resources.elicottero3, Properties.Resources.cloudBackground);
+                }
+                    
+                // Else if the change finished
+                else
+                {
+                    this.BackgroundImage = Properties.Resources.cloudBackground;
+                    pbBackgroundChanger.Visible = false;
+                    timerChangeBackground.Enabled = false;
+                    timerLava.Enabled = false;
+                }
+            }
+            
+        }
     }
 }
