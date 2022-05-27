@@ -46,11 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FrmClassifica.cs">
+    <Compile Include="FrmClassification.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmClassifica.Designer.cs">
-      <DependentUpon>FrmClassifica.cs</DependentUpon>
+    <Compile Include="FrmClassification.Designer.cs">
+      <DependentUpon>FrmClassification.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmHelp.cs">
       <SubType>Form</SubType>
@@ -64,11 +64,11 @@
     <Compile Include="FrmHomePage.Designer.cs">
       <DependentUpon>FrmHomePage.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmGioco.cs">
+    <Compile Include="FrmGame.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmGioco.Designer.cs">
-      <DependentUpon>FrmGioco.cs</DependentUpon>
+    <Compile Include="FrmGame.Designer.cs">
+      <DependentUpon>FrmGame.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmPause.cs">
       <SubType>Form</SubType>
@@ -78,11 +78,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="FrmClassifica.resx">
-      <DependentUpon>FrmClassifica.cs</DependentUpon>
+    <EmbeddedResource Include="FrmClassification.resx">
+      <DependentUpon>FrmClassification.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmGioco.resx">
-      <DependentUpon>FrmGioco.cs</DependentUpon>
+    <EmbeddedResource Include="FrmGame.resx">
+      <DependentUpon>FrmGame.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmHelp.resx">
       <DependentUpon>FrmHelp.cs</DependentUpon>
@@ -140,6 +140,11 @@
   <ItemGroup>
     <Content Include="Resources\A.png" />
     <Content Include="Resources\B.png" />
+    <None Include="Resources\rightKeyboard.png" />
+    <None Include="Resources\pKeyboard.png" />
+    <None Include="Resources\leftKeyboard.png" />
+    <None Include="Resources\spacebarKeyboard.png" />
+    <None Include="Resources\left.png" />
     <None Include="Resources\xLava.png" />
     <None Include="Resources\PlayLava.png" />
     <None Include="Resources\pauseLava.png" />

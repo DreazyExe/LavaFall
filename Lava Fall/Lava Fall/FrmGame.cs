@@ -127,7 +127,7 @@ namespace Lava_Fall
                 lblCountDown.Text = _counter.ToString();
         }
 
-        // MOVEMENT OF THE LAVA - STATUS: OK
+        // MOVEMENT OF THE LAVA
         private void timerLava_Tick(object sender, EventArgs e)
         {
             // Verify if the game is at strake
@@ -145,7 +145,7 @@ namespace Lava_Fall
             }
         }
 
-        // MOVE OF THE BASIS - STATUS: OK
+        // MOVE OF THE BASIS
         private void gameClock_Tick(object sender, EventArgs e)
         {
             // Verify if the game is at strake
@@ -206,7 +206,7 @@ namespace Lava_Fall
             }
         }
 
-        // JUMP OF THE CHARACTER - STATUS: OK
+        // JUMP OF THE CHARACTER
         private void characterJump_Tick(object sender, EventArgs e)
         {
             // Verify if the game is at strake
@@ -222,7 +222,7 @@ namespace Lava_Fall
             }
         }
 
-        // GRAVITY OF THE CHARACTER - STATUS: OK
+        // GRAVITY OF THE CHARACTER
         private void gravity_Tick(object sender, EventArgs e)
         {
             // Verify if the game is at strake
@@ -239,7 +239,7 @@ namespace Lava_Fall
             }
         }
         
-        // MOVE OF THE CHARACTER (EVENT IF A KEY IS PRESSED AND LEFT-RIGHT MOVEMENT) - STATUS: OK
+        // MOVE OF THE CHARACTER (EVENT IF A KEY IS PRESSED AND LEFT-RIGHT MOVEMENT)
         private void frmGioco_KeyDown(object sender, KeyEventArgs key)
         {
             // Disable Windows error sound when pressing a key
@@ -304,7 +304,7 @@ namespace Lava_Fall
             }
         }
 
-        // CHANGE OF BASES - STATUS: OK
+        // CHANGE OF BASES
         private void timerChangeBackground_Tick(object sender, EventArgs e)
         {
             // Verify if the game is at strake
@@ -453,10 +453,37 @@ namespace Lava_Fall
                 }
             }
         }
+
+        // DEATH OF THE CHARACTER
+        private void timercharacterDeath_Tick(object sender, EventArgs e)
+        {
+            // Verify if the game is lost
+            if (Program._stateGame == Program.eGameState.lost)
+            {
+                // Set the new frame of the lava
+                pbPersonaggio.Image = arrayDeath[_deathIndicator];
+
+                // Increase the indicator of frame
+                if (_deathIndicator < arrayDeath.Length - 1)
+                    _deathIndicator++;
+                // If frames are finished do the other lost actions
+                else
+                {
+                    // Save the points and the date in the file
+                    Program._actualMatch.points = Program._points;
+                    Program._actualMatch.date = DateTime.Now.ToString();
+                    // Open the classification
+                    FrmClassification frmclassifica = new FrmClassification();
+                    frmclassifica.Show();
+                    // Close this form
+                    this.Close();
+                }
+            }
+        }
         #endregion
 
         #region Functions and procedures
-        // INCREASE POINTS - STATUS: OK
+        // INCREASE POINTS
         /// <summary>
         /// Increases score of a set quantity
         /// </summary>
@@ -470,7 +497,7 @@ namespace Lava_Fall
             lblPunteggio.Text = Program._points.ToString();
         }
 
-        // RESPAWN BASES - STATUS: OK
+        // RESPAWN BASES
         /// <summary>
         /// Controls if one of the bases reached lava and, if true, brings it to the top of the form
         /// </summary>
@@ -493,7 +520,7 @@ namespace Lava_Fall
                 return;
         }
 
-        // RESPAWN OBJECTS - STATUS: OK
+        // RESPAWN OBJECTS
         /// <summary>
         /// Respawns an object in the bottom of the form
         /// </summary>
@@ -528,7 +555,7 @@ namespace Lava_Fall
             pbDaModificare.Image = newBackgroundImage;
         }
 
-        // MOVE OF THE CHARACTER (JUMP AND DESCENT) - STATUS: OK
+        // MOVE OF THE CHARACTER (JUMP AND DESCENT)
         /// <summary>
         /// Makes the character jump
         /// </summary>
@@ -585,31 +612,5 @@ namespace Lava_Fall
             characterJump.Enabled = false;
         }
         #endregion
-
-        private void timercharacterDeath_Tick(object sender, EventArgs e)
-        {
-            // Verify if the game is lost
-            if (Program._stateGame == Program.eGameState.lost)
-            {
-                // Set the new frame of the lava
-                pbPersonaggio.Image = arrayDeath[_deathIndicator];
-
-                // Increase the indicator of frame
-                if (_deathIndicator < arrayDeath.Length - 1)
-                    _deathIndicator++;
-                // If frames are finished do the other lost actions
-                else
-                {
-                    // Save the points and the date in the file
-                    Program._actualMatch.points = Program._points;
-                    Program._actualMatch.date = DateTime.Now.ToString();
-                    // Open the classification
-                    FrmClassification frmclassifica = new FrmClassification();
-                    frmclassifica.Show();
-                    // Close this form
-                    this.Close();
-                }
-            }
-        }
     }
 }

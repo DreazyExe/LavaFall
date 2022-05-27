@@ -85,7 +85,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::Lava_Fall.Properties.Resources.sfondo;
+            this.BackgroundImage = global::Lava_Fall.Properties.Resources.background;
             this.ClientSize = new System.Drawing.Size(279, 220);
             this.ControlBox = false;
             this.Controls.Add(this.lblActualPoints);

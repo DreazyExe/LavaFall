@@ -96,7 +96,7 @@
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.Image = global::Lava_Fall.Properties.Resources.Tavola_disegno_312x;
+            this.pictureBox1.Image = global::Lava_Fall.Properties.Resources.nickname;
             this.pictureBox1.Location = new System.Drawing.Point(123, 431);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(348, 96);
@@ -109,7 +109,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.BackgroundImage = global::Lava_Fall.Properties.Resources.sfondo;
+            this.BackgroundImage = global::Lava_Fall.Properties.Resources.background;
             this.ClientSize = new System.Drawing.Size(794, 711);
             this.Controls.Add(this.tbName);
             this.Controls.Add(this.pbHelp);

@@ -93,6 +93,16 @@ namespace Lava_Fall.Properties {
         /// <summary>
         ///   Cerca una risorsa localizzata di tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap background {
+            get {
+                object obj = ResourceManager.GetObject("background", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una risorsa localizzata di tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Base {
             get {
                 object obj = ResourceManager.GetObject("Base", resourceCulture);
@@ -383,9 +393,29 @@ namespace Lava_Fall.Properties {
         /// <summary>
         ///   Cerca una risorsa localizzata di tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap leftKeyboard {
+            get {
+                object obj = ResourceManager.GetObject("leftKeyboard", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una risorsa localizzata di tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap LogoFinale {
             get {
                 object obj = ResourceManager.GetObject("LogoFinale", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una risorsa localizzata di tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap nickname {
+            get {
+                object obj = ResourceManager.GetObject("nickname", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -406,6 +436,16 @@ namespace Lava_Fall.Properties {
         internal static System.Drawing.Bitmap piattaforma_normale {
             get {
                 object obj = ResourceManager.GetObject("piattaforma_normale", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una risorsa localizzata di tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pKeyboard {
+            get {
+                object obj = ResourceManager.GetObject("pKeyboard", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -443,9 +483,9 @@ namespace Lava_Fall.Properties {
         /// <summary>
         ///   Cerca una risorsa localizzata di tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap sfondo {
+        internal static System.Drawing.Bitmap rightKeyboard {
             get {
-                object obj = ResourceManager.GetObject("sfondo", resourceCulture);
+                object obj = ResourceManager.GetObject("rightKeyboard", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -456,6 +496,16 @@ namespace Lava_Fall.Properties {
         internal static System.Drawing.Bitmap spaceBackground {
             get {
                 object obj = ResourceManager.GetObject("spaceBackground", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una risorsa localizzata di tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap spacebarKeyboard {
+            get {
+                object obj = ResourceManager.GetObject("spacebarKeyboard", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -486,16 +536,6 @@ namespace Lava_Fall.Properties {
         internal static System.Drawing.Bitmap spaceship3 {
             get {
                 object obj = ResourceManager.GetObject("spaceship3", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Cerca una risorsa localizzata di tipo System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Tavola_disegno_312x {
-            get {
-                object obj = ResourceManager.GetObject("Tavola_disegno_312x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
