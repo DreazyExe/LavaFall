@@ -77,9 +77,9 @@
             // 
             this.pbHelp.BackColor = System.Drawing.Color.Transparent;
             this.pbHelp.Image = global::Lava_Fall.Properties.Resources.help;
-            this.pbHelp.Location = new System.Drawing.Point(694, 23);
+            this.pbHelp.Location = new System.Drawing.Point(694, 11);
             this.pbHelp.Name = "pbHelp";
-            this.pbHelp.Size = new System.Drawing.Size(88, 60);
+            this.pbHelp.Size = new System.Drawing.Size(88, 38);
             this.pbHelp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbHelp.TabIndex = 5;
             this.pbHelp.TabStop = false;

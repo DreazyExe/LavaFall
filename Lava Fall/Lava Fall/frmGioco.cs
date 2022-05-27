@@ -72,11 +72,11 @@ namespace Lava_Fall
         int _deathIndicator = 0;
         System.Drawing.Image[] arrayDeath =
         {
-            Properties.Resources.B, Properties.Resources.C, Properties.Resources.D,
-            Properties.Resources.E, Properties.Resources.F, Properties.Resources.G,
-            Properties.Resources.H, Properties.Resources.I, Properties.Resources.J,
-            Properties.Resources.K, Properties.Resources.L, Properties.Resources.A
-        };  //Array of lava images
+            Properties.Resources.death1, Properties.Resources.death2, Properties.Resources.death3,
+            Properties.Resources.death4, Properties.Resources.death5, Properties.Resources.death6,
+            Properties.Resources.death7, Properties.Resources.death8, Properties.Resources.death9,
+            Properties.Resources.death10, Properties.Resources.death11, Properties.Resources.death12
+        };  //Array of character death image
 
         // Actaul background variable
         Program.eBackgrounds _actualBackground = Program.eBackgrounds.lava;
@@ -137,7 +137,7 @@ namespace Lava_Fall
                 pbLava.Image = arrayLava[_lavaIndicator];
 
                 // Increase the indicator of frame
-                if (_lavaIndicator < 11)
+                if (_lavaIndicator < arrayLava.Length - 1)
                     _lavaIndicator++;
                 // If frames are finished restart the animation
                 else
@@ -194,14 +194,10 @@ namespace Lava_Fall
                 // VERIFY IF THE PLAYER HAS LOST
                 if (pbPersonaggio.Bottom > BOTTOMSCREEN)
                 {
-                    // Save the points and the date in the file
-                    Program._actualMatch.points = Program._points;
-                    Program._actualMatch.date = DateTime.Now.ToString();
-                    // Open the classification
-                    FrmClassification frmclassifica = new FrmClassification();
-                    frmclassifica.Show();
-                    // Close this form
-                    this.Close();
+                    // Set the state of the game to lost
+                    Program._stateGame = Program.eGameState.lost;
+                    // Start the death of the character
+                    timercharacterDeath.Enabled = true;
                 }
 
                 // POINTS
@@ -589,5 +585,31 @@ namespace Lava_Fall
             characterJump.Enabled = false;
         }
         #endregion
+
+        private void timercharacterDeath_Tick(object sender, EventArgs e)
+        {
+            // Verify if the game is lost
+            if (Program._stateGame == Program.eGameState.lost)
+            {
+                // Set the new frame of the lava
+                pbPersonaggio.Image = arrayDeath[_deathIndicator];
+
+                // Increase the indicator of frame
+                if (_deathIndicator < arrayDeath.Length - 1)
+                    _deathIndicator++;
+                // If frames are finished do the other lost actions
+                else
+                {
+                    // Save the points and the date in the file
+                    Program._actualMatch.points = Program._points;
+                    Program._actualMatch.date = DateTime.Now.ToString();
+                    // Open the classification
+                    FrmClassification frmclassifica = new FrmClassification();
+                    frmclassifica.Show();
+                    // Close this form
+                    this.Close();
+                }
+            }
+        }
     }
 }

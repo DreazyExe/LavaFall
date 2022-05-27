@@ -211,6 +211,10 @@
             // 
             this.timerChangeBaseBackgrounds.Tick += new System.EventHandler(this.timerChangeBaseBackgrounds_Tick);
             // 
+            // timercharacterDeath
+            // 
+            this.timercharacterDeath.Tick += new System.EventHandler(this.timercharacterDeath_Tick);
+            // 
             // FormGioco
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
