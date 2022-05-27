@@ -44,7 +44,7 @@ namespace Lava_Fall
         int _lastRandomNumber;                              // Positions of the last respawned platform
 
         // Lava movement variables
-        int i = 0;  //Counter of the image
+        int _lavaIndicator = 0;  //Counter of the image
         System.Drawing.Image[] arrayLava = 
         {
             Properties.Resources.B, Properties.Resources.C, Properties.Resources.D,
@@ -52,9 +52,6 @@ namespace Lava_Fall
             Properties.Resources.H, Properties.Resources.I, Properties.Resources.J,
             Properties.Resources.K, Properties.Resources.L, Properties.Resources.A
         };  //Array of lava images
-
-        // State of the game variable
-        Program.eGameState _stateGame;
 
         // Background change variables
         bool _ChangePlatForm1 = false;      // Was platform 1 changed?
@@ -71,6 +68,16 @@ namespace Lava_Fall
             Location = new Point(0, TOPSCREEN),
         };
 
+        // Character death variables
+        int _deathIndicator = 0;
+        System.Drawing.Image[] arrayDeath =
+        {
+            Properties.Resources.B, Properties.Resources.C, Properties.Resources.D,
+            Properties.Resources.E, Properties.Resources.F, Properties.Resources.G,
+            Properties.Resources.H, Properties.Resources.I, Properties.Resources.J,
+            Properties.Resources.K, Properties.Resources.L, Properties.Resources.A
+        };  //Array of lava images
+
         // Actaul background variable
         Program.eBackgrounds _actualBackground = Program.eBackgrounds.lava;
         #endregion
@@ -81,7 +88,7 @@ namespace Lava_Fall
             InitializeComponent();
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             // when the program start the game is suspended
-            _stateGame = Program.eGameState.suspended;
+            Program._stateGame = Program.eGameState.suspended;
         }
         #endregion
 
@@ -100,7 +107,7 @@ namespace Lava_Fall
             if (_counter <= 0)
             {
                 // Change the state of the game
-                _stateGame = Program.eGameState.atstake;
+                Program._stateGame = Program.eGameState.atstake;
 
                 // Write "Go!" on the label of the countdown to indicate the beginning of the game
                 lblCountDown.Text = "Go!";
@@ -109,7 +116,7 @@ namespace Lava_Fall
                 gameClock.Enabled = true;
 
                 // Disable countdown timer
-                this.Enabled = false;
+                countDown.Enabled = false;
 
                 // Hide counter label
                 lblCountDown.Visible = false;
@@ -123,111 +130,126 @@ namespace Lava_Fall
         // MOVEMENT OF THE LAVA - STATUS: OK
         private void timerLava_Tick(object sender, EventArgs e)
         {
-            if (_stateGame == Program.eGameState.atstake)
+            // Verify if the game is at strake
+            if (Program._stateGame == Program.eGameState.atstake)
             {
                 // Set the new frame of the lava
-                pbLava.Image = arrayLava[i];
+                pbLava.Image = arrayLava[_lavaIndicator];
 
                 // Increase the indicator of frame
-                if (i < 11)
-                    i++;
+                if (_lavaIndicator < 11)
+                    _lavaIndicator++;
                 // If frames are finished restart the animation
                 else
-                    i = 0;
+                    _lavaIndicator = 0;
             }
         }
 
         // MOVE OF THE BASIS - STATUS: OK
         private void gameClock_Tick(object sender, EventArgs e)
         {
-            // MOVEMENT OF BASES
-            // For every tick move all the bases 10 pixels down
-            pbBase1.Top += 10;
-            pbBase2.Top += 10;
-            pbBase3.Top += 10;
-            pbBase4.Top += 10;
-            pbBasePrincipale.Top += 10;
-            
-            // If one of the basis is in the bottom of form respawn it in the top
-            RespawnBasesCheck();
+            // Verify if the game is at strake
+            if(Program._stateGame == Program.eGameState.atstake)
+            {
+                // MOVEMENT OF BASES
+                // For every tick move all the bases 10 pixels down
+                pbBase1.Top += 10;
+                pbBase2.Top += 10;
+                pbBase3.Top += 10;
+                pbBase4.Top += 10;
+                pbBasePrincipale.Top += 10;
 
-            // CHANGE OF THE BACKGROUND
-            // If the points are between 10000 and 30000 set clouds background (if not set before)
-            if (Program._points >= 10000 && Program._points < 35000 && _actualBackground != Program.eBackgrounds.clouds)
-            {
-                // Add the temporary background changer to the controls, make it visible and set its image
-                this.Controls.Add(pbBackgroundChanger);
-                pbBackgroundChanger.Image = Properties.Resources.cloudBackground;
-                pbBackgroundChanger.Visible = true;
-                // Indicate the background to set
-                _newBackgroundToSet = Program.eBackgrounds.clouds;
-                // Enable the change background timer
-                timerChangeBackground.Enabled = true;
-                // Modify game speed
-                gameClock.Interval = 200;
-            }                
-            // Else if the points are more that 35000 set space background (if not set before)
-            else if (Program._points >= 35000 && _actualBackground != Program.eBackgrounds.space)
-            {
-                // Make the background changer visible and set its image
-                pbBackgroundChanger.Image = Properties.Resources.spaceBackground;
-                pbBackgroundChanger.Visible = true;
-                // Indicate the background to set
-                _newBackgroundToSet = Program.eBackgrounds.space;
-                // Enable the change background timer
-                timerChangeBackground.Enabled = true;
-                // Modify game speed
-                gameClock.Interval = 100;
+                // If one of the basis is in the bottom of form respawn it in the top
+                RespawnBasesCheck();
+
+                // CHANGE OF THE BACKGROUND
+                // If the points are between 10000 and 30000 set clouds background (if not set before)
+                if (Program._points >= 10000 && Program._points < 35000 && _actualBackground != Program.eBackgrounds.clouds)
+                {
+                    // Add the temporary background changer to the controls, make it visible and set its image
+                    this.Controls.Add(pbBackgroundChanger);
+                    pbBackgroundChanger.Image = Properties.Resources.cloudBackground;
+                    pbBackgroundChanger.Visible = true;
+                    // Indicate the background to set
+                    _newBackgroundToSet = Program.eBackgrounds.clouds;
+                    // Enable the change background timer
+                    timerChangeBackground.Enabled = true;
+                    // Modify game speed
+                    gameClock.Interval = 200;
+                }
+                // Else if the points are more that 35000 set space background (if not set before)
+                else if (Program._points >= 35000 && _actualBackground != Program.eBackgrounds.space)
+                {
+                    // Make the background changer visible and set its image
+                    pbBackgroundChanger.Image = Properties.Resources.spaceBackground;
+                    pbBackgroundChanger.Visible = true;
+                    // Indicate the background to set
+                    _newBackgroundToSet = Program.eBackgrounds.space;
+                    // Enable the change background timer
+                    timerChangeBackground.Enabled = true;
+                    // Modify game speed
+                    gameClock.Interval = 100;
+                }
+
+                // VERIFY IF THE PLAYER HAS LOST
+                if (pbPersonaggio.Bottom > BOTTOMSCREEN)
+                {
+                    // Save the points and the date in the file
+                    Program._actualMatch.points = Program._points;
+                    Program._actualMatch.date = DateTime.Now.ToString();
+                    // Open the classification
+                    FrmClassification frmclassifica = new FrmClassification();
+                    frmclassifica.Show();
+                    // Close this form
+                    this.Close();
+                }
+
+                // POINTS
+                // Add 1 point to the points    
+                increasePoints(50);
             }
-                
-            // VERIFY IF THE PLAYER HAS LOST
-            if (pbPersonaggio.Bottom > BOTTOMSCREEN)
-            {
-                // Save the points and the date in the file
-                Program._actualMatch.points = Program._points;
-                Program._actualMatch.date = DateTime.Now.ToString();
-                // Open the classification
-                FrmClassification frmclassifica = new FrmClassification();
-                frmclassifica.Show();
-                // Close this form
-                this.Close();
-            }
-            
-            // POINTS
-            // Add 1 point to the points    
-            increasePoints(50);
         }
 
         // JUMP OF THE CHARACTER - STATUS: OK
         private void characterJump_Tick(object sender, EventArgs e)
         {
-            // Verify if the character has to jump or descent
-            if (_actualForce > 0 && _jump)
-                // If he has to jump start the jump
-                jump();
-            else if (_descent)
-                // If he has to descent start the descent
-                startCharacterDescent();
+            // Verify if the game is at strake
+            if(Program._stateGame == Program.eGameState.atstake)
+            {
+                // Verify if the character has to jump or descent
+                if (_actualForce > 0 && _jump)
+                    // If he has to jump start the jump
+                    jump();
+                else if (_descent)
+                    // If he has to descent start the descent
+                    startCharacterDescent();
+            }
         }
 
         // GRAVITY OF THE CHARACTER - STATUS: OK
         private void gravity_Tick(object sender, EventArgs e)
         {
-            // If the character is not on a platform start his descent (for the gravity)
-            if (!pbPersonaggio.Bounds.IntersectsWith(pbBase1.Bounds) && !pbPersonaggio.Bounds.IntersectsWith(pbBase2.Bounds) && !pbPersonaggio.Bounds.IntersectsWith(pbBase3.Bounds) && !pbPersonaggio.Bounds.IntersectsWith(pbBase4.Bounds) && !pbPersonaggio.Bounds.IntersectsWith(pbBasePrincipale.Bounds) && !_jump && !_descent)
+            // Verify if the game is at strake
+            if(Program._stateGame == Program.eGameState.atstake)
             {
-                // Set the actual force of the character
-                _actualForce = 10;
-                // Start his descent
-                startCharacterDescent();
+                // If the character is not on a platform start his descent (for the gravity)
+                if (!pbPersonaggio.Bounds.IntersectsWith(pbBase1.Bounds) && !pbPersonaggio.Bounds.IntersectsWith(pbBase2.Bounds) && !pbPersonaggio.Bounds.IntersectsWith(pbBase3.Bounds) && !pbPersonaggio.Bounds.IntersectsWith(pbBase4.Bounds) && !pbPersonaggio.Bounds.IntersectsWith(pbBasePrincipale.Bounds) && !_jump && !_descent)
+                {
+                    // Set the actual force of the character
+                    _actualForce = 10;
+                    // Start his descent
+                    startCharacterDescent();
+                }
             }
         }
-
+        
         // MOVE OF THE CHARACTER (EVENT IF A KEY IS PRESSED AND LEFT-RIGHT MOVEMENT) - STATUS: OK
         private void frmGioco_KeyDown(object sender, KeyEventArgs key)
         {
-            // if the game is not at stake you can't move
-            if (_stateGame == Program.eGameState.atstake)
+            // Disable Windows error sound when pressing a key
+            key.SuppressKeyPress = true;
+            // Verify if the game is at strake
+            if (Program._stateGame == Program.eGameState.atstake)
             {
                 // Perform an action based on the pressed key
                 switch (key.KeyCode)
@@ -255,149 +277,183 @@ namespace Lava_Fall
                             characterJump.Enabled = true;
                         }   
                         break;
+                    // Istructions if the key is "P"
+                    case Keys.P:
+                        // Set the game state to suspended
+                        Program._stateGame = Program.eGameState.suspended;
+                        // Open the pause menu
+                        FrmPause frmPausa = new FrmPause();
+                        DialogResult dr = frmPausa.ShowDialog();
+                        if(dr == DialogResult.OK)
+                        {
+                            // Enable the timer to continue the game
+                            _counter = 3;
+                            lblCountDown.Text = "3";
+                            lblCountDown.Visible = true;
+                            countDown.Enabled = true;
+                        }
+                        else
+                        {
+                            // Save the points and the date in the file
+                            Program._actualMatch.points = Program._points;
+                            Program._actualMatch.date = DateTime.Now.ToString();
+                            // Open the classification
+                            FrmClassification frmclassifica = new FrmClassification();
+                            frmclassifica.Show();
+                            // Close this form
+                            this.Close();
+                        }
+                        break;
                 }
             }
-
         }
 
         // CHANGE OF BASES - STATUS: OK
         private void timerChangeBackground_Tick(object sender, EventArgs e)
         {
-            // Verify it the background to set is "clouds"
-            if (_newBackgroundToSet == Program.eBackgrounds.clouds)
+            // Verify if the game is at strake
+            if(Program._stateGame == Program.eGameState.atstake)
             {
-                // Move down the background while it doesn't cover the form
-                if (pbBackgroundChanger.Bottom < this.Height + (this.ClientRectangle.Height - this.Height))
+                // Verify it the background to set is "clouds"
+                if (_newBackgroundToSet == Program.eBackgrounds.clouds)
                 {
-                    pbLava.Top += 10;
-                    pbBackgroundChanger.Top += 10;
+                    // Move down the background while it doesn't cover the form
+                    if (pbBackgroundChanger.Bottom < this.Height + (this.ClientRectangle.Height - this.Height))
+                    {
+                        pbLava.Top += 10;
+                        pbBackgroundChanger.Top += 10;
+                    }
+                    // When the new background covers the form
+                    else
+                    {
+                        // Change form's background image
+                        this.BackgroundImage = Properties.Resources.cloudBackground;
+                        // Indicate that the actual background is "clouds"
+                        _actualBackground = Program.eBackgrounds.clouds;
+                        // Hide background changer PictureBox and bring it to the top of the form
+                        pbBackgroundChanger.Visible = false;
+                        pbBackgroundChanger.Location = new Point(0, TOPSCREEN);
+                        // Disable lava movement timer
+                        timerLava.Enabled = false;
+                        // Enable the base background change timer
+                        timerChangeBaseBackgrounds.Enabled = true;
+                        // Disable background change timer
+                        timerChangeBackground.Enabled = false;
+                    }
                 }
-                // When the new background covers the form
+                // Else if the background to set is "space"
                 else
                 {
-                    // Change form's background image
-                    this.BackgroundImage = Properties.Resources.cloudBackground;
-                    // Indicate that the actual background is "clouds"
-                    _actualBackground = Program.eBackgrounds.clouds;
-                    // Hide background changer PictureBox and bring it to the top of the form
-                    pbBackgroundChanger.Visible = false;
-                    pbBackgroundChanger.Location = new Point(0, TOPSCREEN);
-                    // Disable lava movement timer
-                    timerLava.Enabled = false;
-                    // Enable the base background change timer
-                    timerChangeBaseBackgrounds.Enabled = true;
-                    // Disable background change timer
-                    timerChangeBackground.Enabled = false;
-                }
-            }
-            // Else if the background to set is "space"
-            else
-            {
-                // Move down the background while it doesn't cover the form
-                if (pbBackgroundChanger.Bottom < this.Height + (this.ClientRectangle.Height - this.Height))
-                    pbBackgroundChanger.Top += 10;
-                // When the new background covers the form
-                else
-                {
-                    // Change form's background image
-                    this.BackgroundImage = Properties.Resources.spaceBackground;
-                    // Indicate that the actual background is "space"
-                    _actualBackground = Program.eBackgrounds.space;
-                    // Hide background changer PictureBox and bring it to the top of the form
-                    pbBackgroundChanger.Visible = false;
-                    pbBackgroundChanger.Location = new Point(0, TOPSCREEN);
-                    // Enable the base background change timer
-                    timerChangeBaseBackgrounds.Enabled = true;
-                    // Disable background change timer
-                    timerChangeBackground.Enabled = false;
+                    // Move down the background while it doesn't cover the form
+                    if (pbBackgroundChanger.Bottom < this.Height + (this.ClientRectangle.Height - this.Height))
+                        pbBackgroundChanger.Top += 10;
+                    // When the new background covers the form
+                    else
+                    {
+                        // Change form's background image
+                        this.BackgroundImage = Properties.Resources.spaceBackground;
+                        // Indicate that the actual background is "space"
+                        _actualBackground = Program.eBackgrounds.space;
+                        // Hide background changer PictureBox and bring it to the top of the form
+                        pbBackgroundChanger.Visible = false;
+                        pbBackgroundChanger.Location = new Point(0, TOPSCREEN);
+                        // Enable the base background change timer
+                        timerChangeBaseBackgrounds.Enabled = true;
+                        // Disable background change timer
+                        timerChangeBackground.Enabled = false;
+                    }
                 }
             }
         }
         private void timerChangeBaseBackgrounds_Tick(object sender, EventArgs e)
         {
-            // Verify if the actual background is "clouds"
-            if (_actualBackground == Program.eBackgrounds.clouds)
+            // Verify if the game is at strake
+            if(Program._stateGame == Program.eGameState.atstake)
             {
-                // Change the background of a platform only if it hasn't changed before, if the new background position has passed the center of the screen and if the base has passed the bottom of the form
-                // Check for first platform
-                if (!_ChangePlatForm1 && pbBase1.Location.Y > BOTTOMSCREEN - 10)
+                // Verify if the actual background is "clouds"
+                if (_actualBackground == Program.eBackgrounds.clouds)
                 {
-                    // Change base1 dimensions and image and confirm the change
-                    changeBaseBackground(pbBase1, Properties.Resources.elicottero1);
-                    _ChangePlatForm1 = true;
-                }
-                // Check for second platform
-                if (!_ChangePlatForm2 && pbBase2.Location.Y > BOTTOMSCREEN - 10)
-                {
-                    // Change base2 dimensions and image and confirm the change
-                    changeBaseBackground(pbBase2, Properties.Resources.elicottero2);
-                    _ChangePlatForm2 = true;
-                }
-                // Check for third platform
-                if (!_ChangePlatForm3 && pbBase3.Location.Y > BOTTOMSCREEN - 10)
-                {
-                    // Change base3 dimensions and image and confirm the change
-                    changeBaseBackground(pbBase3, Properties.Resources.elicottero3);
-                    _ChangePlatForm3 = true;
-                }
-                // Check for fourth platform
-                if (!_ChangePlatForm4 && pbBase4.Location.Y > BOTTOMSCREEN - 10)
-                {
-                    // Change base4 dimensions and image and confirm the change
-                    changeBaseBackground(pbBase4, Properties.Resources.elicottero1);
-                    _ChangePlatForm4 = true;
-                }
-                // If the change of platforms background has finished stop this timer and reset variables
-                if (_ChangePlatForm1 && _ChangePlatForm2 && _ChangePlatForm3 && _ChangePlatForm4)
-                {
-                    timerChangeBaseBackgrounds.Enabled = false;
-                    _ChangePlatForm1 = false;
-                    _ChangePlatForm2 = false;
-                    _ChangePlatForm3 = false;
-                    _ChangePlatForm4 = false;
-                }
+                    // Change the background of a platform only if it hasn't changed before, if the new background position has passed the center of the screen and if the base has passed the bottom of the form
+                    // Check for first platform
+                    if (!_ChangePlatForm1 && pbBase1.Location.Y > BOTTOMSCREEN - 10)
+                    {
+                        // Change base1 dimensions and image and confirm the change
+                        changeBaseBackground(pbBase1, Properties.Resources.elicottero1);
+                        _ChangePlatForm1 = true;
+                    }
+                    // Check for second platform
+                    if (!_ChangePlatForm2 && pbBase2.Location.Y > BOTTOMSCREEN - 10)
+                    {
+                        // Change base2 dimensions and image and confirm the change
+                        changeBaseBackground(pbBase2, Properties.Resources.elicottero2);
+                        _ChangePlatForm2 = true;
+                    }
+                    // Check for third platform
+                    if (!_ChangePlatForm3 && pbBase3.Location.Y > BOTTOMSCREEN - 10)
+                    {
+                        // Change base3 dimensions and image and confirm the change
+                        changeBaseBackground(pbBase3, Properties.Resources.elicottero3);
+                        _ChangePlatForm3 = true;
+                    }
+                    // Check for fourth platform
+                    if (!_ChangePlatForm4 && pbBase4.Location.Y > BOTTOMSCREEN - 10)
+                    {
+                        // Change base4 dimensions and image and confirm the change
+                        changeBaseBackground(pbBase4, Properties.Resources.elicottero1);
+                        _ChangePlatForm4 = true;
+                    }
+                    // If the change of platforms background has finished stop this timer and reset variables
+                    if (_ChangePlatForm1 && _ChangePlatForm2 && _ChangePlatForm3 && _ChangePlatForm4)
+                    {
+                        timerChangeBaseBackgrounds.Enabled = false;
+                        _ChangePlatForm1 = false;
+                        _ChangePlatForm2 = false;
+                        _ChangePlatForm3 = false;
+                        _ChangePlatForm4 = false;
+                    }
 
-            }
-            // Else if the actual background is "space"
-            else
-            {
-                // Change the background of a platform only if it hasn't changed before, if the new background position has passed the center of the screen and if the base has passed the bottom of the form
-                // Check for first platform
-                if (!_ChangePlatForm1 && pbBase1.Location.Y > BOTTOMSCREEN - 10)
-                {
-                    // Change base1 dimensions and image and confirm the change
-                    changeBaseBackground(pbBase1, Properties.Resources.spaceship1);
-                    _ChangePlatForm1 = true;
                 }
-                // Check for second platform
-                if (!_ChangePlatForm2 && pbBase2.Location.Y > BOTTOMSCREEN - 10)
+                // Else if the actual background is "space"
+                else
                 {
-                    // Change base2 dimensions and image and confirm the change
-                    changeBaseBackground(pbBase2, Properties.Resources.spaceship2);
-                    _ChangePlatForm2 = true;
-                }
-                // Check for third platform
-                if (!_ChangePlatForm3 && pbBase3.Location.Y > BOTTOMSCREEN - 10)
-                {
-                    // Change base3 dimensions and image and confirm the change
-                    changeBaseBackground(pbBase3, Properties.Resources.spaceship3);
-                    _ChangePlatForm3 = true;
-                }
-                // Check for fourth platform
-                if (!_ChangePlatForm4 && pbBase4.Location.Y > BOTTOMSCREEN - 10)
-                {
-                    // Change base4 dimensions and image and confirm the change
-                    changeBaseBackground(pbBase4, Properties.Resources.spaceship1);
-                    _ChangePlatForm4 = true;
-                }
-                // If the change of platforms background has finished stop this timer and reset variables
-                if (_ChangePlatForm1 && _ChangePlatForm2 && _ChangePlatForm3 && _ChangePlatForm4)
-                {
-                    timerChangeBaseBackgrounds.Enabled = false;
-                    _ChangePlatForm1 = false;
-                    _ChangePlatForm2 = false;
-                    _ChangePlatForm3 = false;
-                    _ChangePlatForm4 = false;
+                    // Change the background of a platform only if it hasn't changed before, if the new background position has passed the center of the screen and if the base has passed the bottom of the form
+                    // Check for first platform
+                    if (!_ChangePlatForm1 && pbBase1.Location.Y > BOTTOMSCREEN - 10)
+                    {
+                        // Change base1 dimensions and image and confirm the change
+                        changeBaseBackground(pbBase1, Properties.Resources.spaceship1);
+                        _ChangePlatForm1 = true;
+                    }
+                    // Check for second platform
+                    if (!_ChangePlatForm2 && pbBase2.Location.Y > BOTTOMSCREEN - 10)
+                    {
+                        // Change base2 dimensions and image and confirm the change
+                        changeBaseBackground(pbBase2, Properties.Resources.spaceship2);
+                        _ChangePlatForm2 = true;
+                    }
+                    // Check for third platform
+                    if (!_ChangePlatForm3 && pbBase3.Location.Y > BOTTOMSCREEN - 10)
+                    {
+                        // Change base3 dimensions and image and confirm the change
+                        changeBaseBackground(pbBase3, Properties.Resources.spaceship3);
+                        _ChangePlatForm3 = true;
+                    }
+                    // Check for fourth platform
+                    if (!_ChangePlatForm4 && pbBase4.Location.Y > BOTTOMSCREEN - 10)
+                    {
+                        // Change base4 dimensions and image and confirm the change
+                        changeBaseBackground(pbBase4, Properties.Resources.spaceship1);
+                        _ChangePlatForm4 = true;
+                    }
+                    // If the change of platforms background has finished stop this timer and reset variables
+                    if (_ChangePlatForm1 && _ChangePlatForm2 && _ChangePlatForm3 && _ChangePlatForm4)
+                    {
+                        timerChangeBaseBackgrounds.Enabled = false;
+                        _ChangePlatForm1 = false;
+                        _ChangePlatForm2 = false;
+                        _ChangePlatForm3 = false;
+                        _ChangePlatForm4 = false;
+                    }
                 }
             }
         }

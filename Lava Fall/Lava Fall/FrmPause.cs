@@ -10,11 +10,17 @@ using System.Windows.Forms;
 
 namespace Lava_Fall
 {
-    public partial class FrmHelp : Form
+    public partial class FrmPause : Form
     {
-        public FrmHelp()
+        public FrmPause()
         {
             InitializeComponent();
+        }
+
+        private void FrmPausa_Load(object sender, EventArgs e)
+        {
+            // Show points in the form
+            lblActualPoints.Text = Program._points.ToString() + " punti";
         }
     }
 }

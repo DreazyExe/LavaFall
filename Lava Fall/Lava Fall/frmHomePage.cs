@@ -11,9 +11,9 @@ using System.IO;
 
 namespace Lava_Fall
 {
-    public partial class frmHomePage : Form
+    public partial class FrmHomePage : Form
     {
-        public frmHomePage()
+        public FrmHomePage()
         {
             InitializeComponent();
         }
@@ -38,7 +38,7 @@ namespace Lava_Fall
         private void pbHelp_Click(object sender, EventArgs e)
         {
             //Quando premi il pulsante play, apri frmHelp.
-            frmHelp frmHelp = new frmHelp();
+            FrmHelp frmHelp = new FrmHelp();
             frmHelp.ShowDialog();
         }
         #endregion

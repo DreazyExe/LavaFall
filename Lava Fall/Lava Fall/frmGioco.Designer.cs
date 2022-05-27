@@ -47,6 +47,7 @@
             this.gravity = new System.Windows.Forms.Timer(this.components);
             this.timerChangeBackground = new System.Windows.Forms.Timer(this.components);
             this.timerChangeBaseBackgrounds = new System.Windows.Forms.Timer(this.components);
+            this.timercharacterDeath = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pbBase1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbBase2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbBase3)).BeginInit();
@@ -230,6 +231,7 @@
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "FormGioco";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Lava Fall";
@@ -265,5 +267,6 @@
         private System.Windows.Forms.Timer gravity;
         private System.Windows.Forms.Timer timerChangeBackground;
         private System.Windows.Forms.Timer timerChangeBaseBackgrounds;
+        private System.Windows.Forms.Timer timercharacterDeath;
     }
 }

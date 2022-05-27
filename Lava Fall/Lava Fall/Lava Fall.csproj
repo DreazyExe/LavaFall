@@ -52,37 +52,46 @@
     <Compile Include="FrmClassifica.Designer.cs">
       <DependentUpon>FrmClassifica.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmHelp.cs">
+    <Compile Include="FrmHelp.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmHelp.Designer.cs">
-      <DependentUpon>frmHelp.cs</DependentUpon>
+    <Compile Include="FrmHelp.Designer.cs">
+      <DependentUpon>FrmHelp.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmHomePage.cs">
+    <Compile Include="FrmHomePage.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmHomePage.Designer.cs">
-      <DependentUpon>frmHomePage.cs</DependentUpon>
+    <Compile Include="FrmHomePage.Designer.cs">
+      <DependentUpon>FrmHomePage.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmGioco.cs">
+    <Compile Include="FrmGioco.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmGioco.Designer.cs">
-      <DependentUpon>frmGioco.cs</DependentUpon>
+    <Compile Include="FrmGioco.Designer.cs">
+      <DependentUpon>FrmGioco.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmPause.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmPause.Designer.cs">
+      <DependentUpon>FrmPause.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FrmClassifica.resx">
       <DependentUpon>FrmClassifica.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmGioco.resx">
-      <DependentUpon>frmGioco.cs</DependentUpon>
+    <EmbeddedResource Include="FrmGioco.resx">
+      <DependentUpon>FrmGioco.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmHelp.resx">
-      <DependentUpon>frmHelp.cs</DependentUpon>
+    <EmbeddedResource Include="FrmHelp.resx">
+      <DependentUpon>FrmHelp.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmHomePage.resx">
-      <DependentUpon>frmHomePage.cs</DependentUpon>
+    <EmbeddedResource Include="FrmHomePage.resx">
+      <DependentUpon>FrmHomePage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmPause.resx">
+      <DependentUpon>FrmPause.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -131,6 +140,10 @@
   <ItemGroup>
     <Content Include="Resources\A.png" />
     <Content Include="Resources\B.png" />
+    <None Include="Resources\xLava.png" />
+    <None Include="Resources\PlayLava.png" />
+    <None Include="Resources\pauseLava.png" />
+    <None Include="Resources\playAgain_trim.png" />
     <None Include="Resources\Tavola_disegno_312x.png" />
     <None Include="Resources\spaceBackground.png" />
     <None Include="Resources\navicella2.png" />

@@ -16,7 +16,7 @@ namespace Lava_Fall
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmHomePage());
+            Application.Run(new FrmHomePage());
         }
 
         #region Public structs
@@ -53,6 +53,8 @@ namespace Lava_Fall
         public static int _points = 0;
         // Actual match informations
         public static sMatch _actualMatch;
+        // State of the game
+        public static Program.eGameState _stateGame;
         #endregion
     }
 }

@@ -35,6 +35,8 @@
             this.clData = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.clPunteggio = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lbClassifica = new System.Windows.Forms.Label();
+            this.btPlayAgain = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.btPlayAgain)).BeginInit();
             this.SuspendLayout();
             // 
             // lvClassification
@@ -49,7 +51,7 @@
             this.lvClassification.ForeColor = System.Drawing.SystemColors.Window;
             this.lvClassification.GridLines = true;
             this.lvClassification.HideSelection = false;
-            this.lvClassification.Location = new System.Drawing.Point(111, 183);
+            this.lvClassification.Location = new System.Drawing.Point(116, 139);
             this.lvClassification.Name = "lvClassification";
             this.lvClassification.Size = new System.Drawing.Size(563, 416);
             this.lvClassification.TabIndex = 0;
@@ -82,11 +84,21 @@
             this.lbClassifica.BackColor = System.Drawing.Color.Transparent;
             this.lbClassifica.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbClassifica.ForeColor = System.Drawing.Color.White;
-            this.lbClassifica.Location = new System.Drawing.Point(237, 98);
+            this.lbClassifica.Location = new System.Drawing.Point(250, 54);
             this.lbClassifica.Name = "lbClassifica";
             this.lbClassifica.Size = new System.Drawing.Size(314, 55);
             this.lbClassifica.TabIndex = 1;
             this.lbClassifica.Text = "CLASSIFICA";
+            // 
+            // btPlayAgain
+            // 
+            this.btPlayAgain.Image = global::Lava_Fall.Properties.Resources.playAgain_trim;
+            this.btPlayAgain.Location = new System.Drawing.Point(265, 592);
+            this.btPlayAgain.Name = "btPlayAgain";
+            this.btPlayAgain.Size = new System.Drawing.Size(284, 65);
+            this.btPlayAgain.TabIndex = 2;
+            this.btPlayAgain.TabStop = false;
+            this.btPlayAgain.Click += new System.EventHandler(this.btPlayAgain_Click);
             // 
             // FrmClassification
             // 
@@ -94,12 +106,17 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::Lava_Fall.Properties.Resources.sfondo;
             this.ClientSize = new System.Drawing.Size(794, 711);
+            this.Controls.Add(this.btPlayAgain);
             this.Controls.Add(this.lbClassifica);
             this.Controls.Add(this.lvClassification);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "FrmClassification";
-            this.Text = "Classifica";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Lava Fall - Classifica";
             this.Load += new System.EventHandler(this.FrmClassifica_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.btPlayAgain)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -113,5 +130,6 @@
         private System.Windows.Forms.ColumnHeader clData;
         private System.Windows.Forms.ColumnHeader clPunteggio;
         private System.Windows.Forms.Label lbClassifica;
+        private System.Windows.Forms.PictureBox btPlayAgain;
     }
 }

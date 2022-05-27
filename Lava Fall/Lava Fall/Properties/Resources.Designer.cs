@@ -273,6 +273,16 @@ namespace Lava_Fall.Properties {
         /// <summary>
         ///   Cerca una risorsa localizzata di tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap pauseLava {
+            get {
+                object obj = ResourceManager.GetObject("pauseLava", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una risorsa localizzata di tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap piattaforma_normale {
             get {
                 object obj = ResourceManager.GetObject("piattaforma_normale", resourceCulture);
@@ -286,6 +296,26 @@ namespace Lava_Fall.Properties {
         internal static System.Drawing.Bitmap play {
             get {
                 object obj = ResourceManager.GetObject("play", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una risorsa localizzata di tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap playAgain_trim {
+            get {
+                object obj = ResourceManager.GetObject("playAgain_trim", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una risorsa localizzata di tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap PlayLava {
+            get {
+                object obj = ResourceManager.GetObject("PlayLava", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -346,6 +376,16 @@ namespace Lava_Fall.Properties {
         internal static System.Drawing.Bitmap Tavola_disegno_312x {
             get {
                 object obj = ResourceManager.GetObject("Tavola_disegno_312x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una risorsa localizzata di tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap xLava {
+            get {
+                object obj = ResourceManager.GetObject("xLava", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -134,6 +134,16 @@ namespace Lava_Fall
             // Refresh ListView
             refreshListView();
         }
+        private void btPlayAgain_Click(object sender, EventArgs e)
+        {
+            // Reset game points
+            Program._points = 0;
+            // Open the homepage of the game
+            FrmHomePage frmHomepage = new FrmHomePage();
+            frmHomepage.Show();
+            // Close this form
+            this.Close();
+        }
         #endregion
     }
 }
