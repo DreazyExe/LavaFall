@@ -183,10 +183,11 @@ namespace Lava_Fall
             // VERIFY IF THE PLAYER HAS LOST
             if (pbPersonaggio.Bottom > BOTTOMSCREEN)
             {
-                // Save the points in the file
-                savePointToClassification();
+                // Save the points and the date in the file
+                Program._actualMatch.points = Program._points;
+                Program._actualMatch.date = DateTime.Now.ToString();
                 // Open the classification
-                FrmClassifica frmclassifica = new FrmClassifica();
+                FrmClassification frmclassifica = new FrmClassification();
                 frmclassifica.Show();
                 // Close this form
                 this.Close();
@@ -415,14 +416,6 @@ namespace Lava_Fall
 
             // Refresh of the points label
             lblPunteggio.Text = Program._points.ToString();
-        }
-
-        // SAVE POINTS
-        private void savePointToClassification()
-        {
-            // Save the points to the file
-            using (StreamWriter sw = File.AppendText(@"..\classification.txt"))
-                sw.Write("|" + Program._points + "\r\n");
         }
 
         // RESPAWN BASES - STATUS: OK

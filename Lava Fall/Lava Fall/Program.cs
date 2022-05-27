@@ -51,6 +51,8 @@ namespace Lava_Fall
         #region Public variables
         // Points
         public static int _points = 0;
+        // Actual match informations
+        public static sMatch _actualMatch;
         #endregion
     }
 }
